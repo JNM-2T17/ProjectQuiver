@@ -1,0 +1,74 @@
+process?
+project is submitted and sent to the evaluation
+judges then rate it
+
+faculty provides the projects
+
+look into awwwards (project is based on this site)
+
+project is per sector
+	grade
+
+evaluation is manual and has to be approved
+grading is to be discussed
+ideally someone will be giving the review and submitted to (admin?)
+
+users
+
+
+priority:	
+	admin
+	check student submissions
+	judges
+
+prof accounts are for the future
+
+	for voting
+		students
+		friends
+		people outside the university
+
+dlsu main
+board
+students
+
+---
+faculty
+
+comment are to be discussed
+
+things to submit:
+~Student submit is to be decided~
+screenshot of 3 for student
+description of project 1 paragraph
+team members 
+dlsu email/primary contact
+
+emails are to be displayed for discussion
+shwing contact details are to be discussed
+
+the proposed tihngs that the users see are 2:
+
+honrable mention page AND list of honorable mentions
+	Tentative grade
+	high score get a unique page
+	3.0 - 4.0 grade
+
+nice to have each page for project
+
+details for the list are undecided
+
+Add Account (10)
+Submit Project (10)
+View Pending Projects (10)
+Evaluate Project (10)
+Approve Project (10)
+View Projects (20)
+View Project (20)
+Rate Project (30)
+Add Review (30)
+Add Comment (40)
+Archive Project (50)
+
+
+
