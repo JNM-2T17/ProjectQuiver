@@ -1,0 +1,267 @@
+<!-- IDK -->
+        <section class="">
+            <!-- SPACE --> <div class="pushdown-5p"></div>
+            <div class="" style="padding: 10% 10% 10% 10%">
+                <div class="row">
+                    <!-- FIRST APP -->
+                    <div class="col s12 m4 no-padding">
+                        <div id="app-white" class="card" 
+                             style="border-radius: 5px;
+                                    border-top-right-radius: 0px;
+                                    height: 500px">
+                            <!-- SPACE --> <div class="pushdown-30p hide-on-small-only"></div>
+                            <div class="card-content">
+                                <!-- Title Area for App 1 -->
+                                <div id="title-1">
+                                    <h3 class="green-text text-accent-3 no-margin">
+                                        ShareZone
+                                    </h3>
+                                    <!-- Badges -->
+                                    <div class="row">
+                                        <!-- Mobile Category -->
+                                        <div class="col s6">
+                                            <p class="cat mobile amber-text center">
+                                                Mobile App
+                                            </p>
+                                        </div>
+                                        <!-- Award Status -->
+                                        <div class="col s6">
+                                            <p class="cat pole-pos blue-text center">
+                                                Winner
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Description for App 1 -->
+                                <div id="desc-1">
+                                    <p class="grey-text text-darken-3">
+                                        ShareZone allows you to share and transfer files from multiple different devices with each other with just a web browser and your smartphone.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SECOND APP -->
+                    <div class="col s12 m4 no-padding">
+                        <div id="app-white" class="card" style="border-radius: 0px; height: 500px">
+                            <!-- SPACE --> <div class="pushdown-30p hide-on-small-only"></div>
+                            <div class="card-content">
+                                <!-- Title Area for App 1 -->
+                                <div id="title-1">
+                                    <h3 class="green-text text-accent-3 no-margin">
+                                        ShareZone
+                                    </h3>
+                                    <!-- Badges -->
+                                    <div class="row">
+                                        <!-- Mobile Category -->
+                                        <div class="col s6">
+                                            <p class="cat mobile amber-text center">
+                                                Mobile App
+                                            </p>
+                                        </div>
+                                        <!-- Award Status -->
+                                        <div class="col s6">
+                                            <p class="cat pole-pos blue-text center">
+                                                Winner
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Description for App 1 -->
+                                <div id="desc-1">
+                                    <p class="grey-text text-darken-3">
+                                        ShareZone allows you to share and transfer files from multiple different devices with each other with just a web browser and your smartphone.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- THIRD APP -->
+                    <div class="col s12 m4 no-padding">
+                        <div id="app-white" class="card" style="border-radius: 5px; height: 500px">
+                            <!-- SPACE --> <div class="pushdown-30p hide-on-small-only"></div>
+                            <div class="card-content">
+                                <!-- Title Area for App 1 -->
+                                <div id="title-1">
+                                    <h3 class="green-text text-accent-3 no-margin">
+                                        ShareZone
+                                    </h3>
+                                    <!-- Badges -->
+                                    <div class="row">
+                                        <!-- Mobile Category -->
+                                        <div class="col s6">
+                                            <p class="cat mobile amber-text center">
+                                                Mobile App
+                                            </p>
+                                        </div>
+                                        <!-- Award Status -->
+                                        <div class="col s6">
+                                            <p class="cat pole-pos blue-text center">
+                                                Winner
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Description for App 1 -->
+                                <div id="desc-1">
+                                    <p class="grey-text text-darken-3">
+                                        ShareZone allows you to share and transfer files from multiple different devices with each other with just a web browser and your smartphone.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /section -->
+        </section>
+        <!-- Show a nice project here -->
+        <section class="grey lighten-4">
+            <!-- SPACE --> <div class="pushdown-5p"></div>
+            <div class="container">
+                <div class="row">
+                    <!-- left side -->
+                    <div class="col s12 m6">
+                        <!-- App 1 -->
+                        <div id="app-1" class="card quiver-green" style="height: 600px;">
+                            <!-- SPACE --> <div class="pushdown-30p hide-on-small-only"></div>
+                            <div class="card-content">
+                                <!-- Title Area for App 1 -->
+                                <div id="title-1">
+                                    <h1 class="green-text text-accent-3 no-margin">
+                                        ShareZone
+                                    </h1>
+                                    <!-- Badges -->
+                                    <div class="row">
+                                        <!-- Mobile Category -->
+                                        <div class="col s4">
+                                            <p class="cat mobile amber-text center">
+                                                Mobile App
+                                            </p>
+                                        </div>
+                                        <!-- Award Status -->
+                                        <div class="col s4">
+                                            <p class="cat pole-pos blue-text center">
+                                                Winner
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Description for App 1 -->
+                                <div id="desc-1">
+                                    <p class="white-text">
+                                        ShareZone allows you to share and transfer files from multiple different devices with each other with just a web browser and your smartphone.
+                                    </p>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                    <!-- Right Side -->
+                    <div class="col s12 m6">
+                        <!-- App 2 -->
+                        <div id="app-2" class="card app" style="height: 290px">
+                            <div class="card-content">
+                                <!-- Title Area for App 1 -->
+                                <div id="title-1">
+                                    <h1 class="green-text text-accent-3 no-margin">
+                                        HackerCup 2015
+                                    </h1>
+                                    <!-- Badges -->
+                                    <div class="row">
+                                        <!-- Mobile Category -->
+                                        <div class="col s4">
+                                            <p class="cat web amber-text center">
+                                                Web App
+                                            </p>
+                                        </div>
+                                        <!-- Award Status -->
+                                        <div class="col s4">
+                                            <p class="cat honorable-mention-light blue-text center">
+                                                Hon. Mention
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Description for App 1 -->
+                                <div id="desc-1">
+                                    <p class="white-text">
+                                        It's just a very magnificent website. It's a sight to behold. It is just a wonderful piece of art.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- App 3-->
+                        <div id="app-2" class="card app" style="height: 290px">
+                            <div class="card-content">
+                                <!-- Title Area for App 1 -->
+                                <div id="title-1">
+                                    <h1 class="green-text text-accent-3 no-margin">
+                                        Optimus Prime
+                                    </h1>
+                                    <!-- Badges -->
+                                    <div class="row">
+                                        <!-- Mobile Category -->
+                                        <div class="col s4">
+                                            <p class="cat robotics amber-text center">
+                                                Robotics
+                                            </p>
+                                        </div>
+                                        <!-- Award Status -->
+                                        <div class="col s4">
+                                            <p class="cat pole-pos blue-text center">
+                                                Winner
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Description for App 1 -->
+                                <div id="desc-1">
+                                    <p class="white-text">
+                                        It's just a very magnificent website. It's a sight to behold. It is just a wonderful piece of art.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+        
+        <section>
+            <div class="center">                
+            </div>
+            <div class="container" style="width: 90%;">
+                <div class="card green-border white">
+                    
+                    <div class="card-content" style="padding: 0px 0px 0px 12px; height: 300px;">
+                        <div class="row" style="height: 300px;">
+                            <!-- Featured work screenshot -->
+                            <div class="col s12 m4 no-margin image-featured-screen" style="height: inherit;">
+                                <!-- Image was placed here -->
+                            </div>
+                            <!-- Featured Project Title -->
+                            <div class="col s12 m4" >
+                                <h2 class="green-text text-accent-3">
+                                    Text Summarizer for Mobile
+                                </h2>
+                                <h5>
+                                    Web Application
+                                </h5>
+                            </div>
+                            <!-- Featured Project Description -->
+                            <div class="col s12 m4" style="height: inherit; border-left: 1px solid #f0f0f0;">
+                                <!-- SPACE --> <div class="pushdown-10p"></div>
+                                <div style="padding-left: 10px; padding-right: 10px;">
+                                    <p>
+                                        A text summarizer is something magical, I am too lazy to paste a lorem ipsum but here it goes anyway. <br>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
