@@ -424,7 +424,7 @@ p {
         linear-gradient( to bottom,
             rgba(1, 20, 1, 0.1), 
             rgba(1, 5, 3, 0.95)
-        ), url('/assets/images/tablet.jpg');
+        ), url('../assets/images/tablet.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -434,7 +434,7 @@ p {
         linear-gradient( to left,
             rgba(0, 230, 118, 0.85), 
             rgba(0, 230, 118, 1)
-        ), url('/assets/images/phone.gif');
+        ), url('../assets/images/phone.gif');
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
