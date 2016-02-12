@@ -1,0 +1,244 @@
+<?php
+
+require_once "main-functions.php";
+require_once "student-functions.php";
+
+function proj_add($name,$class,$abstract = null,$desc = null,$students = null
+					,$grades = null,$images = null,$recogs = null
+					,$tags = null) {
+	global $db;
+
+	$query = "INSERT INTO pq_project(name,class";
+	$query2 = "VALUES (:name,:class";
+	$param = array(
+		":name" => $name,
+		":class" => $class
+	);
+
+	if( $abstract != null ) {
+		$query .= ",abstract";
+		$query2 .= ",:abstract";
+		$param[':abstract'] = $abstract;
+	}
+
+	if( $desc != null) {
+		$query .= ",description";
+		$query2 .= ",:description";
+		$param[':description'] = $desc;	
+	}
+
+	$query .= ") ".$query2.")";
+
+	$res = $db->query("INSERT_ID",$query,$param);
+
+	if( $res['status'] ) {
+		$id = $res['data'];
+
+		if( $grades !== null && count($grades) > 0) {
+			$query = "INSERT INTO pq_project_grades(id,criteriaNo,grade) 
+						VALUES ";
+			$param = array(
+				":id" => $id
+			);
+			$i = 0;
+			foreach($grades as $g) {
+				if( $i > 0 ) {
+					$query .= ",";
+				}
+				$query .= "(:id,:crit_$i,:grade_$i)";
+				$param[":crit_$i"] = $i;
+				$param[":grade_$i"] = $g;
+				$i++;
+			}
+
+			$res = $db->query("INSERT",$query,$param);
+			if(!$res['status']) {
+				echo $res['error'];
+				return false;
+			}
+		}
+
+		if( $images !== null && count($images) > 0) {
+			$query = "INSERT INTO pq_project_images(id,image) 
+						VALUES ";
+			$params = array(
+				":id" => $id
+			);
+			$i = 0;
+			foreach($images as $image) {
+				if( $i > 0 ) {
+					$query .= ",";
+				}
+				$query .= "(:id,:image_$i)";
+				$params[":image_$i"] = $image;
+				$i++;
+			}
+
+			$res = $db->query("INSERT",$query,$params);
+			if(!$res['status']) {
+				echo $res['error'];
+				return false;
+			}	
+		} 
+
+		if( $students != null && count($students) > 0) {
+			$query = "INSERT INTO pq_project_students(projectId,studentId) 
+						VALUES ";
+			$params = array(
+				":projectId" => $id
+			);
+			$i = 0;
+			foreach($students as $student) {
+				$student_id = student_add($student['idNo'],$student['fName']
+											,$student['lName']
+											,$student['email']);
+				if( $student_id ) {
+					if( $i > 0) {
+						$query .= ",";
+					}
+					$query .= "(:projectId,:studentid_$i)";
+					$params[":studentid_$i"] = $student_id;
+					$i++;
+				}
+			}
+
+			$res = $db->query("INSERT",$query,$params);
+			if( !$res['status']) {
+				echo $res['error'];
+				return false;
+			}
+		}
+
+		if( $recogs !== null && count($recogs) > 0) {
+			$query = "INSERT INTO pq_project_recogs(id,recog) 
+						VALUES ";
+			$param = array(
+				":id" => $id
+			);
+			$i = 0;
+			foreach($recogs as $recog) {
+				if( $i > 0 ) {
+					$query .= ",";
+				}
+				$query .= "(:id,:recog_$i)";
+				$param[":recog_$i"] = $recog;
+				$i++;
+			}
+
+			$res = $db->query("INSERT",$query,$param);
+			if(!$res['status']) {
+				echo $res['error'];
+				return false;
+			}	
+		} 
+
+		if( $tags !== null && count($tags) > 0) {
+			$query = "INSERT INTO pq_project_tags(id,tag) 
+						VALUES ";
+			$param = array(
+				":id" => $id
+			);
+			$i = 0;
+			foreach($tags as $tag) {
+				if( $i > 0 ) {
+					$query .= ",";
+				}
+				$query .= "(:id,:tag_$i)";
+				$param[":tag_$i"] = $tag;
+				$i++;
+			}
+
+			$res = $db->query("INSERT",$query,$param);
+			if(!$res['status']) {
+				echo $res['error'];
+				return false;
+			}	
+		} 
+
+		return true;
+	} else {
+		echo $res['error'];
+		return false;
+	}
+}
+
+// echo proj_add("ShareZone","Mobile Application","ShareZone allows you to share and transfer files from multiple different devices with each other with just a web browser and your smartphone.","Simpatico is a text simplification system that makes us of lexical and syntactic simplification methods in order to simplify legalese to plain English in which a majority of the Philippine population can understand. It makes use of various existing NLP tools in order to carry out tasks like multiword extraction and word sense disambiguation.",array(
+// 		array(
+// 			"idNo" => "11312121",
+// 			"fName" => "John",
+// 			"lName" => "Collantes",
+// 			"email" => "johncollantes@dlsu.edu.ph"
+// 		),
+// 		array(
+// 			"idNo" => "11312122",
+// 			"fName" => "John",
+// 			"lName" => "Hipe",
+// 			"email" => "johnHipe@dlsu.edu.ph"
+// 		),
+// 		array(
+// 			"idNo" => "11312123",
+// 			"fName" => "John",
+// 			"lName" => "Sorilla",
+// 			"email" => "johnSorilla@dlsu.edu.ph"
+// 		),
+// 		array(
+// 			"idNo" => "11312124",
+// 			"fName" => "John",
+// 			"lName" => "Tolentino",
+// 			"email" => "johnTolentino@dlsu.edu.ph"
+// 		)
+// 	),array(10,9,10,9),null,array("Best in Mobile"),array("CS-ST","Thesis","NLP","Lexical Simplification","Text Simplification","Standford NLP"));
+// echo proj_add("HackerCup","Web Application","This amazing website is more than just a registration page, it's a piece of modern art. With flying particles in the background, eye-catching color palette, and useless once the event is finished, the site is still a reminder of what can be achieved through highly practiced procrastination techniques from one of the nation's best procrastinators.",null,array(
+// 		array(
+// 			"idNo" => "11312121",
+// 			"fName" => "John",
+// 			"lName" => "Collantes",
+// 			"email" => "johncollantes@dlsu.edu.ph"
+// 		),
+// 		array(
+// 			"idNo" => "11312122",
+// 			"fName" => "John",
+// 			"lName" => "Hipe",
+// 			"email" => "johnHipe@dlsu.edu.ph"
+// 		),
+// 		array(
+// 			"idNo" => "11312123",
+// 			"fName" => "John",
+// 			"lName" => "Sorilla",
+// 			"email" => "johnSorilla@dlsu.edu.ph"
+// 		),
+// 		array(
+// 			"idNo" => "11312124",
+// 			"fName" => "John",
+// 			"lName" => "Tolentino",
+// 			"email" => "johnTolentino@dlsu.edu.ph"
+// 		)
+// 	),array(10,9,10,9),null,array("Best in Category"),array("CS-ST","Thesis","NLP","Lexical Simplification","Text Simplification","Standford NLP"));
+// echo proj_add("Optimus Prime","Robotics Hardware","Optimus Prime is consistently depicted as having strong moral character, excellent leadership, and sound decision-making skills, and possesses brilliant military tactics, powerful martial arts, and advanced alien weaponry. Optimus Prime has a strong sense of honor and justice, being dedicated to building peaceful and mutually beneficial co-existence with humans, the protection of life and liberty of all sentient species.",null,array(
+// 		array(
+// 			"idNo" => "11312121",
+// 			"fName" => "John",
+// 			"lName" => "Collantes",
+// 			"email" => "johncollantes@dlsu.edu.ph"
+// 		),
+// 		array(
+// 			"idNo" => "11312122",
+// 			"fName" => "John",
+// 			"lName" => "Hipe",
+// 			"email" => "johnHipe@dlsu.edu.ph"
+// 		),
+// 		array(
+// 			"idNo" => "11312123",
+// 			"fName" => "John",
+// 			"lName" => "Sorilla",
+// 			"email" => "johnSorilla@dlsu.edu.ph"
+// 		),
+// 		array(
+// 			"idNo" => "11312124",
+// 			"fName" => "John",
+// 			"lName" => "Tolentino",
+// 			"email" => "johnTolentino@dlsu.edu.ph"
+// 		)
+// 	),array(10,9,10,9),null,array("Best in Category"),array("CS-ST","Thesis","NLP","Lexical Simplification","Text Simplification","Standford NLP"));
+
+?>
