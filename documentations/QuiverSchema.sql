@@ -1,3 +1,4 @@
+DROP SCHEMA db_project_quiver;
 CREATE SCHEMA db_project_quiver;
 
 USE db_project_quiver;
@@ -41,8 +42,9 @@ CREATE TABLE IF NOT EXISTS pq_student(
 CREATE TABLE IF NOT EXISTS pq_project(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(45) NOT NULL,
-    abstract VARCHAR(256),
-    description VARCHAR(1024),
+    class VARCHAR(45) NOT NULL,
+    abstract TEXT,
+    description TEXT,
     review VARCHAR(512),
     reviewer INT,
     forJudging TINYINT(1) NOT NULL DEFAULT 1,

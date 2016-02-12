@@ -3,6 +3,112 @@
 require_once "main-functions.php";
 require_once "student-functions.php";
 
+function proj_get_all() {
+	global $db;
+
+	$query = "SELECT id FROM pq_project WHERE status = 1";
+	$res = $db->query("SELECT",$query);
+	if( $res['status']) {
+		$projects = array();
+		foreach($res['data'] as $project) {
+			$projects[] = proj_get($project['id']);
+		}
+		return $projects;
+	} else {
+		return false;
+	}
+}
+
+function proj_get($id) {
+	global $db;
+
+	$query = "SELECT name, class, abstract, description, AVG(grade) AS grade
+				FROM pq_project P INNER JOIN pq_project_grades PG 
+					ON P.id = PG.id AND P.status = 1 AND PG.status = 1
+				WHERE P.id = :id
+				GROUP BY P.id";
+	$params = array(
+		":id" => $id
+	);
+	$project = array();
+	$res = $db->query("SELECT",$query,$params);
+	if( $res['status']) {
+		foreach($res['data'][0] as $key=>$val) {
+			$project[$key] = $val;
+		}
+
+		$query = "SELECT criteriaNo, grade
+					FROM pq_project_grades
+					WHERE id = :id";
+		$res = $db->query("SELECT",$query,$params);
+		$grades = array();
+		if( $res['status'] && $res['count'] > 0 ) {
+			foreach( $res['data'] as $grade) {
+				$grades[] = $grade['grade'];
+			}
+		} 
+		$project['grades'] = $grades;
+		
+		$query = "SELECT image
+					FROM pq_project_images
+					WHERE id = :id";
+		$res = $db->query("SELECT",$query,$params);
+		$images = array();
+		if( $res['status'] && $res['count'] > 0 ) {
+			foreach( $res['data'] as $image) {
+				$images[] = $image['image'];
+			}
+		}
+		$project['images'] = $images;
+		
+		$query = "SELECT recog
+					FROM pq_project_recogs
+					WHERE id = :id";
+		$res = $db->query("SELECT",$query,$params);
+		$recogs = array();
+		if( $res['status'] && $res['count'] > 0 ) {
+			foreach( $res['data'] as $recog) {
+				$recogs[] = $recog['recog'];
+			}
+		}
+		$project['recogs'] = $recogs;
+
+		$query = "SELECT tag
+					FROM pq_project_tags
+					WHERE id = :id";
+		$res = $db->query("SELECT",$query,$params);
+		$tags = array();
+		if( $res['status'] && $res['count'] > 0 ) {
+			foreach( $res['data'] as $tag) {
+				$tags[] = $tag['tag'];
+			}
+		}
+		$project['tags'] = $tags;
+
+		$query = "SELECT idNo, fName, lName, email
+					FROM pq_project_students PS INNER JOIN pq_student S 
+						ON PS.studentId = S.id 
+							AND PS.status = 1 AND S.status = 1
+					WHERE PS.projectId = :id";
+		$res = $db->query("SELECT",$query,$params);
+		$team = array();
+		if( $res['status'] && $res['count'] > 0 ) {
+			foreach( $res['data'] as $student) {
+				$temp = array();
+				foreach($student as $key=>$val) {
+					$temp[$key] = $val;
+				}
+				$team[] = $temp;
+			}
+		}
+		$project['team'] = $team;
+
+		return $project;
+	} else {
+		return false;
+	}
+}
+
 function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 					,$grades = null,$images = null,$recogs = null
 					,$tags = null) {
@@ -240,5 +346,5 @@ function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 // 			"email" => "johnTolentino@dlsu.edu.ph"
 // 		)
 // 	),array(10,9,10,9),null,array("Best in Category"),array("CS-ST","Thesis","NLP","Lexical Simplification","Text Simplification","Standford NLP"));
-
+print_r(proj_get_all());
 ?>
