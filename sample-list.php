@@ -151,7 +151,7 @@
                                         </span>
                                         <!-- Scores -->
                                         <h1 class="sf-200 center green-text text-accent-3 no-margin">
-                                            <?php echo $project['grade'];?>/10
+                                            <?php echo getGrade($project['grade']);?>/4.0
                                         </h1>
                                         <?php foreach($project['recogs'] as $recog) {?>
                                         <div class="cat mobile">

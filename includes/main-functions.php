@@ -55,4 +55,24 @@ function validateEmail($email) {
 
 	return preg_match($pattern,$email);
 }
+
+function getGrade($grade) {
+	if( $grade >= 9.4) {
+		return "4.0";
+	} elseif($grade >= 8.9) {
+		return "3.5";
+	} elseif($grade >= 8.3) {
+		return "3.0";
+	} elseif($grade >= 7.8) {
+		return "2.5";
+	} elseif($grade >= 7.2) {
+		return "2.0";
+	} elseif($grade >= 6.6) {
+		return "1.5";
+	} elseif($grade >= 6.0) {
+		return "1.0";
+	} else {
+		return "0.0";
+	}
+}
 ?>

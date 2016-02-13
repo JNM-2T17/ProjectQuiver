@@ -212,7 +212,7 @@
                                         <div class="card-panel white-border">
                                             <span>Grade Equivalent:</span>
                                             <h2 class="green-text text-accent-3 ">
-                                                <?php echo $project['grade'];?>/10
+                                                <?php echo getGrade($project['grade']);?>/4.0
                                             </h2>
                                         </div>
                                     </div>
