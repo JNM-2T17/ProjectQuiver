@@ -6,7 +6,7 @@ require_once "student-functions.php";
 function proj_get_all() {
 	global $db;
 
-	$query = "SELECT id FROM pq_project WHERE status = 1";
+	$query = "SELECT id FROM pq_project WHERE status = 1 ORDER BY name";
 	$res = $db->query("SELECT",$query);
 	if( $res['status']) {
 		$projects = array();
@@ -56,7 +56,8 @@ function proj_get_best() {
 										AND PG.status = 1
 								INNER JOIN pq_project_recogs PR 
 									ON P.id = PR.id
-								GROUP BY P.id)B";
+								GROUP BY P.id)B
+				ORDER BY B.grade DESC";
 	$res = $db->query("SELECT",$query);
 
 	if($res['status']) {
@@ -73,7 +74,8 @@ function proj_get_best() {
 function proj_get($id) {
 	global $db;
 
-	$query = "SELECT name, class, abstract, description, AVG(grade) AS grade
+	$query = "SELECT P.id,name, class, abstract, description
+					, AVG(grade) AS grade
 				FROM pq_project P INNER JOIN pq_project_grades PG 
 					ON P.id = PG.id AND P.status = 1 AND PG.status = 1
 				WHERE P.id = :id
@@ -397,5 +399,5 @@ function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 // 			"email" => "johnTolentino@dlsu.edu.ph"
 // 		)
 // 	),array(10,9,10,9),null,array("Best in Category"),array("CS-ST","Thesis","NLP","Lexical Simplification","Text Simplification","Standford NLP"));
-print_r(proj_get_best());
+// print_r(proj_get_best());
 ?>
