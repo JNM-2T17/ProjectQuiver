@@ -1,4 +1,5 @@
 <?php
+session_start();
 define("BASE_PATH","PMS");
 
 if( empty($_POST) && !isset($_SERVER['HTTP_REFERER'])) {
@@ -14,7 +15,8 @@ $request = $_SERVER['REQUEST_METHOD'] == "POST" ? $_POST : $_GET;
 switch($request['request']) {
 	case "login":
 		$res = usr_check($request['email'],$request['password']);
-		if($res === true) {
+		if(is_numeric($res)) {
+			$_SESSION['user'] = $res;
 			header("Location: ../");
 		} else {
 			header("Location: ../login.php?status=$res");

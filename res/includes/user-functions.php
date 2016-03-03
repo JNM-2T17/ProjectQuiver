@@ -26,7 +26,7 @@ function usr_add($email,$password,$fname,$lname,$usrType) {
 function usr_check($email,$password) {
 	global $db;
 
-	$sql = "SELECT password FROM pq_user WHERE email = :email";
+	$sql = "SELECT id,password FROM pq_user WHERE email = :email";
 	$param = array(":email" => $email);
 	$res = $db->query("SELECT",$sql,$param);
 	
@@ -34,7 +34,7 @@ function usr_check($email,$password) {
 		if( $res['count'] == 0 ) {
 			return "No Such User";
 		} else if(password_verify($password,$res['data'][0]['password'])) {
-			return true;
+			return $res['data'][0]['id'];
 		} else {
 			return "Wrong password";
 		}
