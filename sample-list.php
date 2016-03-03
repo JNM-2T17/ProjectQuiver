@@ -153,11 +153,12 @@
                                         <h1 class="sf-200 center green-text text-accent-3 no-margin">
                                             <?php echo getGrade($project['grade']);?>/4.0
                                         </h1>
-                                        <?php foreach($project['recogs'] as $recog) {?>
+                                        <?php if( count($project['recogs']) > 0 ) {
+                                            foreach($project['recogs'] as $recog) {?>
                                         <div class="cat mobile">
                                             <?php echo $recog;?>
                                         </div>
-                                        <?php }?>
+                                        <?php }}?>
                                     </div>
                                 </div>
                             </div>

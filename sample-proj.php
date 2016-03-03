@@ -225,7 +225,7 @@
                                             <br>
                                             <br>
                                         </b>
-                                        Aliquam erat volutpat. Nam vel sagittis felis, et aliquam dui. Aenean feugiat libero ipsum, ac auctor augue dapibus vel. Praesent vitae dignissim leo. Praesent id neque sapien. Nunc gravida libero sit amet aliquet ornare. Sed ac facilisis dui. Sed sit amet tortor eget arcu placerat accumsan vel nec dui.
+                                        <?php echo $project['review']; ?>
                                     </p>
                                 </div>
                             </div>
