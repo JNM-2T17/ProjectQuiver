@@ -4,7 +4,6 @@ function checkSubmit() {
 	console.log($("#projabstract").val());
 	console.log($("#projstudentreview").val());
 	console.log($("#projreview").val());
-
 	if( $("#projname").val().length > 0 && 
 		$("#projmembers").val().length > 0 &&
 		$("#projabstract").val().length > 0 &&

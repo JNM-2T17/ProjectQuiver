@@ -22,6 +22,30 @@ function proj_get_all() {
 	}
 }
 
+function proj_get_pending() {
+	global $db;
+
+	$query = "SELECT id,name, class
+				FROM pq_project
+				WHERE status = 1 AND forJudging = 1
+				ORDER BY dateAdded DESC";
+	$res = $db->query("SELECT",$query);
+
+	if($res['status']) {
+		$pending = array();
+		for($res['data'] as $val) {
+			$pending[] = array(
+				"id" => $val['id'],
+				"name" => $val['name'],
+				"class" => $val['class']
+			);
+		}
+		return $pending;
+	} else {
+		return false;
+	}
+}
+
 function proj_get_best() {
 	global $db;
 
