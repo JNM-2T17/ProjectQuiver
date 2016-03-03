@@ -33,7 +33,7 @@ function proj_get_pending() {
 
 	if($res['status']) {
 		$pending = array();
-		for($res['data'] as $val) {
+		foreach($res['data'] as $val) {
 			$pending[] = array(
 				"id" => $val['id'],
 				"name" => $val['name'],

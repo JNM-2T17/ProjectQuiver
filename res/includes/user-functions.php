@@ -4,7 +4,7 @@
  * @author Austin Fernandex
  * @20160303
  */
-require "main-functions.php";
+require_once "main-functions.php";
 
 function usr_add($email,$password,$fname,$lname,$usrType) {
 	global $db;
