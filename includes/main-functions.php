@@ -51,7 +51,7 @@ function validateDate($date) {
  * @return true if valid, false otherwise
  */
 function validateEmail($email) {
-	$pattern = "/[A-Za-z0-9_.]+@([A-Za-z0-9]+.)+[A-Za-z]+/";
+	$pattern = "/[A-Za-z][A-Za-z0-9_.]*[A-Za-z0-9]+@([A-Za-z0-9]+.)+[A-Za-z]+/";
 
 	return preg_match($pattern,$email);
 }
