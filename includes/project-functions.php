@@ -33,7 +33,7 @@ function proj_get_pending() {
 
 	if($res['status']) {
 		$pending = array();
-		for($res['data'] as $val) {
+		foreach($res['data'] as $val) {
 			$pending[] = array(
 				"id" => $val['id'],
 				"name" => $val['name'],
@@ -62,6 +62,7 @@ function proj_get_best() {
 												AND P.forJudging = 0
 										INNER JOIN pq_project_recogs PR 
 											ON P.id = PR.id
+										WHERE forJudging = 0
 										GROUP BY P.id) A
 						GROUP BY recog, grade) B NATURAL JOIN 
 						(SELECT recog,MAX(grade) as grade
@@ -75,6 +76,7 @@ function proj_get_best() {
 											AND P.forJudging = 0
 									INNER JOIN pq_project_recogs PR 
 										ON P.id = PR.id
+									WHERE forJudging = 0
 									GROUP BY P.id) A
 							GROUP BY recog)C)A2
 						NATURAL JOIN 
@@ -86,6 +88,7 @@ function proj_get_best() {
 										AND P.forJudging = 0
 								INNER JOIN pq_project_recogs PR 
 									ON P.id = PR.id
+								WHERE forJudging = 0
 								GROUP BY P.id)B
 				ORDER BY B.grade DESC";
 	$res = $db->query("SELECT",$query);
