@@ -9,6 +9,7 @@
 
     require_once "includes/project-functions.php";
     $projects = proj_get_best();
+    // print_r($projects);
 ?>
 <html>
     <head>
