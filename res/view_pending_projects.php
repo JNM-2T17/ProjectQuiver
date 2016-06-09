@@ -7,7 +7,7 @@ $projects = proj_get_pending();
 <html>
   <head>
 
-    <title>Peding Projects</title>
+    <title>Pending Projects</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/materialize.min.css">
