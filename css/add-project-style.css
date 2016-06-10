@@ -1,0 +1,71 @@
+/** Bold */
+@font-face {
+  font-family: "San Francisco";
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
+}
+
+body{
+  background-color: #f4f4f4;
+}
+h1{
+  margin-left: 10px;
+  font-family: "San Francisco";
+  font-weight: 700;
+  margin-top: 90px;
+  font-weight: 900;
+  font-kerning: none;
+}
+
+.add-project-form-container{
+  padding-top: 170px;
+  background-color: #fff;
+  height: 100%;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+.btn-colored {
+    /* Border */
+    border-radius: 5px;
+    /* Colors */
+    background: #f2f2f2;
+    /* Size & Position */
+    width: 100px;
+    color: #262626;
+    text-align: center;
+    height: 50px;
+    line-height: 3.2;
+    transition: all .3s ease-in-out;
+}
+
+.btn-colored:hover {
+    /* Colors */
+    background: #e4e4e4;
+    color: white !important;
+    /* Fading transition */
+}
+
+.btn-colored-sumit {
+    /* Border */
+    border-radius: 5px;
+    /* Colors */
+    background: #00E676;
+    box-shadow: 0 0 0 0;
+    /* Size & Position */
+    width: 150px;
+    color: #fff;
+    text-align: center;
+    height: 50px;
+    line-height: 3.2;
+    transition: all .3s ease-in-out;
+}
+
+.btn-colored-sumit:hover {
+    /* Colors */
+    background: #24ec8b;
+    color: white !important;
+    /* Fading transition */
+    transition: background 0.5s color 0.5s;
+}
