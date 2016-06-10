@@ -5,21 +5,21 @@
 body {
     font-family: "San Francisco" !important;
     font-weight: 400;
-    background-position: center -20px;    
+    background-position: center -20px;
     color: 0A1B20;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "San Francisco" !important;
     font-weight: 900;
-    font-kerning: none;    
+    font-kerning: none;
 }
 
 nav {
     box-shadow: 0 0 0 0 !important;
 }
 
-hr {    
+hr {
     border-color: #b9f6ca !important;
 }
 
@@ -93,16 +93,16 @@ p {
     Sections
 */
 
-#sec { 
+#sec {
     padding-top: 15%;
-    padding-bottom: 15%;    
-    vertical-align: middle; 
+    padding-bottom: 15%;
+    vertical-align: middle;
     position: relative;
     z-index: 2;
 }
 
 #above-fold {
-    
+
     position: relative;
     z-index: 3;
 }
@@ -114,9 +114,9 @@ p {
     z-index: 2;
     background-image: -o-linear-gradient(0deg,rgba(9, 15, 14, 0) 0%,rgba(9, 15, 14, 0.95) 45%,rgba(9, 15, 14, 0) 90%);
     background-image: -moz-linear-gradient(00deg,rgba(9, 15, 14, 0) 0%,rgba(9, 15, 14, 0.95) 45%,rgba(9, 15, 14, 0) 90%);
-    
+
     background-image: -webkit-linear-gradient(0deg,rgba(10, 27, 32, 1) 0%,rgba(10, 27, 32, 1) 57%,rgba(10, 27, 32, 0) 100%);
-    
+
     background-image: -ms-linear-gradient(90deg,rgba(9, 15, 14, 0) 0%,rgba(9, 15, 14, 0.95) 45%,rgba(9, 15, 14, 0) 90%);
     background-image: linear-gradient(90deg,rgb(10, 27, 32, 0) 0%,rgba(9, 15, 14, 0.95) 45%,rgba(9, 15, 14, 0) 90%);
 }
@@ -126,7 +126,7 @@ p {
 */
 
 #grad-bg {
-    /*background: rgba(9, 15, 14, 0.95);*/    
+    /*background: rgba(9, 15, 14, 0.95);*/
     background-image: -o-linear-gradient(180deg,rgba(9, 15, 14, 0) 0%,rgba(9, 15, 14, 0.95) 45%,rgba(9, 15, 14, 0) 90%);
     background-image: -moz-linear-gradient(180deg,rgba(9, 15, 14, 0) 0%,rgba(9, 15, 14, 0.95) 45%,rgba(9, 15, 14, 0) 90%);
     background-image: -webkit-linear-gradient(180deg,rgba(9, 15, 14, 0) 0%,rgba(9, 15, 14, 0.95) 45%,rgba(9, 15, 14, 0) 90%);
@@ -177,8 +177,8 @@ p {
     box-shadow: 0 0 0 0;
     /* Size & Position */
     height: 50px;
-    line-height: 3.2;    
-    
+    line-height: 3.2;
+
 }
 
 .btn-border-only:hover {
@@ -194,13 +194,13 @@ p {
 */
 
 .nav {
-    opacity: 0.97;    
+    opacity: 0.97;
     transition: background 0.4s;
     box-shadow: 0 0 0 0 !important;
 }
 
 .nav h4 {
-    color: white;    
+    color: white;
     transition: color 0.35s;
 }
 
@@ -213,7 +213,7 @@ p {
     opacity: 1;
     height: 20px;
     width: 100%;
-    
+
     filter: blur(5px);
     -webkit-filter: blur(20px);
 }
@@ -224,8 +224,8 @@ p {
     width: 90%;
     height: 0px;
     align-content: center;
-    
-} 
+
+}
 
 .white-to-quiver {
     color: #0a1b20;
@@ -236,12 +236,12 @@ p {
     transition: color 0.4s, background 0.4s;
 }
 
-.moveLeft {        
+.moveLeft {
     transform: translate(-30px,0px);
     transition: transform 1s ease-in-out;
 }
 
-.bodyBGimage {    
+.bodyBGimage {
     background-image: url(https://earnest-static-assets.s3.amazonaws.com/images/annual-report/confetti-background-final-c10b9a151a.png);
 }
 
@@ -276,8 +276,8 @@ p {
 /* CATEGORIES */
 
 .cat {
-    border: 1px solid;    
-    height: 40px;    
+    border: 1px solid;
+    height: 40px;
     border-radius: 5px;
     padding: 7px 5px 5px 5px;
 }
@@ -314,50 +314,50 @@ p {
     /* Border */
     border: 1px solid;
     border-radius: 5px;
-    /* Colors */    
+    /* Colors */
     border-color: #00E676;
     box-shadow: 0 0 0 0;
-    /* Size & Position */    
+    /* Size & Position */
 }
 
 .white-border {
     /* Border */
     border: 1px solid;
     border-radius: 5px;
-    /* Colors */    
+    /* Colors */
     border-color: white;
     box-shadow: 0 0 0 0;
-    /* Size & Position */      
+    /* Size & Position */
 }
 
 .amber-border {
     /* Border */
     border: 1px solid;
     border-radius: 5px;
-    /* Colors */    
+    /* Colors */
     border-color: #ffc107;
     box-shadow: 0 0 0 0;
-    /* Size & Position */    
+    /* Size & Position */
 }
 
 .red-border {
     /* Border */
     border: 1px solid;
     border-radius: 5px;
-    /* Colors */    
+    /* Colors */
     border-color: #ff4d4d;
     box-shadow: 0 0 0 0;
-    /* Size & Position */    
+    /* Size & Position */
 }
 
 .grey-border {
     /* Border */
     border: 1px solid;
     border-radius: 5px;
-    /* Colors */    
+    /* Colors */
     border-color: #d8d8d8;
     box-shadow: 0 0 0 0;
-    /* Size & Position */    
+    /* Size & Position */
 }
 
 .white-border.dashed {
@@ -371,36 +371,36 @@ p {
 
 .score-in-card {
     position: absolute;
-    bottom: 0px; 
+    bottom: 0px;
     width: 100%;
 }
 
 .short-desc {
     height: 180px;
     width: 100%;
-    
-    text-overflow: ellipsis;    
-    overflow: hidden;    
+
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .overflow-white {
     /* color */
-    background: 
+    background:
         linear-gradient(
-            rgba(255, 255, 255, 0), 
+            rgba(255, 255, 255, 0),
             rgba(255, 255, 255, 1)
         );
     /* position */
     position: absolute;
-    bottom: 205px; 
+    bottom: 205px;
     left: 0px;
     z-index: 5;
     /* size */
-    height: 70px;     
+    height: 70px;
     width: inherit;
 }
 
-.app-card-plain {    
+.app-card-plain {
     /* Border */
     border: 1px solid;
     border-radius: 5px;
@@ -408,9 +408,9 @@ p {
     background: white;
     border-color: rgb(0, 230, 118);
     box-shadow: 0 0 0 0;
-    /* Size & Position */  
+    /* Size & Position */
     height: 520px;
-    cursor: pointer;        
+    cursor: pointer;
 }
 
 .app-card-plain:hover {
@@ -422,7 +422,7 @@ p {
 .image-bg-ad {
     background:
         linear-gradient( to bottom,
-            rgba(1, 20, 1, 0.1), 
+            rgba(1, 20, 1, 0.1),
             rgba(1, 5, 3, 0.95)
         ), url('../assets/images/tablet.jpg');
     background-repeat: no-repeat;
@@ -432,7 +432,7 @@ p {
 .image-bg-featured {
     background:
         linear-gradient( to left,
-            rgba(0, 230, 118, 0.85), 
+            rgba(0, 230, 118, 0.85),
             rgba(0, 230, 118, 1)
         ), url('../assets/images/phone.gif');
     background-repeat: no-repeat;
@@ -441,22 +441,22 @@ p {
     transition: background 0.5s;
 }
 
-.image-bg-featured:hover {    
+.image-bg-featured:hover {
     transition: background 0.5s;
     background: linear-gradient( to left,
-            rgba(0, 230, 118, 0.85), 
+            rgba(0, 230, 118, 0.85),
             rgba(0, 230, 118, 1)
         ), url('http://i.istockimg.com/file_thumbview_approve/21671140/6/stock-illustration-21671140-doodle-background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    
+
 }
 
 .image-fit-width {
     width: 100%;
 }
 
-.image-caption {    
+.image-caption {
     /* Positioning */
     margin: 0;
     padding: 5px 10px 5px 10px;
@@ -488,7 +488,7 @@ p {
 }
 
 .bottom {
-    position: absolute; 
-    bottom: 0px; 
+    position: absolute;
+    bottom: 0px;
     width: 100%;
 }
