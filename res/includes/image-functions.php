@@ -21,14 +21,14 @@ function img_upload($folderName,$images) {
 				$filename = $path."/".$imgCtr.".".$ext;
 				if( move_uploaded_file($image['tmp_name'], $filename)) {
 					echo $filename." has been uploaded.<br/>";
-					$paths[] = $filename;
+					$paths[] = substr($filename,6);
 					$imgCtr++;
 				}
 			} else {
 				echo "$image[name] is too large";
 			}
 		} else {
-			echo "$image[name] has an invalid file extension.";
+			echo "$image[name] has an invalid file extension $ext.";
 		}
 	}
 
