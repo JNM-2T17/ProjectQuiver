@@ -7,6 +7,7 @@ if( empty($_POST) && !isset($_SERVER['HTTP_REFERER'])) {
 	die();
 }
 
+require_once "image-functions.php";
 require_once "project-functions.php";
 require_once "user-functions.php";
 
@@ -48,7 +49,7 @@ switch($request['request']) {
 		$review = $request['review'];
 		$grades = $request['grades'];
 		$gradeok = true;
-		for($grades as $g) {
+		foreach($grades as $g) {
 			$gradeok = $gradeok && ($g >= 0 && $g <= 10);
 			if( !$gradeok ) {
 				break;
@@ -56,17 +57,33 @@ switch($request['request']) {
 		}
 		if( $gradeok ) {
 			$recogs = $request['recogs'];
-			proj_review($id,$_SESSION['user'],$review,$grades)
+			proj_review($id,$_SESSION['user'],$review,$grades);
 		}
 		break;
-	case "submitProject":
-		print_r($request);
-		proj_add($request["projname"],"web",$request["projabstract"],
-					$request["projstudentreview"]);
-					// ,$students = null
-					// ,$grades = null,$images = null,$recogs = null
-					// ,$tags = null)
-		header("Location: ../addproject.php");
+	case "addProject":
+		$id = proj_add($request["projname"],$request['category'],$request["abstract"]
+					,$request["description"]
+					,null// ,$request['members']
+					,isset($request['tags']) ? $request['tags'] : null);
+		
+		//upload images
+		$images = array();
+		$imgCtr = count($_FILES['images']['name']);
+		echo "IMGCTR: $imgCtr<br/>";
+		for($i = 0; $i < $imgCtr; $i++) {
+			$image = array(
+				"name" 		=> $_FILES["images"]["name"][$i],
+				"type" 		=> $_FILES["images"]["type"][$i],
+				"tmp_name" 	=> $_FILES["images"]["tmp_name"][$i],
+				"error" 	=> $_FILES["images"]["error"][$i],
+				"size" 		=> $_FILES["images"]["size"][$i]
+			);
+			$images[] = $image;
+		}
+		echo $id;
+		//save images in db
+		proj_add_images($id,img_upload($id,$images));
+		header("Location: ../add-project.php");
 		break;
 	default:
 }

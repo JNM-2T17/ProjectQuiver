@@ -260,7 +260,7 @@ function proj_review($id,$reviewer,$review,$grades,$recogs = null) {
 // proj_review(5,1,"Beri Gud project",array(10,9,8,8));
 
 function proj_add($name,$class,$abstract = null,$desc = null,$students = null
-					,$images = null,$tags = null) {
+					,$tags = null) {
 	global $db;
 
 	$query = "INSERT INTO pq_project(name,class";
@@ -288,29 +288,6 @@ function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 
 	if( $res['status'] ) {
 		$id = $res['data'];
-
-		if( $images !== null && count($images) > 0) {
-			$query = "INSERT INTO pq_project_images(id,image) 
-						VALUES ";
-			$params = array(
-				":id" => $id
-			);
-			$i = 0;
-			foreach($images as $image) {
-				if( $i > 0 ) {
-					$query .= ",";
-				}
-				$query .= "(:id,:image_$i)";
-				$params[":image_$i"] = $image;
-				$i++;
-			}
-
-			$res = $db->query("INSERT",$query,$params);
-			if(!$res['status']) {
-				echo $res['error'];
-				return false;
-			}	
-		} 
 
 		if( $students != null && count($students) > 0) {
 			$query = "INSERT INTO pq_project_students(projectId,studentId) 
@@ -363,13 +340,39 @@ function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 			}	
 		} 
 
-		return true;
+		return $id;
 	} else {
 		echo $res['error'];
 		return false;
 	}
 }
 
+function proj_add_images($id,$images) {
+	global $db;
+
+	if( $images !== null && count($images) > 0) {
+		$query = "INSERT INTO pq_project_images(id,image) 
+					VALUES ";
+		$params = array(
+			":id" => $id
+		);
+		$i = 0;
+		foreach($images as $image) {
+			if( $i > 0 ) {
+				$query .= ",";
+			}
+			$query .= "(:id,:image_$i)";
+			$params[":image_$i"] = $image;
+			$i++;
+		}
+
+		$res = $db->query("INSERT",$query,$params);
+		if(!$res['status']) {
+			echo $res['error'];
+			return false;
+		}	
+	} 
+}
 // echo proj_add("ShareZone v2","Mobile Application","ShareZone allows you to share and transfer files from multiple different devices with each other with just a web browser and your smartphone.","Simpatico is a text simplification system that makes us of lexical and syntactic simplification methods in order to simplify legalese to plain English in which a majority of the Philippine population can understand. It makes use of various existing NLP tools in order to carry out tasks like multiword extraction and word sense disambiguation.",array(
 // 		array(
 // 			"idNo" => "11312121",

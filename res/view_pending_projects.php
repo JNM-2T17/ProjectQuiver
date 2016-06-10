@@ -41,6 +41,7 @@ $projects = proj_get_pending();
     </nav>
     <div class = "container" style="padding-top: 80px;">
     <div class = "col s12 m12 l12">
+    <h1>Pending Projects</h1>
     <table  class = "bordered highlight responsive-table">
         <thead>
           <tr>

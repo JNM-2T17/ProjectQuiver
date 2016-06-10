@@ -101,7 +101,7 @@
 			<input type="hidden" name='request' value="addProject"/>
 			<div class = "row">
 				<div class="input-field col s6">
-			      <input placeholder="Placeholder" id="name" name="name" type="text" class="validate">
+			      <input placeholder="Placeholder" id="name" name="projname" type="text" class="validate">
 			      <label for="first_name">Name</label>
 			    </div>
 			</div>
@@ -109,10 +109,10 @@
 				<div class="input-field col s12">
 	    			<select name="category">
 		      			<option value="" disabled selected>Choose your option</option>
-		      			<option value="web">Web</option>
-		      			<option value="mobile">Mobile</option>
-		      			<option value="desktop">Desktop</option>
-						<option value="hardware">Hardware</option>
+		      			<option value="Web Application">Web</option>
+		      			<option value="Mobile Application">Mobile</option>
+		      			<option value="Desktop Application">Desktop</option>
+						<option value="Hardware Project">Hardware</option>
 	    			</select>
 	    			<label>Category</label>
 			 	</div>
@@ -130,8 +130,14 @@
 		
 			<div class="row">
 				<div class="input-field col s12">
-		          <textarea name = "abstract" id="abstract" name="abstract" class="materialize-textarea"></textarea>
+		          <textarea name = "abstract" id="abstract" name="projabstract" class="materialize-textarea"></textarea>
 		          <label for="Abstract">Abstract</label>
+		        </div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+		          <textarea name = "description" id="description" name="projdescription" class="materialize-textarea"></textarea>
+		          <label for="Description">Description</label>
 		        </div>
 			</div>
 			<div class = "row">
@@ -143,12 +149,15 @@
 		    	</div>
 			</div>
 			<div class = "row">
-				<ul id = "test">
-				</ul>
-				<div class="file-field input-field col s6">
-		        	<input class="file-path validate" type="text" placeholder="Upload multiple Images">
-					<button type="File" class="btn-flat grey lighten-2" id = "browse-image">Browse Image</button>
-		    	</div>
+				<div class="file-field input-field">
+			      <div class="btn">
+			        <span>File</span>
+			        <input type="file" name="images[]" multiple>
+			      </div>
+			      <div class="file-path-wrapper">
+			        <input class="file-path validate" type="text" placeholder="Upload one or more files">
+			      </div>
+			    </div>
 			</div>
 		<div class="row">
 			<button class="btn green accent-3" type="submit" name="action" id = "submit">Submit</button>
