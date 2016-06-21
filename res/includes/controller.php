@@ -62,8 +62,8 @@ switch($request['request']) {
 			echo $id;
 			//save images in db
 			proj_add_images($id,img_upload($id,$images));
+			header("Location: ../add-project.php");
 		}
-		header("Location: ../add-project.php");
 		break;
 	case "add_user":
 		if( validateEmail($request['input_email'])) {
