@@ -31,7 +31,7 @@ switch($request['request']) {
 				$error = true;
 				echo "INVALID FIRST NAME ".$fName;
 			}
-			if(!preg_match("/^[a-z ,.'-]+$/i",$lName) {
+			if(!preg_match("/^[a-z ,.'-]+$/i",$lName) ) {
 				$error = true;
 				echo "INVALID LAST NAME ".$lName;
 			}
@@ -48,7 +48,7 @@ switch($request['request']) {
 			);
 		}
 
-		if(!$error) {
+		if($error) {
 			header("Location: ../add-project.php?status=error");
 		} else {
 			$id = proj_add($request["projname"],$request['category'],$request["abstract"]
