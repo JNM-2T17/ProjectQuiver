@@ -2,31 +2,6 @@
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-		<script>
-			$(document).ready(function(){
-			   $("#add-tag").click(function() {
-					var tag = $("#tags").val();
-					if( tag.length > 0 ) {
-						$("#taglist").append("<div class='tag-entry'>" + tag 
-									+ "<input type='hidden' name='tags[]' value='" 
-									+ tag + "' /></div>");
-						$("#tags").val("");
-					}
-				});
-
-				$("#add-member").click(function() {
-					var tag = $("#members").val();
-					if( tag.length > 0 ) {
-						$("#memlist").append("<div class='mem-entry'>" + tag 
-									+ "<input type='hidden' name='members[]' value='" 
-									+ tag + "' /></div>");
-						$("#members").val("");
-					}
-				});
-
-				$('select').material_select();
-			});
-		</script>
 		<!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="css/materialize.min.css">
 	<link rel="stylesheet" href="css/add-project-style.css">
@@ -122,7 +97,10 @@
 					<ul id = "memlist">
 					</ul>
 					<div class="input-field col s6">
-		        <input placeholder="Juan Dela Cruz" id="members" type="text" class="validate">
+		        <input placeholder="ID Number" id="idNo" type="text" class="validate">
+		        <input placeholder="First Name" id="firstName" type="text" class="validate">
+		        <input placeholder="Last Name" id="lastName" type="text" class="validate">
+		        <input placeholder="Email Address" id="emailAdd" type="text" class="validate">
 		        <label for="members">Add Member name here</label>
 						<button type="button" class="btn-flat grey lighten-2" id = "add-member">Add Member</button>
 		    	</div>
@@ -165,29 +143,8 @@
 	</div>
 
 	<!-- Script for changing navbar color. I know it's primitive. -->
-	<script>
-			var a = $(".nav").offset().top;
-
-			$(document).ready(function(){
-					if($(this).scrollTop() > a)
-					{
-							$('.nav').css({"background":"rgb(10, 27, 32)"});
-							$('.white-to-quiver').css({"color":"white"});
-							$('#submitBtn').css({"color":"#0a1b20", "background":"#00e676"});
-							$('.moveLeft').css({"transform":"translate(0px,0px)", "transition":"transform 0.4s ease-in-out"});
-
-					} else {
-							$('.nav').css({"background":"white"});
-							$('.white-to-quiver').css({"color":"#0a1b20"});
-							$('#submitBtn').css({"color":"white", "background":"#0a1b20"});
-							$('.moveLeft').css({"transform":"translate(-30px,0px)"});
-					}
-			});
-	</script>
+	<script src="js/addProject.js"></script>
 	<script type="text/javascript" src="js/materialize.js"></script>
-	<script>
-			$(".button-collapse").sideNav();
-	</script>
 	<script type="text/javascript" src="js/laurenz.js"></script>
 </body>
 </html>

@@ -309,7 +309,7 @@ function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 					$i++;
 				}
 			}
-
+			
 			$res = $db->query("INSERT",$query,$params);
 			if( !$res['status']) {
 				echo $res['error'];
