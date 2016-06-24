@@ -14,6 +14,68 @@ require_once "user-functions.php";
 $request = $_SERVER['REQUEST_METHOD'] == "POST" ? $_POST : $_GET;
 
 switch($request['request']) {
+	case "addProject":
+		$members = array();
+		$error = false;
+		for($i = 0; $i < count($request['idNo']); $i++) {
+			$idNo = $request['idNo'][$i];
+			$fName = $request['fName'][$i];
+			$lName = $request['lName'][$i];
+			$email = $request['email'][$i];
+
+			if(!preg_match("/^[0-9]{8}$/",$idNo) ) {
+				$error = true;
+				echo "INVALID ID ".$idNo;
+			}
+			if(!preg_match("/^[a-z ,.'-]+$/i",$fName) ) {
+				$error = true;
+				echo "INVALID FIRST NAME ".$fName;
+			}
+			if(!preg_match("/^[a-z ,.'-]+$/i",$lName) ) {
+				$error = true;
+				echo "INVALID LAST NAME ".$lName;
+			}
+			if(!preg_match("/^([a-zA-Z0-9_\-\.]+)@(dlsu.edu.ph|delasalle.ph)$/",$email)) {
+				$error = true;
+				echo "INVALID EMAIL ".$email;
+			}
+
+			$members[] = array(
+				"idNo"  => $idNo,
+				"fName" => $fName,
+				"lName" => $lName,
+				"email" => $email
+			);
+		}
+
+		if($error) {
+			header("Location: ../add-project.php?status=error");
+		} else {
+			$id = proj_add($request["projname"],$request['category'],$request["abstract"]
+						,$request["description"]
+						,$members
+						,isset($request['tags']) ? $request['tags'] : null);
+			
+			//upload images
+			$images = array();
+			$imgCtr = count($_FILES['images']['name']);
+			echo "IMGCTR: $imgCtr<br/>";
+			for($i = 0; $i < $imgCtr; $i++) {
+				$image = array(
+					"name" 		=> $_FILES["images"]["name"][$i],
+					"type" 		=> $_FILES["images"]["type"][$i],
+					"tmp_name" 	=> $_FILES["images"]["tmp_name"][$i],
+					"error" 	=> $_FILES["images"]["error"][$i],
+					"size" 		=> $_FILES["images"]["size"][$i]
+				);
+				$images[] = $image;
+			}
+			echo $id;
+			//save images in db
+			proj_add_images($id,img_upload($id,$images));
+			header("Location: ../add-project.php");
+		}
+		break;
 	case "add_user":
 		if( validateEmail($request['input_email'])) {
 			if( preg_match("/^[A-Za-z](([A-Za-z\s] | -[A-Za-z])|\"([A-Za-z\s] | -[A-Za-z])*\")*$/"
@@ -59,31 +121,6 @@ switch($request['request']) {
 			$recogs = $request['recogs'];
 			proj_review($id,$_SESSION['user'],$review,$grades);
 		}
-		break;
-	case "addProject":
-		$id = proj_add($request["projname"],$request['category'],$request["abstract"]
-					,$request["description"]
-					,null// ,$request['members']
-					,isset($request['tags']) ? $request['tags'] : null);
-		
-		//upload images
-		$images = array();
-		$imgCtr = count($_FILES['images']['name']);
-		echo "IMGCTR: $imgCtr<br/>";
-		for($i = 0; $i < $imgCtr; $i++) {
-			$image = array(
-				"name" 		=> $_FILES["images"]["name"][$i],
-				"type" 		=> $_FILES["images"]["type"][$i],
-				"tmp_name" 	=> $_FILES["images"]["tmp_name"][$i],
-				"error" 	=> $_FILES["images"]["error"][$i],
-				"size" 		=> $_FILES["images"]["size"][$i]
-			);
-			$images[] = $image;
-		}
-		echo $id;
-		//save images in db
-		proj_add_images($id,img_upload($id,$images));
-		header("Location: ../add-project.php");
 		break;
 	default:
 }
