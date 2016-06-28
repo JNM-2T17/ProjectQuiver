@@ -16,6 +16,30 @@ h1{
   font-kerning: none;
 }
 
+#alert-overlay{
+  /*position: absolute;
+  bottom:0;
+  right:0;*/
+  z-index: 100;
+}
+#alert-container{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 20px;
+  max-width: 300px;
+  height: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px grey solid;
+  float: right;
+}
+
+#alert-container p{
+  font-size: 14px;
+}
 .add-project-form-container{
   padding-top: 170px;
   background-color: #fff;

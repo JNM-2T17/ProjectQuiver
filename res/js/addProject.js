@@ -4,7 +4,7 @@ function checkSubmit() {
 	console.log($("#projabstract").val());
 	console.log($("#projstudentreview").val());
 	console.log($("#projreview").val());
-	if( $("#projname").val().length > 0 && 
+	if( $("#projname").val().length > 0 &&
 		$("#projmembers").val().length > 0 &&
 		$("#projabstract").val().length > 0 &&
 		$("#projstudentreview").val().length > 0 &&
@@ -20,6 +20,7 @@ $(".button-collapse").sideNav();
 var a = $(".nav").offset().top;
 
 $(document).ready(function(){
+	$("#alert-container").hide();
 	if($(this).scrollTop() > a)
 	{
 			$('.nav').css({"background":"rgb(10, 27, 32)"});
@@ -37,8 +38,8 @@ $(document).ready(function(){
    $("#add-tag").click(function() {
 		var tag = $("#tags").val();
 		if( tag.length > 0 ) {
-			$("#taglist").append("<div class='tag-entry'>" + tag 
-						+ "<input type='hidden' name='tags[]' value='" 
+			$("#taglist").append("<div class='tag-entry'>" + tag
+						+ "<input type='hidden' name='tags[]' value='"
 						+ tag + "' /></div>");
 			$("#tags").val("");
 		}
@@ -63,26 +64,31 @@ $(document).ready(function(){
 		}
 		if( !/^([a-zA-Z0-9_\-\.]+)@(dlsu.edu.ph|delasalle.ph)$/.test(emailAdd)) {
 				message += (message.length == 0 ? "" : "<br/>")
-						+ "Email Address is invalid. Make sure you are inputting a valid DLSU email.";	
+						+ "Email Address is invalid. Make sure you are inputting a valid DLSU email.";
 		}
 		if( message.length == 0 ) {
-			$("#memlist").append("<div class='mem-entry'>" 
-				+ idNo + " - " + firstName + " " + lastName + " - " 
-				+ emailAdd 
-				+ "<input type='hidden' name='idNo[]' value='" 
+			$("#memlist").append("<div class='mem-entry'>"
+				+ idNo + " - " + firstName + " " + lastName + " - "
+				+ emailAdd
+				+ "<input type='hidden' name='idNo[]' value='"
 				+ idNo + "' />"
-				+ "<input type='hidden' name='fName[]' value='" 
+				+ "<input type='hidden' name='fName[]' value='"
 				+ firstName + "' />"
-				+ "<input type='hidden' name='lName[]' value='" 
+				+ "<input type='hidden' name='lName[]' value='"
 				+ lastName + "' />"
-				+ "<input type='hidden' name='email[]' value='" 
+				+ "<input type='hidden' name='email[]' value='"
 				+ emailAdd + "' /></div>");
 			$("#idNo").val("");
 			$("#firstName").val("");
 			$("#lastName").val("");
 			$("#emailAdd").val("");
 		} else {
-			alert(message);
+			//alert(message);
+			$("#alert-container p").html(message);
+			$("#alert-container").show();
+			setTimeout(function(){
+				$("#alert-container").fadeOut("slow");
+			}, 3000);
 		}
 	});
 
