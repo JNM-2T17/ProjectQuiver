@@ -23,21 +23,10 @@ switch($request['request']) {
 			$lName = $request['lName'][$i];
 			$email = $request['email'][$i];
 
-			if(!preg_match("/^[0-9]{8}$/",$idNo) ) {
+			if(!preg_match("/^[0-9]{8}$/",$idNo) || !preg_match("/^[a-z ,.'-]+$/i",$fName) 
+				|| !preg_match("/^[a-z ,.'-]+$/i",$lName) 
+				|| !preg_match("/^([a-zA-Z0-9_\-\.]+)@(dlsu.edu.ph|delasalle.ph)$/",$email)) {
 				$error = true;
-				echo "INVALID ID ".$idNo;
-			}
-			if(!preg_match("/^[a-z ,.'-]+$/i",$fName) ) {
-				$error = true;
-				echo "INVALID FIRST NAME ".$fName;
-			}
-			if(!preg_match("/^[a-z ,.'-]+$/i",$lName) ) {
-				$error = true;
-				echo "INVALID LAST NAME ".$lName;
-			}
-			if(!preg_match("/^([a-zA-Z0-9_\-\.]+)@(dlsu.edu.ph|delasalle.ph)$/",$email)) {
-				$error = true;
-				echo "INVALID EMAIL ".$email;
 			}
 
 			$members[] = array(
@@ -73,8 +62,8 @@ switch($request['request']) {
 			echo $id;
 			//save images in db
 			proj_add_images($id,img_upload($id,$images));
-			header("Location: ../add-project.php");
 		}
+		header("Location: ../add-project.php");
 		break;
 	case "add_user":
 		if( validateEmail($request['input_email'])) {
