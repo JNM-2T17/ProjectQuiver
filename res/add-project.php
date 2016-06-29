@@ -13,10 +13,18 @@
 	<!--Import jQuery before materialize.js-->
  <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
  <script type="text/javascript" src="js/materialize.min.js"></script>
- 
+
 
 	</head>
 	<body>
+		<div id="alert-overlay">
+			<div id="alert-container">
+				<h4>Oops!</h4>
+				<p id="alert-text">
+					There is an error.
+				</p>
+			</div>
+		</div>
 		<!-- belowNav provides an effect for the nav bar-->
 		<!--
 				NAVBAR
@@ -105,7 +113,7 @@
 						<button type="button" class="btn-flat grey lighten-2" id = "add-member">Add Member</button>
 		    	</div>
 			</div>
-		
+
 			<div class="row">
 				<div class="input-field col s12">
 		          <textarea name = "abstract" id="abstract" name="projabstract" class="materialize-textarea"></textarea>
