@@ -37,8 +37,8 @@ switch($request['request']) {
 			);
 		}
 
-		if(!$error) {
-			header("Location: ../addProject.php?status=error");
+		if($error) {
+			header("Location: ../add-project.php?status=error");
 		} else {
 			$id = proj_add($request["projname"],$request['category'],$request["abstract"]
 						,$request["description"]
