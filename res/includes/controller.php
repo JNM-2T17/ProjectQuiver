@@ -89,10 +89,10 @@ switch($request['request']) {
 	case "login":
 		$res = usr_check($request['email'],$request['password']);
 		if(is_numeric($res)) {
-			$_SESSION['user'] = $res;
+			$_SESSION['session_user'] = $res;
 			header("Location: ../");
 		} else {
-			header("Location: ../login.php?status=$res");
+			header("Location: ../login.php?status=error");
 		}
 		break;
 	case "reviewProject":
