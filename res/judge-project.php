@@ -1,17 +1,24 @@
 <?php
-    /**
-     * Developed and designed by: Laurenz T.
-     * email me @: laurenz@outlook.ph
-     * COLLEGE OF COMPUTER STUDIES
-     * COMPUTER SCIENCE - SOFTWARE TECHNOLOGY
-     * "Ang pusong nabiyak, madalas naninindak" #uselessQuotesNgBagongTaon #2016
-     */
-     require_once "includes/project-functions.php";
-     if( !isset($_GET['id'])) {
-        header("Location: ./");
-     }
+/**
+ * judge-project.php
+ * @author Angela Acorda
+ * @20160705
+ */
+require_once "includes/security-functions.php";
 
-     $project = proj_get($_GET['id']);
+$auth = checkAuth("judgeProject");
+if( $auth === FALSE ) {
+  header("Location: login.php");
+} else if( $auth === 0 ) {
+  header("Location: index.php");
+}
+
+require_once "includes/project-functions.php";
+if( !isset($_GET['id'])) {
+    header("Location: index.php");
+}
+
+$project = proj_get($_GET['id']);
 ?>
 <html>
     <head>

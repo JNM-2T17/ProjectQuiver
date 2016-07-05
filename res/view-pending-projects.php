@@ -1,7 +1,22 @@
 <?php
+/**
+ * view-pending-projects.php
+ * @author Angela Acorda
+ * @20160705
+ */
+require_once "includes/security-functions.php";
+
+$auth = checkAuth("judgeProject");
+if( $auth === FALSE ) {
+  header("Location: login.php");
+} else if( $auth === 0 ) {
+  header("Location: index.php");
+}
+
 require_once "includes/project-functions.php";
 
 $projects = proj_get_pending();
+
 ?>
 <!DOCTYPE html>
 <html>
