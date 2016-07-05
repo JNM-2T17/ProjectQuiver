@@ -1,3 +1,18 @@
+<?php
+/**
+ * login.php
+ * @author Angela Acorda
+ * @20160303
+ */
+require_once "includes/security-functions.php";
+
+$auth = checkAuth("addProject");
+if( $auth === FALSE ) {
+	header("Location: login.php");
+} else if( $auth === 0 ) {
+	header("Location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
