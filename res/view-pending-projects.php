@@ -1,8 +1,8 @@
 <?php
 /**
- * login.php
+ * view-pending-projects.php
  * @author Angela Acorda
- * @20160303
+ * @20160705
  */
 require_once "includes/security-functions.php";
 
