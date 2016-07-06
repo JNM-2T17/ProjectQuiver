@@ -25,7 +25,7 @@ function student_get($idNo) {
 	global $db;
 
 	$query = "SELECT id,idNo,fName,lName,email FROM pq_student 
-				WHERE idNo = :idNo";
+				WHERE idNo = :idNo AND status = 1";
 	$param = array(
 		":idNo" => $idNo
 	);
