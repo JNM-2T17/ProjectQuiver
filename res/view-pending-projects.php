@@ -71,7 +71,7 @@ $projects = proj_get_pending();
           <tr>
             <td><?php echo $proj['name'];?></td>
               <td><?php echo $proj['class']; ?></td>
-              <td><a  href="review_project?id=<?php echo $proj['id']?>"> Judge </a></td>
+              <td><a  href="judge-project.php?id=<?php echo $proj['id']?>"> Judge </a></td>
           </tr>
           <?php } ?>
         </tbody>

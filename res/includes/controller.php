@@ -98,18 +98,19 @@ switch($request['request']) {
 	case "reviewProject":
 		$id = $request['id'];
 		$review = $request['review'];
-		$grades = $request['grades'];
-		$gradeok = true;
-		foreach($grades as $g) {
-			$gradeok = $gradeok && ($g >= 0 && $g <= 10);
-			if( !$gradeok ) {
-				break;
-			}
-		}
-		if( $gradeok ) {
-			$recogs = $request['recogs'];
-			proj_review($id,$_SESSION['user'],$review,$grades);
-		}
+		$grades = array(10,10,10,10);
+		// $gradeok = true;
+		// foreach($grades as $g) {
+		// 	$gradeok = $gradeok && ($g >= 0 && $g <= 10);
+		// 	if( !$gradeok ) {
+		// 		break;
+		// 	}
+		// }
+		// if( $gradeok ) {
+			//$recogs = $request['recogs'];
+			proj_review($id,$_SESSION['session_user'],$review,$grades);
+			header("Location: ../index.php");
+		// }
 		break;
 	default:
 }

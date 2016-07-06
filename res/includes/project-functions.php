@@ -107,7 +107,7 @@ function proj_get_best() {
 function proj_get($id) {
 	global $db;
 
-	$query = "SELECT P.id,name, class, abstract, description,review
+	$query = "SELECT P.id,name, class, abstract, description,review,forJudging
 					,concat(fname, ' ',lName) As reviewer, AVG(grade) AS grade
 				FROM pq_project P LEFT JOIN pq_project_grades PG 
 					ON P.id = PG.id AND P.status = 1 AND PG.status = 1
