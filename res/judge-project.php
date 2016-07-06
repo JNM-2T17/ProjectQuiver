@@ -228,7 +228,7 @@ if( $project['forJudging'] == 0 ) {
                             <div class="card whited-border">
                                 <div class="card-image">
                                     <?php foreach($project['images'] as $image) {?>
-                                    <img src="<?php echo $image;?>" class="image-fit-width">
+                                    <img src="../<?php echo $image;?>" class="image-fit-width">
                                     <?php }?>
                                     <div>
 
