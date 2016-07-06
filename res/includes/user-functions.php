@@ -26,7 +26,7 @@ function usr_add($email,$password,$fname,$lname,$usrType) {
 function usr_check($email,$password) {
 	global $db;
 
-	$sql = "SELECT id,password FROM pq_user WHERE email = :email";
+	$sql = "SELECT id,password FROM pq_user WHERE email = BINARY :email";
 	$param = array(":email" => $email);
 	$res = $db->query("SELECT",$sql,$param);
 	

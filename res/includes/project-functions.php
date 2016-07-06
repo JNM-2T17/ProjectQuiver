@@ -109,7 +109,7 @@ function proj_get($id) {
 
 	$query = "SELECT P.id,name, class, abstract, description,review
 					,concat(fname, ' ',lName) As reviewer, AVG(grade) AS grade
-				FROM pq_project P INNER JOIN pq_project_grades PG 
+				FROM pq_project P LEFT JOIN pq_project_grades PG 
 					ON P.id = PG.id AND P.status = 1 AND PG.status = 1
 					LEFT JOIN pq_user U ON P.reviewer = U.id AND U.status = 1
 				WHERE P.id = :id

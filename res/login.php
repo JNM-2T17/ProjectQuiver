@@ -4,6 +4,12 @@
  * @author Angelo Amadora
  * @20160303
  */
+session_start();
+require_once "user-functions.php";
+
+if( isset($_SESSION['session_user'])) {
+  header("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
