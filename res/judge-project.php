@@ -13,12 +13,16 @@ if( $auth === FALSE ) {
   header("Location: index.php");
 }
 
+$user = usr_get($_SESSION['session_user']);
 require_once "includes/project-functions.php";
 if( !isset($_GET['id'])) {
     header("Location: index.php");
 }
 
 $project = proj_get($_GET['id']);
+if( $project['forJudging'] == 0 ) {
+    header("Location: index.php");   
+}
 ?>
 <html>
     <head>
@@ -188,10 +192,14 @@ $project = proj_get($_GET['id']);
                                           <b>
                                               Review
                                           </b>
-                                          by <span class="judge">Angelo Amadora</span>
+                                          by <span class="judge"><?php echo $user['fName']." ".$user['lName'];?></span>
                                       </p>
-                                      <textarea id="review" placeholder="Write your review here"></textarea>
-                                      <button class="btn green accent-3" type="submit" name="action" id = "submit">Submit</button>
+                                      <form action="includes/controller.php" method="POST" onSubmit="return checkForm();">
+                                      <input type="hidden" name="request" value="reviewProject"/>
+                                      <input type="hidden" name="id" value="<?php echo $_GET['id'];?>"/>
+                                      <textarea id="review" placeholder="Write your review here" name="review"></textarea>
+                                      <input class="btn green accent-3" type="submit" name="action" id = "submit"/>
+                                      </form>
                                     </div>
                             </div>
                         </div>
@@ -200,6 +208,15 @@ $project = proj_get($_GET['id']);
                 </div>
             </div>
         </section>
+        <script>
+        function checkForm() {
+            if( $("#review").val().length == 0 ) {
+                alert("Review cannot be empty.");
+                return false;
+            }
+            return true;
+        }
+        </script>
         <!-- /Ratings -->
         <section class="">
             <div>
