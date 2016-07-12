@@ -14,12 +14,13 @@ $usr = usr_get_session();
 <link rel="stylesheet" href="css/materialize.min.css">
 <link rel="stylesheet" type="text/css" href="css/styles-2.css">
 
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+
 <!-- Compiled and minified JavaScript -->
 <script src="js/materialize.min.js"></script>
 
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 
 
 </head>

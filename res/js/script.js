@@ -12,9 +12,9 @@ function showError(message) {
 
 $(".button-collapse").sideNav();
 
-var a = $("nav").offset().top;
-
 $(document).ready(function(){
+    var a = $("nav").offset().top;
+
     $("#alert-container").hide();
     if($(this).scrollTop() > a)
   	{

@@ -122,15 +122,7 @@ require_once "commons/admin-header.php";
                 </div>
             </div>
         </section>
-        <script>
-        function checkForm() {
-            if( $("#review").val().length == 0 ) {
-                alert("Review cannot be empty.");
-                return false;
-            }
-            return true;
-        }
-        </script>
+        <script src="js/judge-project.js"></script>
         <!-- /Ratings -->
         <section class="">
             <div>
