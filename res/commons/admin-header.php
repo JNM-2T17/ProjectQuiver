@@ -1,4 +1,14 @@
+<?php
+/**
+ *
+ */
+require_once "includes/user-functions.php";
+$usr = usr_get_session();
+?>
+<!DOCTYPE html>
+<html>
 <head>
+    <title>Quiver</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="css/materialize.min.css">
@@ -46,18 +56,29 @@
                     </i>
                 </a>
                 <ul class="right hide-on-med-and-down" style="padding-right: 20px;">
+                    <?php if($usr['addProject'] === 1 ) {?>
                     <li class="moveLeft">
-                        <a class="white-to-quiver " href="index.php">
+                        <a class="white-to-quiver " href="add-project.php">
+                            Add Project
+                        </a>
+                    </li>
+                    <?php } 
+                    if($usr['judgeProject'] === 1 ) { ?>
+                    <li class="moveLeft">
+                        <a class="white-to-quiver " href=".">
                             Judge Projects
                         </a>
                     </li>
+                    <?php } 
+                    if($usr['createUser'] === 1 ) { ?>
                     <li class="moveLeft">
                         <a class="white-to-quiver " href="create-account.php">
                             Create Account
                         </a>
                     </li>
+                    <?php }?>
                     <li>
-                        <a href="mobile.html" class="quiver-green-text">
+                        <a href="includes/controller.php?request=logout" class="quiver-green-text">
                             Log Out
                         </a>
                     </li>

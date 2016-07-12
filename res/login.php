@@ -5,7 +5,7 @@
  * @20160303
  */
 session_start();
-require_once "user-functions.php";
+require_once "includes/user-functions.php";
 
 if( isset($_SESSION['session_user'])) {
   header("Location: index.php");

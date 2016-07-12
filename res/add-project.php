@@ -13,11 +13,7 @@ if( $auth === FALSE ) {
 	header("Location: index.php");
 }
 ?>
-<!DOCTYPE html>
-<html>
-
-		<!-- belowNav provides an effect for the nav bar-->
-		<?php require_once "commons/header.php";?>
+<?php require_once "commons/admin-header.php";?>
 		<div class="row add-project-form-container">
 			<h1> Add Project </h1>
 			<form action = "includes/controller.php" method= "post" enctype="multipart/form-data">
