@@ -1,6 +1,6 @@
 <?php
 session_start();
-define("BASE_PATH","Quiver");
+define("BASE_PATH","PMS");
 
 if( empty($_POST) && !isset($_SERVER['HTTP_REFERER'])) {
 	header("Location: ../");
@@ -89,33 +89,27 @@ switch($request['request']) {
 	case "login":
 		$res = usr_check($request['email'],$request['password']);
 		if(is_numeric($res)) {
-			$_SESSION['session_user'] = $res;
+			$_SESSION['user'] = $res;
 			header("Location: ../");
 		} else {
-			header("Location: ../login.php?status=error");
+			header("Location: ../login.php?status=$res");
 		}
-		break;
-	case "logout":
-		session_unset();
-		session_destroy();
-		header("Location: ../");
 		break;
 	case "reviewProject":
 		$id = $request['id'];
 		$review = $request['review'];
-		$grades = array(10,10,10,10);
-		// $gradeok = true;
-		// foreach($grades as $g) {
-		// 	$gradeok = $gradeok && ($g >= 0 && $g <= 10);
-		// 	if( !$gradeok ) {
-		// 		break;
-		// 	}
-		// }
-		// if( $gradeok ) {
-			//$recogs = $request['recogs'];
-			proj_review($id,$_SESSION['session_user'],$review,$grades);
-			header("Location: ../index.php");
-		// }
+		$grades = $request['grades'];
+		$gradeok = true;
+		foreach($grades as $g) {
+			$gradeok = $gradeok && ($g >= 0 && $g <= 10);
+			if( !$gradeok ) {
+				break;
+			}
+		}
+		if( $gradeok ) {
+			$recogs = $request['recogs'];
+			proj_review($id,$_SESSION['user'],$review,$grades);
+		}
 		break;
 	default:
 }

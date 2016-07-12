@@ -1,30 +1,105 @@
 <?php
-/**
- * judge-project.php
- * @author Angela Acorda
- * @20160705
- */
-require_once "includes/security-functions.php";
+    /**
+     * Developed and designed by: Laurenz T.
+     * email me @: laurenz@outlook.ph
+     * COLLEGE OF COMPUTER STUDIES
+     * COMPUTER SCIENCE - SOFTWARE TECHNOLOGY
+     * "Ang pusong nabiyak, madalas naninindak" #uselessQuotesNgBagongTaon #2016
+     */
+     require_once "includes/project-functions.php";
+     if( !isset($_GET['id'])) {
+        header("Location: ./");
+     }
 
-$auth = checkAuth("judgeProject");
-if( $auth === FALSE ) {
-  header("Location: login.php");
-} else if( $auth === 0 ) {
-  header("Location: index.php");
-}
-
-$user = usr_get($_SESSION['session_user']);
-require_once "includes/project-functions.php";
-if( !isset($_GET['id'])) {
-    header("Location: index.php");
-}
-
-$project = proj_get($_GET['id']);
-if( $project['forJudging'] == 0 ) {
-    header("Location: index.php");   
-}
-require_once "commons/admin-header.php";
+     $project = proj_get($_GET['id']);
 ?>
+<html>
+    <head>
+        <title>Quiver | Sample </title>
+        <!-- Google icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <!-- Fonts up up and away -->
+        <link type="text/css" rel="stylesheet" href="css/fontpack.css"/>
+        <!-- Materialize CSS Import -->
+        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+        <!-- Custom Stylesheet -->
+        <link type="text/css" rel="stylesheet" href="css/styles-2.css"/>
+        <!-- Judge Project Stylesheet -->
+        <link type="text/css" rel="stylesheet" href="css/judge-project-style.css"/>
+        <!--
+            PLEASE UPDATE THE FAVICON FFS
+        -->
+        <link rel="icon" type="image/png" href="assets/img/hack2015-favicon.png">
+        <!--
+            Looks like you've skipped editing the FAVICON....
+        -->
+        <!-- jquery. It's here because it wants to be here. It doesn't have to listen to what you want. -->
+        <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+        <style>
+            p {
+                font-size: 1em;
+            }
+        </style>
+    </head>
+    <!--
+        Start of Body
+    -->
+    <body class="">
+        <!-- belowNav provides an effect for the nav bar-->
+        <!--
+            NAVBAR
+        -->
+        <nav class="white fixed nav" style="position: fixed; z-index: 99; padding-top: -2px; margin-top: -2px;">
+            <div class="nav-wrapper nav">
+                <!-- Left Part of the NavBar-->
+                <div class="valign-wrapper pushleft-5p">
+                    <a href="index.php">
+                        <img src="assets/images/quiver-badge-only.png" class="valign moveLeft" style="width: 45px;">
+                    </a>
+                    <a href="index.php">
+                        <h4 class="white-to-quiver valign pushleft-10p moveLeft" style="color: black;">
+                            QUIVER
+                        </h4>
+                    </a>
+                    <span class="right" style="position: absolute; right: 0px;">
+                        <!-- Only visible when screensize is desktoplike or larger -->
+                        <a href="#" data-activates="mobile-demo" class="button-collapse">
+                            <i class="material-icons">
+                                menu
+                            </i>
+                        </a>
+                        <ul class="right hide-on-med-and-down" style="padding-right: 20px;">
+                            <li class="moveLeft">
+                                <a class="white-to-quiver " href="#">
+                                    FAQ
+                                </a>
+                            </li>
+                            <li class="moveLeft">
+                                <a class="white-to-quiver " href="#">
+                                    Requirements
+                                </a>
+                            </li>
+                            <li class="moveLeft">
+                                <a class="white-to-quiver " href="#">
+                                    Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+                <!-- Only shown when screen size == mobile or similar-->
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Requirements</a></li>
+                    <li><a href="#">Log Out</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- \NAVBAR -->
+
         <!--
             MAIN CONTENT
         -->
@@ -106,14 +181,10 @@ require_once "commons/admin-header.php";
                                           <b>
                                               Review
                                           </b>
-                                          by <span class="judge"><?php echo $user['fName']." ".$user['lName'];?></span>
+                                          by <span class="judge">Angelo Amadora</span>
                                       </p>
-                                      <form action="includes/controller.php" method="POST" onSubmit="return checkForm();">
-                                      <input type="hidden" name="request" value="reviewProject"/>
-                                      <input type="hidden" name="id" value="<?php echo $_GET['id'];?>"/>
-                                      <textarea id="review" placeholder="Write your review here" name="review"></textarea>
-                                      <input class="btn green accent-3" type="submit" name="action" id = "submit"/>
-                                      </form>
+                                      <textarea id="review" placeholder="Write your review here"></textarea>
+                                      <button class="btn green accent-3" type="submit" name="action" id = "submit">Submit</button>
                                     </div>
                             </div>
                         </div>
@@ -122,15 +193,6 @@ require_once "commons/admin-header.php";
                 </div>
             </div>
         </section>
-        <script>
-        function checkForm() {
-            if( $("#review").val().length == 0 ) {
-                alert("Review cannot be empty.");
-                return false;
-            }
-            return true;
-        }
-        </script>
         <!-- /Ratings -->
         <section class="">
             <div>
@@ -142,7 +204,7 @@ require_once "commons/admin-header.php";
                             <div class="card whited-border">
                                 <div class="card-image">
                                     <?php foreach($project['images'] as $image) {?>
-                                    <img src="../<?php echo $image;?>" class="image-fit-width">
+                                    <img src="<?php echo $image;?>" class="image-fit-width">
                                     <?php }?>
                                     <div>
 

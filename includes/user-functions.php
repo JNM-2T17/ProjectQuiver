@@ -4,7 +4,7 @@
  * @author Austin Fernandex
  * @20160303
  */
-require_once "main-functions.php";
+require "main-functions.php";
 
 function usr_add($email,$password,$fname,$lname,$usrType) {
 	global $db;
@@ -26,7 +26,7 @@ function usr_add($email,$password,$fname,$lname,$usrType) {
 function usr_check($email,$password) {
 	global $db;
 
-	$sql = "SELECT id,password FROM pq_user WHERE email = BINARY :email";
+	$sql = "SELECT password FROM pq_user WHERE email = :email";
 	$param = array(":email" => $email);
 	$res = $db->query("SELECT",$sql,$param);
 	
@@ -34,42 +34,12 @@ function usr_check($email,$password) {
 		if( $res['count'] == 0 ) {
 			return "No Such User";
 		} else if(password_verify($password,$res['data'][0]['password'])) {
-			return $res['data'][0]['id'];
+			return true;
 		} else {
 			return "Wrong password";
 		}
 	} else {
 		return false;
-	}
-}
-
-function usr_get($id) {
-	global $db;
-
-	$sql = "SELECT U.id, email, fName, lName, addProject, judgeProject, createUser, deleteUser
-			FROM pq_user U LEFT JOIN pq_user_type UT ON U.userType = UT.id AND UT.status = 1
-			WHERE U.status = 1 AND U.id = 1";
-	$param = array(
-		"id" => $id
-	);
-	$res = $db->query("SELECT",$sql,$param);
-	if( $res['status'] ) {
-		if( $res['count'] == 0 ) {
-			return null;
-		} else {
-			return array(
-				"id" => $res['data'][0]['id'], 
-				"email" => $res['data'][0]['email'], 
-				"fName" => $res['data'][0]['fName'], 
-				"lName" => $res['data'][0]['lName'], 
-				"addProject" => $res['data'][0]['addProject'] * 1, 
-				"judgeProject" => $res['data'][0]['judgeProject'] * 1, 
-				"createUser" => $res['data'][0]['createUser'] * 1, 
-				"deleteUser" => $res['data'][0]['deleteUser'] * 1
-			);
-		}
-	} else {
-		return null;
 	}
 }
 ?>

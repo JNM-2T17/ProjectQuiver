@@ -1,32 +1,96 @@
-<?php
-/**
- * login.php
- * @author Angela Acorda
- * @20160303
- */
-require_once "includes/security-functions.php";
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="css/materialize.min.css">
+	<link rel="stylesheet" href="css/add-project-style.css">
+	<link rel="stylesheet" type="text/css" href="css/styles-2.css">
 
-$auth = checkAuth("addProject");
-if( $auth === FALSE ) {
-	header("Location: login.php");
-} else if( $auth === 0 ) {
-	header("Location: index.php");
-}
-?>
-<?php require_once "commons/admin-header.php";?>
+  <!-- Compiled and minified JavaScript -->
+  <script src="js/materialize.min.js"></script>
+
+	<!--Import jQuery before materialize.js-->
+ <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+ <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
+	</head>
+	<body>
+		<div id="alert-overlay">
+			<div id="alert-container">
+				<h4>Oops!</h4>
+				<p id="alert-text">
+					There is an error.
+				</p>
+			</div>
+		</div>
+		<!-- belowNav provides an effect for the nav bar-->
+		<!--
+				NAVBAR
+		-->
+		<nav class="white fixed nav" style="position: fixed; z-index: 99; padding-top: -2px; margin-top: -2px;">
+				<div class="nav-wrapper nav">
+						<!-- Left Part of the NavBar-->
+						<div class="valign-wrapper pushleft-5p">
+								<a href="index.html">
+										<img src="assets/images/quiver-badge-only.png" class="valign moveLeft" style="width: 45px;">
+								</a>
+								<a href="index.html">
+										<h4 class="white-to-quiver valign pushleft-10p moveLeft" style="color: black;">
+												QUIVER
+										</h4>
+								</a>
+								<span class="right" style="position: absolute; right: 0px;">
+										<!-- Only visible when screensize is desktoplike or larger -->
+										<a href="#" data-activates="mobile-demo" class="button-collapse">
+												<i class="material-icons">
+														menu
+												</i>
+										</a>
+										<ul class="right hide-on-med-and-down" style="padding-right: 20px;">
+												<li class="moveLeft">
+														<a class="white-to-quiver " href="#">
+																FAQ
+														</a>
+												</li>
+												<li class="moveLeft">
+														<a class="white-to-quiver " href="#">
+																Requirements
+														</a>
+												</li>
+												<li>
+														<a id="submitBtn" href="mobile.html" class="quiver-green-text"
+															 style="border-radius: 40px; height: 35px; margin-top: 15px; line-height: 35px; color: white; background: #0a1b20;">
+																Submit
+														</a>
+												</li>
+										</ul>
+								</span>
+						</div>
+						<!-- Only shown when screen size == mobile or similar-->
+						<ul class="side-nav" id="mobile-demo">
+								<li><a href="#">FAQ</a></li>
+								<li><a href="#">Requirements</a></li>
+								<li><a href="#">Submit</a></li>
+						</ul>
+				</div>
+		</nav>
+		<!-- \NAVBAR -->
+
 		<div class="row add-project-form-container">
 			<h1> Add Project </h1>
-			<form action = "includes/controller.php" method= "post" onsubmit="return checkSubmit();" enctype="multipart/form-data">
+			<form action = "includes/controller.php" method= "post" enctype="multipart/form-data">
 			<input type="hidden" name='request' value="addProject"/>
 			<div class = "row">
 				<div class="input-field col s6">
-			      <input placeholder="Placeholder" id="projname" name="projname" type="text" class="validate">
+			      <input placeholder="Placeholder" id="name" name="projname" type="text" class="validate">
 			      <label for="first_name">Name</label>
 			    </div>
 			</div>
 			<div class = "row">
 				<div class="input-field col s12">
-	    			<select id="projcat" name="category">
+	    			<select name="category">
 		      			<option value="" disabled selected>Choose your option</option>
 		      			<option value="Web Application">Web</option>
 		      			<option value="Mobile Application">Mobile</option>
@@ -52,13 +116,13 @@ if( $auth === FALSE ) {
 
 			<div class="row">
 				<div class="input-field col s12">
-		          <textarea name = "abstract" id="projabstract" name="projabstract" class="materialize-textarea"></textarea>
+		          <textarea name = "abstract" id="abstract" name="projabstract" class="materialize-textarea"></textarea>
 		          <label for="Abstract">Abstract</label>
 		        </div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-		          <textarea name = "description" id="projdescription" name="projdescription" class="materialize-textarea"></textarea>
+		          <textarea name = "description" id="description" name="projdescription" class="materialize-textarea"></textarea>
 		          <label for="Description">Description</label>
 		        </div>
 			</div>
@@ -88,5 +152,7 @@ if( $auth === FALSE ) {
 
 	<!-- Script for changing navbar color. I know it's primitive. -->
 	<script src="js/addProject.js"></script>
-
-<?php require_once "commons/footer.php"; ?>
+	<script type="text/javascript" src="js/materialize.js"></script>
+	<script type="text/javascript" src="js/laurenz.js"></script>
+</body>
+</html>
