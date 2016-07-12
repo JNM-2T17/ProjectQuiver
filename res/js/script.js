@@ -16,8 +16,7 @@ var a = $("nav").offset().top;
 
 $(document).ready(function(){
     $("#alert-container").hide();
-    console.log($(this).scrollTop() + " " + a);
-  	if($(this).scrollTop() > a)
+    if($(this).scrollTop() > a)
   	{
   			$('.nav').css({"background":"rgb(10, 27, 32)"});
   			$('.white-to-quiver').css({"color":"white"});
