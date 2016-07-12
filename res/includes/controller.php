@@ -1,6 +1,6 @@
 <?php
 session_start();
-define("BASE_PATH","PMS");
+define("BASE_PATH","Quiver");
 
 if( empty($_POST) && !isset($_SERVER['HTTP_REFERER'])) {
 	header("Location: ../");
@@ -94,6 +94,11 @@ switch($request['request']) {
 		} else {
 			header("Location: ../login.php?status=error");
 		}
+		break;
+	case "logout":
+		session_unset();
+		session_destroy();
+		header("Location: ../");
 		break;
 	case "reviewProject":
 		$id = $request['id'];

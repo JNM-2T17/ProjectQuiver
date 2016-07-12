@@ -43,6 +43,10 @@ function usr_check($email,$password) {
 	}
 }
 
+function usr_get_session() {
+	return isset($_SESSION['session_user']) ? usr_get($_SESSION['session_user']) : null;
+}
+
 function usr_get($id) {
 	global $db;
 
