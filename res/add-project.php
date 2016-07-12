@@ -16,7 +16,7 @@ if( $auth === FALSE ) {
 <?php require_once "commons/admin-header.php";?>
 		<div class="row add-project-form-container">
 			<h1> Add Project </h1>
-			<form action = "includes/controller.php" method= "post" enctype="multipart/form-data">
+			<form action = "includes/controller.php" method= "post" onSubmit="return checkSubmit();" enctype="multipart/form-data">
 			<input type="hidden" name='request' value="addProject"/>
 			<div class = "row">
 				<div class="input-field col s6">

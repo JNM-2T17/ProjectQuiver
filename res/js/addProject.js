@@ -66,7 +66,6 @@ $(document).ready(function(){
 			$("#lastName").val("");
 			$("#emailAdd").val("");
 		} else {
-			//alert(message);
 			$("#alert-container p").html(message);
 			$("#alert-container").show();
 			setTimeout(function(){
