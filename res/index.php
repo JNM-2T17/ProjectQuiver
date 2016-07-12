@@ -35,7 +35,19 @@ $projects = proj_get_pending();
           <?php foreach($projects as $proj) { ?>
           <tr>
             <td><?php echo $proj['name'];?></td>
-            <td><?php echo $proj['name']."<br/>".$proj['name']."<br/>".$proj['name'];?></td>
+            <td>
+            <?php 
+            	$i = 0;
+            	foreach($proj['team'] as $member) {
+            		if( $i > 0 ) {
+            			echo "<br/>";
+            		}
+            		echo "$member[fName] $member[lName]";
+            		$i++;
+            	}
+            ?>
+            	
+            </td>
               <td><?php echo $proj['class']; ?></td>
               <td><a id="judge-button" href="judge-project.php?id=<?php echo $proj['id']?>"> Judge </a></td>
           </tr>

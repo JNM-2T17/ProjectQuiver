@@ -6,11 +6,11 @@
  */
 require_once "includes/security-functions.php";
 
-$auth = checkAuth("judgeProject");
+$auth = checkAuth("createUser");
 if( $auth === FALSE ) {
   header("Location: login.php");
 } else if( $auth === 0 ) {
-  header("Location: index.php");
+  header("Location: ./");
 }
 
 require_once "includes/project-functions.php";
