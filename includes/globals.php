@@ -11,7 +11,7 @@ if( $sandbox) {
 	define("DBHOST","localhost");
 	define("DBNAME","db_project_quiver");
 	define("DBUSER","root");
-	define("DBPASS","password");
+	define("DBPASS","");
 	define("SALT_LEFT","20160211");
 	define("SALT_RIGHT","20160212");
 } else {
@@ -19,7 +19,7 @@ if( $sandbox) {
 	define("DBHOST","localhost");
 	define("DBNAME","db_project_quiver");
 	define("DBUSER","root");
-	define("DBPASS","password");
+	define("DBPASS","");
 	define("SALT_LEFT","20160211");
 	define("SALT_RIGHT","20160212");
 }

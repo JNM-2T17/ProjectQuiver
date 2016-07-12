@@ -1,47 +1,38 @@
 function checkSubmit() {
-	console.log($("#projname").val());
-	console.log($("#projmembers").val());
-	console.log($("#projabstract").val());
-	console.log($("#projstudentreview").val());
-	console.log($("#projreview").val());
+	console.log($("#projname").val().length);
+	console.log($("#projcat").val());
+	console.log($("#projabstract").val().length);
+	console.log($("#projdescription").val().length);
 	if( $("#projname").val().length > 0 &&
-		$("#projmembers").val().length > 0 &&
+		$("#projcat").val() != null &&
 		$("#projabstract").val().length > 0 &&
-		$("#projstudentreview").val().length > 0 &&
-		$("#projreview").val().length > 0 ) {
+		$("#projdescription").val().length > 0 ) {
 		return true;
 	} else {
-		alert("Please fill out all fields.");
+		$("#alert-container p").html("Please fill out all fields.");
+		$("#alert-container").show();
+		setTimeout(function(){
+			$("#alert-container").fadeOut("slow");
+		}, 3000);
 		return false;
 	}
 }
-$(".button-collapse").sideNav();
 
-var a = $(".nav").offset().top;
 
 $(document).ready(function(){
-	$("#alert-container").hide();
-	if($(this).scrollTop() > a)
-	{
-			$('.nav').css({"background":"rgb(10, 27, 32)"});
-			$('.white-to-quiver').css({"color":"white"});
-			$('#submitBtn').css({"color":"#0a1b20", "background":"#00e676"});
-			$('.moveLeft').css({"transform":"translate(0px,0px)", "transition":"transform 0.4s ease-in-out"});
-
-	} else {
-			$('.nav').css({"background":"white"});
-			$('.white-to-quiver').css({"color":"#0a1b20"});
-			$('#submitBtn').css({"color":"white", "background":"#0a1b20"});
-			$('.moveLeft').css({"transform":"translate(-30px,0px)"});
-	}
-
-   $("#add-tag").click(function() {
+	 $("#add-tag").click(function() {
 		var tag = $("#tags").val();
 		if( tag.length > 0 ) {
 			$("#taglist").append("<div class='tag-entry'>" + tag
 						+ "<input type='hidden' name='tags[]' value='"
 						+ tag + "' /></div>");
 			$("#tags").val("");
+		} else {
+			$("#alert-container p").html("Tag cannot be empty.");
+			$("#alert-container").show();
+			setTimeout(function(){
+				$("#alert-container").fadeOut("slow");
+			}, 3000);
 		}
 	});
 
@@ -83,7 +74,6 @@ $(document).ready(function(){
 			$("#lastName").val("");
 			$("#emailAdd").val("");
 		} else {
-			//alert(message);
 			$("#alert-container p").html(message);
 			$("#alert-container").show();
 			setTimeout(function(){
