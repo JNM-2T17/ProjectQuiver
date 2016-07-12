@@ -492,3 +492,152 @@ p {
     bottom: 0px;
     width: 100%;
 }
+
+/*Add Project*/
+/** Bold */
+@font-face {
+  font-family: "San Francisco";
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
+}
+
+body{
+  background-color: #f4f4f4;
+}
+h1{
+  margin-left: 10px;
+  font-family: "San Francisco";
+  font-weight: 700;
+  margin-top: 90px;
+  font-weight: 900;
+  font-kerning: none;
+}
+
+#alert-overlay{
+  /*position: absolute;
+  bottom:0;
+  right:0;*/
+  z-index: 100;
+}
+#alert-container{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 20px;
+  max-width: 300px;
+  height: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px grey solid;
+  float: right;
+  visibility: hidden;
+}
+
+#alert-container p{
+  font-size: 14px;
+}
+
+.add-project-form-container{
+  padding-top: 170px;
+  background-color: #fff;
+  height: 100%;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+.btn-colored {
+    /* Border */
+    border-radius: 5px;
+    /* Colors */
+    background: #f2f2f2;
+    /* Size & Position */
+    width: 100px;
+    color: #262626;
+    text-align: center;
+    height: 50px;
+    line-height: 3.2;
+    transition: all .3s ease-in-out;
+}
+
+.btn-colored:hover {
+    /* Colors */
+    background: #e4e4e4;
+    color: white !important;
+    /* Fading transition */
+}
+
+.btn-colored-sumit {
+    /* Border */
+    border-radius: 5px;
+    /* Colors */
+    background: #00E676;
+    box-shadow: 0 0 0 0;
+    /* Size & Position */
+    width: 150px;
+    color: #fff;
+    text-align: center;
+    height: 50px;
+    line-height: 3.2;
+    transition: all .3s ease-in-out;
+}
+
+.btn-colored-sumit:hover {
+    /* Colors */
+    background: #24ec8b;
+    color: white !important;
+    /* Fading transition */
+    transition: background 0.5s color 0.5s;
+}
+
+/*Admin Index*/
+#pending-table tbody td {
+  font-family: sans-serif;
+}
+
+#judge-button{
+  height: 20px;
+  text-align: center;
+  border-radius: 40px;
+  color: #18282d;
+  background: #16ee7a;
+  padding: 16px;
+}
+
+.add-user-form-container{
+  padding-top: 170px;
+  background-color: #fff;
+  height: 100%;
+  width: 50%;
+  padding: 10px;
+}
+
+#confirm-password-overlay{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-color: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  visibility: hidden;
+}
+
+#confirm-password-box{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  max-width: 300px;
+  height: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px grey solid;
+  float: right;
+}
