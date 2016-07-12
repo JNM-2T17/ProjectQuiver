@@ -21,6 +21,7 @@ $projects = proj_get_pending();
     <div class = "container" style="padding-top: 80px;">
     <div class = "col s12 m12 l12">
     <h1>Pending Projects</h1>
+    <?php if(count($projects) > 0 ) {?>
     <table id="pending-table" class = "bordered highlight responsive-table">
         <thead>
           <tr>
@@ -30,7 +31,6 @@ $projects = proj_get_pending();
               <th data-field="link"></th>
           </tr>
         </thead>
-
         <tbody>
           <?php foreach($projects as $proj) { ?>
           <tr>
@@ -54,6 +54,9 @@ $projects = proj_get_pending();
           <?php } ?>
         </tbody>
       </table>
+      <?php } else { ?>
+      <h6>No pending projects</h6>
+      <?php }?>
     </div>
   </div>
 <?php require_once "commons/footer.php"; ?>
