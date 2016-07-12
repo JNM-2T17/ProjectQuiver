@@ -26,7 +26,7 @@ $usr = usr_get_session();
 <body>
   <div id="alert-overlay">
     <div id="alert-container">
-      <h4>Oops!</h4>
+      <h4>Error</h4>
       <p id="alert-text">
         There is an error.
       </p>

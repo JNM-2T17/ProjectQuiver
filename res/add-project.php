@@ -16,17 +16,17 @@ if( $auth === FALSE ) {
 <?php require_once "commons/admin-header.php";?>
 		<div class="row add-project-form-container">
 			<h1> Add Project </h1>
-			<form action = "includes/controller.php" method= "post" onSubmit="return checkSubmit();" enctype="multipart/form-data">
+			<form action = "includes/controller.php" method= "post" onsubmit="return checkSubmit();" enctype="multipart/form-data">
 			<input type="hidden" name='request' value="addProject"/>
 			<div class = "row">
 				<div class="input-field col s6">
-			      <input placeholder="Placeholder" id="name" name="projname" type="text" class="validate">
+			      <input placeholder="Placeholder" id="projname" name="projname" type="text" class="validate">
 			      <label for="first_name">Name</label>
 			    </div>
 			</div>
 			<div class = "row">
 				<div class="input-field col s12">
-	    			<select name="category">
+	    			<select id="projcat" name="category">
 		      			<option value="" disabled selected>Choose your option</option>
 		      			<option value="Web Application">Web</option>
 		      			<option value="Mobile Application">Mobile</option>
@@ -52,13 +52,13 @@ if( $auth === FALSE ) {
 
 			<div class="row">
 				<div class="input-field col s12">
-		          <textarea name = "abstract" id="abstract" name="projabstract" class="materialize-textarea"></textarea>
+		          <textarea name = "abstract" id="projabstract" name="projabstract" class="materialize-textarea"></textarea>
 		          <label for="Abstract">Abstract</label>
 		        </div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-		          <textarea name = "description" id="description" name="projdescription" class="materialize-textarea"></textarea>
+		          <textarea name = "description" id="projdescription" name="projdescription" class="materialize-textarea"></textarea>
 		          <label for="Description">Description</label>
 		        </div>
 			</div>

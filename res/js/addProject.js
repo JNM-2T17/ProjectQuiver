@@ -1,17 +1,19 @@
 function checkSubmit() {
-	console.log($("#projname").val());
-	console.log($("#projmembers").val());
-	console.log($("#projabstract").val());
-	console.log($("#projstudentreview").val());
-	console.log($("#projreview").val());
+	console.log($("#projname").val().length);
+	console.log($("#projcat").val());
+	console.log($("#projabstract").val().length);
+	console.log($("#projdescription").val().length);
 	if( $("#projname").val().length > 0 &&
-		$("#projmembers").val().length > 0 &&
+		$("#projcat").val() != null &&
 		$("#projabstract").val().length > 0 &&
-		$("#projstudentreview").val().length > 0 &&
-		$("#projreview").val().length > 0 ) {
+		$("#projdescription").val().length > 0 ) {
 		return true;
 	} else {
-		alert("Please fill out all fields.");
+		$("#alert-container p").html("Please fill out all fields.");
+		$("#alert-container").show();
+		setTimeout(function(){
+			$("#alert-container").fadeOut("slow");
+		}, 3000);
 		return false;
 	}
 }
@@ -25,6 +27,12 @@ $(document).ready(function(){
 						+ "<input type='hidden' name='tags[]' value='"
 						+ tag + "' /></div>");
 			$("#tags").val("");
+		} else {
+			$("#alert-container p").html("Tag cannot be empty.");
+			$("#alert-container").show();
+			setTimeout(function(){
+				$("#alert-container").fadeOut("slow");
+			}, 3000);
 		}
 	});
 
