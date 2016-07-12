@@ -74,11 +74,7 @@ $(document).ready(function(){
 			$("#lastName").val("");
 			$("#emailAdd").val("");
 		} else {
-			$("#alert-container p").html(message);
-			$("#alert-container").show();
-			setTimeout(function(){
-				$("#alert-container").fadeOut("slow");
-			}, 3000);
+			showError(message);
 		}
 	});
 

@@ -1,6 +1,15 @@
 /*
     AUTHOR: LAURENZ (laurenz@outlook.ph)
 */
+
+function showError(message) {
+  $("#alert-container p").html(message);
+  $("#alert-container").show();
+  setTimeout(function(){
+    $("#alert-container").fadeOut("slow");
+  }, 3000);
+}
+
 $(".button-collapse").sideNav();
 
 var a = $("nav").offset().top;

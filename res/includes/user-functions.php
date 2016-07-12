@@ -52,7 +52,7 @@ function usr_get($id) {
 
 	$sql = "SELECT U.id, email, fName, lName, addProject, judgeProject, createUser, deleteUser
 			FROM pq_user U LEFT JOIN pq_user_type UT ON U.userType = UT.id AND UT.status = 1
-			WHERE U.status = 1 AND U.id = 1";
+			WHERE U.status = 1 AND U.id = :id";
 	$param = array(
 		"id" => $id
 	);
