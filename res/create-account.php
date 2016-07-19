@@ -27,8 +27,8 @@ $projects = proj_get_pending();
 
     <div class ="row add-user-form-container">
   <h1> Create Account </h1>
-  <!-- <form action = "includes/controller.php" method= "post" enctype="multipart/form-data"> -->
-  <input type="hidden" name='request' value="addProject"/>
+  <form action="includes/controller.php" method="POST" onsubmit="return checkSubmit();">
+  <input type="hidden" name='request' value="createUser"/>
 
   <!-- User Information -->
   <h6>
@@ -36,9 +36,9 @@ $projects = proj_get_pending();
   </h6>
   <div class = "row">
     <div class="input-field col s6">
-      <input placeholder="First Name" id="firstName" type="text" class="validate">
-      <input placeholder="Last Name" id="lastName" type="text" class="validate">
-      <input placeholder="Email Address" id="emailAdd" type="text" class="validate">
+      <input placeholder="First Name" id="firstName" name="firstName" type="text" class="validate">
+      <input placeholder="Last Name" id="lastName" name="lastName" type="text" class="validate">
+      <input placeholder="Email Address" id="emailAdd" name="emailAdd" type="text" class="validate">
     </div>
   </div>
 
@@ -48,7 +48,8 @@ $projects = proj_get_pending();
   </h6>
   <div class="row">
     <div class="input-field col s6">
-      <input placeholder="Password" name = "userPassword" name="userPassword" type="password" id="accountPass"></input>
+      <input placeholder="Password" name="userPassword" type="password" id="accountPass"/>
+      <input placeholder="Confirm Password" name="confirmPassword" type="password" id="confirmPass"/>
     </div>
   </div>
 
@@ -58,15 +59,15 @@ $projects = proj_get_pending();
   </h6>
 
   <div class="row">
-      <input name="group1" type="radio" class="with-gap"id="faculty" checked/>
+      <input name="accountType" value="2" type="radio" class="with-gap" id="faculty" checked/>
       <label for="faculty" style="margin-right: 20px;">Faculty</label>
-      <input name="group1" type="radio" class="with-gap" id="admin"/>
+      <input name="accountType" value="1" type="radio" class="with-gap" id="admin"/>
       <label for="admin">Admin</label>
   </div>
   <!-- Submit Button -->
   <div class="row">
     <div class="input-field col s6">
-      <button class="btn green accent-3" type="submit" name="action" id = "create-account">Create Account</button>
+      <input class="btn green accent-3" type="submit" name="action" id = "create-account" value="Create Account" />
     </div>
   </div>
 </div>

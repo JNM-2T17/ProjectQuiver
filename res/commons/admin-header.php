@@ -78,8 +78,8 @@ $usr = usr_get_session();
                         </a>
                     </li>
                     <?php }?>
-                    <li>
-                        <a href="includes/controller.php?request=logout" class="quiver-green-text">
+                    <li class="moveLeft">
+                        <a href="includes/controller.php?request=logout" class="white-to-quiver">
                             Log Out
                         </a>
                     </li>
