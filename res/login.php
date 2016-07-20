@@ -35,7 +35,6 @@ if( isset($_SESSION['session_user'])) {
       </p>
     </div>
   </div>
-  <script src="login.js"></script>
   <input type="hidden" id="error" 
         value="<?php echo isset($_GET['status']) && $_GET['status'] == "error" ? "Invalid username/password combination" : ""; ?>"/>
   <div class="row">

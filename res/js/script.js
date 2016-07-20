@@ -13,9 +13,10 @@ function showError(message) {
 $(".button-collapse").sideNav();
 
 $(document).ready(function(){
-    var a = $("nav").offset().top;
+    var a = $("nav").offset() ? $("nav").offset().top + 3 : 0 ;
 
     $("#alert-container").hide();
+    console.log($(this).scrollTop() + " " + a);
     if($(this).scrollTop() > a)
   	{
   			$('.nav').css({"background":"rgb(10, 27, 32)"});
@@ -41,20 +42,3 @@ $(document).ready(function(){
         );
     }
 );
-
-/*
-$(document).ready(function(){
-   var scroll_start = 0;
-   var startchange = $('.changeMe');
-   var offset = startchange.offset();
-   $(document).scroll(function() {
-      scroll_start = $(this).scrollTop();
-      if(scroll_start > offset.top) {
-          $('.nav').css('background-color',
-                        'rgb(10, 27, 32)');
-       } else {
-          $('.nav').css('background-color', 'transparent');
-       }
-   });
-});
-*/
