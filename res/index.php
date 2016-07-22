@@ -55,7 +55,7 @@ $projects = proj_get_pending();
         </tbody>
       </table>
       <?php } else { ?>
-      <h6>No pending projects</h6>
+      <h6>No projects to display</h6>
       <?php }?>
     </div>
   </div>

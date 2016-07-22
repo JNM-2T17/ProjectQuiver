@@ -1,3 +1,4 @@
+var auth = false;
 function checkSubmit() {
 	var message = "";
 	var firstName = $("#firstName").val();
@@ -29,6 +30,11 @@ function checkSubmit() {
 					+ "Email Address is invalid. Make sure you are inputting a valid DLSU email.";
 	}
 	if( message.length == 0 ) {
+		if( !auth && accType === "admin") {
+			$("#confirm-password-overlay").show();
+			$("#confirm-password-box").show();
+			return false;
+		}
 		return true;
 	} else {
 		showError(message);
@@ -39,4 +45,31 @@ function checkSubmit() {
 
 $(document).ready(function(){
 	$('select').material_select();
+
+	$("#confirm-password-overlay").hide();
+	$("#confirm-password-box").hide();
+	$("#confirm-password-overlay").click(function(event){
+		$("#confirm-password-overlay").fadeOut(2000);
+		$("#confirm-password-box").fadeOut(2000);
+	});
+	$("#authPassConfirm").click(function() {
+		var pass = $("#adminPassword").val();
+		$.ajax({
+			url : "includes/controller.php",
+			method : "POST",
+			data : {
+				"request" : "confirmPassword",
+				"password" : pass
+			},
+			success : function(a) {
+				console.log(a);
+				if( a == "true") {
+					auth = true;
+					$("#createAccountForm").submit();
+				} else {
+					showError("Failed authentication");
+				}
+			}
+		});
+	});
 });

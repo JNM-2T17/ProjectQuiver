@@ -27,7 +27,7 @@ $projects = proj_get_pending();
 
     <div class ="row add-user-form-container">
   <h1> Create Account </h1>
-  <form action="includes/controller.php" method="POST" onsubmit="return checkSubmit();">
+  <form action="includes/controller.php" method="POST" id="createAccountForm" onsubmit="return checkSubmit();">
   <input type="hidden" name='request' value="createUser"/>
 
   <!-- User Information -->
@@ -72,12 +72,11 @@ $projects = proj_get_pending();
   </div>
 </div>
 
-<div id="confirm-password-overlay">
-  <div id="confirm-password-box">
-    <h4>Enter password before proceeding</h4>
-    <input placeholder="Password" name = "userPassword" id="password" name="userPassword" type="password" id="accountPass"></input>
-    <button class="btn green accent-3" type="submit" name="action" id = "create-account">Proceed</button>
-  </div>
+<div id="confirm-password-overlay"></div>
+<div id="confirm-password-box">
+  <h4>Confirm password to continue</h4>
+  <input placeholder="Password" name = "userPassword" id="adminPassword" name="adminPassword" type="password" id="adminPassword"/>
+  <button class="btn green accent-3" type="submit" name="action" id = "authPassConfirm">Confirm</button>
 </div>
 <script src="js/createAccount.js"></script>
 <?php require_once "commons/footer.php"; ?>

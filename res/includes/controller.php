@@ -62,8 +62,13 @@ switch($request['request']) {
 			echo $id;
 			//save images in db
 			proj_add_images($id,img_upload($id,$images));
+			header("Location: ../add-project.php?status=success");
 		}
-		header("Location: ../add-project.php");
+		break;
+	case "confirmPassword":
+		$usr = usr_get_session();
+		$result = usr_check($usr['email'],$request['password']);
+		echo $result == $usr['id'] ? "true" : "false";
 		break;
 	case "createUser":
 		$request['userPassword'] = $request['confirmPassword'];

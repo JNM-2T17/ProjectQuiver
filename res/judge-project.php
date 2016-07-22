@@ -76,7 +76,6 @@ require_once "commons/admin-header.php";
                                         <?php foreach($project['tags'] as $tag) {?>
                                         <div class="chip">
                                             <?php echo $tag;?>
-                                            <i class="material-icons">close</i>
                                         </div>
                                         <?php }?>
                                     </div>
@@ -145,18 +144,7 @@ require_once "commons/admin-header.php";
                                         </p>
                                     </div>
                                 </div>
-                                <div class="card-content"
-                                     style="font-size: 1.2em; padding: 5% 8% 5% 8%;">
-                                    <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ullamcorper libero eu eros volutpat, et dapibus urna posuere. Praesent tincidunt lectus eget arcu pharetra, quis volutpat eros lacinia. Suspendisse non imperdiet mauris, eu consequat risus. Sed suscipit lectus dolor, at sollicitudin lectus malesuada vel. Morbi vitae eros sit amet magna viverra sollicitudin eget id magna. Vivamus congue laoreet ante, et imperdiet ante pulvinar in. Duis rhoncus sollicitudin metus, ac vulputate massa commodo et. Phasellus dictum diam diam, at porta lectus faucibus euismod. Quisque pretium lacinia sapien, vitae pulvinar risus dignissim id. Curabitur dui eros, iaculis convallis interdum mattis, tincidunt ac dui. Vivamus imperdiet, libero sit amet pharetra molestie, nisi nisi rutrum dolor, id varius felis nisl ut diam. Suspendisse potenti. Sed consectetur ornare arcu sit amet maximus. Donec sed tempor ipsum. Duis imperdiet vehicula augue, egestas porttitor velit iaculis id.
-                                    <br>
-                                    <br>
-                                    Aliquam erat volutpat. Nam vel sagittis felis, et aliquam dui. Aenean feugiat libero ipsum, ac auctor augue dapibus vel. Praesent vitae dignissim leo. Praesent id neque sapien. Nunc gravida libero sit amet aliquet ornare. Sed ac facilisis dui. Sed sit amet tortor eget arcu placerat accumsan vel nec dui.
-                                    <br>
-                                    <br>
-                                    Fusce velit elit, pharetra ac placerat ut, sodales ac felis. Duis pulvinar quam sit amet erat facilisis dictum. Aenean commodo feugiat mauris, ut laoreet turpis gravida eget. Vestibulum vitae eleifend sem. Pellentesque bibendum, lorem quis semper vestibulum, urna tortor volutpat lacus, quis porta felis magna ut tortor. Vestibulum consectetur venenatis suscipit. Quisque non auctor risus. Maecenas viverra viverra varius. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse felis erat, cursus quis tincidunt id, venenatis sed massa. Cras sagittis quam non libero ullamcorper, sit amet suscipit nunc vestibulum. Proin sit amet mauris volutpat, maximus enim et, porttitor metus. Aenean mollis vestibulum leo, id malesuada diam eleifend vitae. Mauris urna metus, scelerisque eu est in, condimentum ornare massa. Sed tincidunt, dolor ac pulvinar faucibus, est lectus semper dolor, et ullamcorper nisi nulla ut sapien. Cras tempor purus ac quam efficitur pretium.
-                                    </p>
-                                </div>
+                                
                             </div>
                             <!-- /App screens and descriptions -->
                         </div>
