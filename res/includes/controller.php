@@ -48,7 +48,7 @@ switch($request['request']) {
 			//upload images
 			$images = array();
 			$imgCtr = count($_FILES['images']['name']);
-			echo "IMGCTR: $imgCtr<br/>";
+			// echo "IMGCTR: $imgCtr<br/>";
 			for($i = 0; $i < $imgCtr; $i++) {
 				$image = array(
 					"name" 		=> $_FILES["images"]["name"][$i],
@@ -59,7 +59,7 @@ switch($request['request']) {
 				);
 				$images[] = $image;
 			}
-			echo $id;
+			// echo $id;
 			//save images in db
 			proj_add_images($id,img_upload($id,$images));
 			header("Location: ../add-project.php?status=success");

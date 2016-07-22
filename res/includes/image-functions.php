@@ -20,7 +20,7 @@ function img_upload($folderName,$images) {
 			if( $image['size'] <= 10485760) {
 				$filename = $path."/".$imgCtr.".".$ext;
 				if( move_uploaded_file($image['tmp_name'], $filename)) {
-					echo $filename." has been uploaded.<br/>";
+					// echo $filename." has been uploaded.<br/>";
 					$paths[] = substr($filename,6);
 					$imgCtr++;
 				}
