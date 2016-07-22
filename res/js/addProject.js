@@ -20,6 +20,19 @@ function checkSubmit() {
 
 
 $(document).ready(function(){
+	var status = $("#status").val();
+	if(status && status.length > 0 ) {
+		switch(status) {
+			case "success":
+				showSuccess("Project successfully added");
+				break;
+			case "error":
+				showError("An unexpected error occured.");
+				break;
+			default:
+		}
+	}
+
 	 $("#add-tag").click(function() {
 		var tag = $("#tags").val();
 		if( tag.length > 0 ) {
@@ -74,11 +87,7 @@ $(document).ready(function(){
 			$("#lastName").val("");
 			$("#emailAdd").val("");
 		} else {
-			$("#alert-container p").html(message);
-			$("#alert-container").show();
-			setTimeout(function(){
-				$("#alert-container").fadeOut("slow");
-			}, 3000);
+			showError(message);
 		}
 	});
 

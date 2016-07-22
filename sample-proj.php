@@ -150,7 +150,6 @@
                                         <?php foreach($project['tags'] as $tag) {?>
                                         <div class="chip">
                                             <?php echo $tag;?>
-                                            <i class="material-icons">close</i>
                                         </div>
                                         <?php }?>
                                     </div>

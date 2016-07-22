@@ -19,13 +19,24 @@ if( isset($_SESSION['session_user'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="css/styles-2.css"/>
   <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
   <script src="js/materialize.min.js"></script>
-
+  <script src="js/script.js"></script>
+  <script src="js/login.js"></script>
 </head>
 
 <body background="assets/images/login_background.jpg">
-
+<div id="alert-overlay">
+    <div id="alert-container">
+      <h4>Error</h4>
+      <p id="alert-text">
+        There is an error.
+      </p>
+    </div>
+  </div>
+  <input type="hidden" id="error" 
+        value="<?php echo isset($_GET['status']) && $_GET['status'] == "error" ? "Invalid username/password combination" : ""; ?>"/>
   <div class="row">
     <form action="includes/controller.php" method="post" onsubmit="">
       <input type="hidden" name="request" value="login">

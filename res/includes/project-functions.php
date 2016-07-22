@@ -25,7 +25,7 @@ function proj_get_all() {
 function proj_get_pending() {
 	global $db;
 
-	$query = "SELECT id,name, class
+	$query = "SELECT id
 				FROM pq_project
 				WHERE status = 1 AND forJudging = 1
 				ORDER BY dateAdded DESC";
@@ -34,11 +34,7 @@ function proj_get_pending() {
 	if($res['status']) {
 		$pending = array();
 		foreach($res['data'] as $val) {
-			$pending[] = array(
-				"id" => $val['id'],
-				"name" => $val['name'],
-				"class" => $val['class']
-			);
+			$pending[] = proj_get($val['id']);
 		}
 		return $pending;
 	} else {

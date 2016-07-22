@@ -48,7 +48,7 @@ switch($request['request']) {
 			//upload images
 			$images = array();
 			$imgCtr = count($_FILES['images']['name']);
-			echo "IMGCTR: $imgCtr<br/>";
+			// echo "IMGCTR: $imgCtr<br/>";
 			for($i = 0; $i < $imgCtr; $i++) {
 				$image = array(
 					"name" 		=> $_FILES["images"]["name"][$i],
@@ -59,31 +59,41 @@ switch($request['request']) {
 				);
 				$images[] = $image;
 			}
-			echo $id;
+			// echo $id;
 			//save images in db
 			proj_add_images($id,img_upload($id,$images));
+			header("Location: ../add-project.php?status=success");
 		}
-		header("Location: ../add-project.php");
 		break;
-	case "add_user":
-		if( validateEmail($request['input_email'])) {
-			if( preg_match("/^[A-Za-z](([A-Za-z\s] | -[A-Za-z])|\"([A-Za-z\s] | -[A-Za-z])*\")*$/"
-							,$request['input_firstname']." ".$request['input_lastname'])) {
-				$fName = $request['input_firstname'];
-				$lName = $request['input_lastname'];
-				$password = $request['input_password'];
-				$email = $request['email'];
-				$type = $request['type'];
+	case "confirmPassword":
+		$usr = usr_get_session();
+		$result = usr_check($usr['email'],$request['password']);
+		echo $result == $usr['id'] ? "true" : "false";
+		break;
+	case "createUser":
+		$request['userPassword'] = $request['confirmPassword'];
+		if( validateDLSUEmail($request['emailAdd'])) {
+			if( preg_match("/^[a-z ,.'-]+ [a-z ,.'-]+$/i"
+							,$request['firstName']." ".$request['lastName'])) {
+				$fName = $request['firstName'];
+				$lName = $request['lastName'];
+				$password = $request['userPassword'];
+				$email = $request['emailAdd'];
+				$type = $request['accountType'];
 				if( usr_add($email,$password,$fName,$lName,$type) ) {
-					header("Location: ../add_user.php?status=success");
+					// echo "Success";
+					header("Location: ../create-account.php?status=success");
 				} else {
-					header("Location: ../add_user.php?status=failure");
+					// echo "Cannot add";
+					header("Location: ../create-account.php?status=failure");
 				}
 			} else {
-				header("Location: ../add_user.php?status=failure");
+				// echo "Invalid NAME";
+				header("Location: ../create-account.php?status=failure");
 			}
 		} else {
-			header("Location: ../add_user.php?status=failure");
+			// echo "Invalid EMAIL";
+			header("Location: ../create-account.php?status=failure");
 		}
 		break;
 	case "login":

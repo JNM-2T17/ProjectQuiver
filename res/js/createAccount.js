@@ -1,71 +1,75 @@
+var auth = false;
 function checkSubmit() {
 	var message = "";
-	console.log($("#firstName").val());
-	console.log($("#lastName").val());
-	console.log($("#projabstract").val());
-	console.log($("#projstudentreview").val());
-	console.log($("#projreview").val());
-	if( $("#firstName").val().length > 0 ) &&
-		$("#lastName").val().length > 0 &&
-		$("#accountPass").val().length > 0 )
-		message = "Please fill out all fields."
+	var firstName = $("#firstName").val();
+	var lastName = $("#lastName").val();
+	var emailAdd = $("#emailAdd").val();
+	var accountPass = $("#accountPass").val();
+	var confirmPass = $("#confirmPass").val();
+	var accType = $("input[name='accountType']:checked").attr("id");
+	console.log(accType);
+	var idNo = $("#idNo").val();
+	var message = "";
+	if( !/^[a-z ,.'-]+$/i.test(firstName)) {
+		message += (message.length == 0 ? "" : "<br/>")
+					+ "First Name is invalid.";
+	}
+	if( !/^[a-z ,.'-]+$/i.test(lastName)) {
+		message += (message.length == 0 ? "" : "<br/>")
+					+ "Last Name is invalid.";
+	}
+	if(accountPass.length == 0 ) {
+		message += (message.length == 0 ? "" : "<br/>")
+					+ "Password cannot be empty.";	
+	} else if(accountPass !== confirmPass) {
+		message += (message.length == 0 ? "" : "<br/>")
+					+ "Passwords don't match.";	
 	}
 	if( !/^([a-zA-Z0-9_\-\.]+)@(dlsu.edu.ph|delasalle.ph)$/.test(emailAdd)) {
 			message += (message.length == 0 ? "" : "<br/>")
 					+ "Email Address is invalid. Make sure you are inputting a valid DLSU email.";
 	}
-	if( message.length == 0 && document.getElementById("admin").checked == true) {
-		$("#confirm-password-overlay").show();
-		$("#firstName").val("");
-		$("#lastName").val("");
-		$("#emailAdd").val("");
-	}
-		else {
-		$("#alert-container p").html(message);
-		$("#alert-container").show();
-		setTimeout(function(){
-			$("#alert-container").fadeOut("slow");
-		}, 3000);
+	if( message.length == 0 ) {
+		if( !auth && accType === "admin") {
+			$("#confirm-password-overlay").show();
+			$("#confirm-password-box").show();
+			return false;
+		}
+		return true;
+	} else {
+		showError(message);
+		return false;
 	}
 }
 
 
 $(document).ready(function(){
-	$("#create-account").click(function() {
-		alert("hi");
-		var firstName = $("#firstName").val();
-		var lastName = $("#lastName").val();
-		var emailAdd = $("#emailAdd").val();
-		var message = "";
-		if( !/^[a-z ,.'-]+$/i.test(firstName)) {
-			message += (message.length == 0 ? "" : "<br/>")
-						+ "First Name is invalid.";
-		}
-		if( !/^[a-z ,.'-]+$/i.test(lastName)) {
-			message += (message.length == 0 ? "" : "<br/>")
-						+ "Last Name is invalid.";
-		}
-		if( !/^([a-zA-Z0-9_\-\.]+)@(dlsu.edu.ph|delasalle.ph)$/.test(emailAdd)) {
-				message += (message.length == 0 ? "" : "<br/>")
-						+ "Email Address is invalid. Make sure you are inputting a valid DLSU email.";
-		}
-		if( message.length == 0 && document.getElementById("admin").checked == true) {
-			$("#confirm-password-overlay").show();
-			$("#firstName").val("");
-			$("#lastName").val("");
-			$("#emailAdd").val("");
-		} else if( message.length == 0 && document.getElementById("faculty").checked == true
-
-		}
-		else {
-			//alert(message);
-			$("#alert-container p").html(message);
-			$("#alert-container").show();
-			setTimeout(function(){
-				$("#alert-container").fadeOut("slow");
-			}, 3000);
-		}
-	});
-
 	$('select').material_select();
+
+	$("#confirm-password-overlay").hide();
+	$("#confirm-password-box").hide();
+	$("#confirm-password-overlay").click(function(event){
+		$("#confirm-password-overlay").fadeOut(2000);
+		$("#confirm-password-box").fadeOut(2000);
+	});
+	$("#authPassConfirm").click(function() {
+		var pass = $("#adminPassword").val();
+		$.ajax({
+			url : "includes/controller.php",
+			method : "POST",
+			data : {
+				"request" : "confirmPassword",
+				"password" : pass
+			},
+			success : function(a) {
+				console.log(a);
+				if( a == "true") {
+					auth = true;
+					$("#createAccountForm").submit();
+				} else {
+					showError("Failed authentication");
+				}
+			}
+		});
+	});
 });
