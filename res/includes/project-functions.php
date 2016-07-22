@@ -348,7 +348,11 @@ function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 function proj_add_images($id,$images) {
 	global $db;
 
-	if( $images !== null && $images !== false && count($images) > 0) {
+	if($images === false) {
+		return false;
+	}
+
+	if( $images !== null && count($images) > 0) {
 		$query = "INSERT INTO pq_project_images(id,image) 
 					VALUES ";
 		$params = array(
