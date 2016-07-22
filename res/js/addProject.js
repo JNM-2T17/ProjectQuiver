@@ -37,11 +37,7 @@ $(document).ready(function(){
 						+ tag + "' /></div>");
 			$("#tags").val("");
 		} else {
-			$("#alert-container p").html("Tag cannot be empty.");
-			$("#alert-container").show();
-			setTimeout(function(){
-				$("#alert-container").fadeOut("slow");
-			}, 3000);
+			showError("Tag cannot be empty.");
 		}
 	});
 

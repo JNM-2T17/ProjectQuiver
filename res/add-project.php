@@ -14,7 +14,7 @@ if( $auth === FALSE ) {
 }
 ?>
 <?php require_once "commons/admin-header.php";?>
-		<input id="status" value="<?php echo isset($_GET['status']) ? $_GET['status'] : "";?>"/>
+		<input id="status" type="hidden" value="<?php echo isset($_GET['status']) ? $_GET['status'] : "";?>"/>
 		<div class="row add-project-form-container">
 			<h1> Add Project </h1>
 			<form action = "includes/controller.php" method= "post" onsubmit="return checkSubmit();" enctype="multipart/form-data">
