@@ -220,7 +220,7 @@
                                 <div class="col s12 m8">
                                     <p>
                                         <b>
-                                            Summary:
+                                            Review by <?php echo $project['reviewer']; ?>:
                                             <br>
                                             <br>
                                         </b>

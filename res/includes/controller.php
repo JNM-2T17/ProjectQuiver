@@ -17,6 +17,10 @@ switch($request['request']) {
 	case "addProject":
 		$members = array();
 		$error = false;
+		if( count($request['idNo']) == 0 || count($request['tags']) == 0 ) {
+			header("Location: ../add-project.php?status=error");
+			die();
+		}
 		for($i = 0; $i < count($request['idNo']); $i++) {
 			$idNo = $request['idNo'][$i];
 			$fName = $request['fName'][$i];

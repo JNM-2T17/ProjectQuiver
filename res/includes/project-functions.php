@@ -45,48 +45,53 @@ function proj_get_pending() {
 function proj_get_best() {
 	global $db;
 
-	$query = "SELECT id
-				FROM (SELECT recog, grade,dateAdded
-						FROM (SELECT recog,grade,MAX(A.dateAdded) dateAdded
-								FROM (SELECT name, class, abstract, description
-												, AVG(grade) AS grade, recog
-												, P.dateAdded
-										FROM pq_project P 
-										INNER JOIN pq_project_grades PG 
-											ON P.id = PG.id AND P.status = 1 
-												AND PG.status = 1 
-												AND P.forJudging = 0
-										INNER JOIN pq_project_recogs PR 
-											ON P.id = PR.id
-										WHERE forJudging = 0
-										GROUP BY P.id) A
-						GROUP BY recog, grade) B NATURAL JOIN 
-						(SELECT recog,MAX(grade) as grade
-							FROM (SELECT name, class, abstract, description
-											, AVG(grade) AS grade, recog
-											, P.dateAdded
-									FROM pq_project P 
-									INNER JOIN pq_project_grades PG 
-										ON P.id = PG.id AND P.status = 1 
-											AND PG.status = 1
-											AND P.forJudging = 0
-									INNER JOIN pq_project_recogs PR 
-										ON P.id = PR.id
-									WHERE forJudging = 0
-									GROUP BY P.id) A
-							GROUP BY recog)C)A2
-						NATURAL JOIN 
-				        (SELECT P.id,AVG(grade) AS grade, recog, P.dateAdded
-								FROM pq_project P 
-								INNER JOIN pq_project_grades PG 
-									ON P.id = PG.id AND P.status = 1 
-										AND PG.status = 1
-										AND P.forJudging = 0
-								INNER JOIN pq_project_recogs PR 
-									ON P.id = PR.id
-								WHERE forJudging = 0
-								GROUP BY P.id)B
-				ORDER BY B.grade DESC";
+	// $query = "SELECT id
+	// 			FROM (SELECT recog, grade,dateAdded
+	// 					FROM (SELECT recog,grade,MAX(A.dateAdded) dateAdded
+	// 							FROM (SELECT name, class, abstract, description
+	// 											, AVG(grade) AS grade, recog
+	// 											, P.dateAdded
+	// 									FROM pq_project P 
+	// 									INNER JOIN pq_project_grades PG 
+	// 										ON P.id = PG.id AND P.status = 1 
+	// 											AND PG.status = 1 
+	// 											AND P.forJudging = 0
+	// 									INNER JOIN pq_project_recogs PR 
+	// 										ON P.id = PR.id
+	// 									WHERE forJudging = 0
+	// 									GROUP BY P.id) A
+	// 					GROUP BY recog, grade) B NATURAL JOIN 
+	// 					(SELECT recog,MAX(grade) as grade
+	// 						FROM (SELECT name, class, abstract, description
+	// 										, AVG(grade) AS grade, recog
+	// 										, P.dateAdded
+	// 								FROM pq_project P 
+	// 								INNER JOIN pq_project_grades PG 
+	// 									ON P.id = PG.id AND P.status = 1 
+	// 										AND PG.status = 1
+	// 										AND P.forJudging = 0
+	// 								INNER JOIN pq_project_recogs PR 
+	// 									ON P.id = PR.id
+	// 								WHERE forJudging = 0
+	// 								GROUP BY P.id) A
+	// 						GROUP BY recog)C)A2
+	// 					NATURAL JOIN 
+	// 			        (SELECT P.id,AVG(grade) AS grade, recog, P.dateAdded
+	// 							FROM pq_project P 
+	// 							INNER JOIN pq_project_grades PG 
+	// 								ON P.id = PG.id AND P.status = 1 
+	// 									AND PG.status = 1
+	// 									AND P.forJudging = 0
+	// 							INNER JOIN pq_project_recogs PR 
+	// 								ON P.id = PR.id
+	// 							WHERE forJudging = 0
+	// 							GROUP BY P.id)B
+	// 			ORDER BY B.grade DESC";
+	$query = "SELECT id 
+				FROM pq_project 
+				WHERE status = 1 AND forJudging = 0
+				ORDER BY dateAdded DESC 
+				LIMIT 4";
 	$res = $db->query("SELECT",$query);
 
 	if($res['status']) {

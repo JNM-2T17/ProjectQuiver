@@ -1,3 +1,5 @@
+var members = 0;
+var tags = 0;
 var imageOK = true;
 var imageError = "";
 
@@ -15,7 +17,13 @@ function checkSubmit() {
 	} 
 	console.log(imageOK + "ERROR: \"" + imageError + "\"");
 	if(!imageOK) {
-		message += (message.length == 0 ? "" : "\n") + imageError;
+		message += (message.length == 0 ? "" : "<br/>") + imageError;
+	}
+	if( members == 0 ) {
+		message += (message.length == 0 ? "" : "<br/>") + "A project must have at least one member.";	
+	}
+	if( tags == 0 ) {
+		message += (message.length == 0 ? "" : "<br/>") + "A project must have at least one tag.";	
 	}
 	console.log(message);
 	if( message.length == 0 ) {
@@ -46,7 +54,7 @@ $(document).ready(function(){
 		imageError = "";
 		for(x in this.files) {
 			if(this.files[x].size > 10485760) {
-				imageError += (imageError.length == 0 ? "" : "\n") + this.files[x].name + " is too large";
+				imageError += (imageError.length == 0 ? "" : "<br/>") + this.files[x].name + " is too large";
 			}
 		}
 
@@ -65,6 +73,7 @@ $(document).ready(function(){
 						+ "<input type='hidden' name='tags[]' value='"
 						+ tag + "' /></div>");
 			$("#tags").val("");
+			tags++;
 		} else {
 			showError("Tag cannot be empty.");
 		}
@@ -107,6 +116,7 @@ $(document).ready(function(){
 			$("#firstName").val("");
 			$("#lastName").val("");
 			$("#emailAdd").val("");
+			members++;
 		} else {
 			showError(message);
 		}

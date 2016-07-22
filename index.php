@@ -221,7 +221,7 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <?php for($i = 0; $i < 3; $i++) {?>
+                    <?php for($i = 1; $i < 4; $i++) {?>
                     <div class="col s12 m4">
 
                         <div class="card white app-card-plain"

@@ -56,6 +56,17 @@ function validateEmail($email) {
 	return preg_match($pattern,$email);
 }
 
+/**
+ * validates an email address
+ * @param $email email to validate
+ * @return true if valid, false otherwise
+ */
+function validateDLSUEmail($email) {
+	$pattern = "/^([a-zA-Z0-9_\-\.]+)@(dlsu.edu.ph|delasalle.ph)$/";
+
+	return preg_match($pattern,$email);
+}
+
 function getGrade($grade) {
 	if( $grade >= 9.4) {
 		return "4.0";
