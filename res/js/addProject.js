@@ -1,15 +1,27 @@
+var imageOK = true;
+var imageError = "";
+
 function checkSubmit() {
 	console.log($("#projname").val().length);
 	console.log($("#projcat").val());
 	console.log($("#projabstract").val().length);
 	console.log($("#projdescription").val().length);
-	if( $("#projname").val().length > 0 &&
+	var message = "";
+	if( !($("#projname").val().length > 0 &&
 		$("#projcat").val() != null &&
 		$("#projabstract").val().length > 0 &&
-		$("#projdescription").val().length > 0 ) {
+		$("#projdescription").val().length > 0 ) ){
+		message += "Please fill out all fields.";
+	} 
+	console.log(imageOK + "ERROR: \"" + imageError + "\"");
+	if(!imageOK) {
+		message += (message.length == 0 ? "" : "\n") + imageError;
+	}
+	console.log(message);
+	if( message.length == 0 ) {
 		return true;
 	} else {
-		showError("Please fill out all fields.");
+		showError(message);
 		return false;
 	}
 }
@@ -28,6 +40,23 @@ $(document).ready(function(){
 			default:
 		}
 	}
+
+	$("#projImages").bind('change',function() {
+		console.log(this.files);
+		imageError = "";
+		for(x in this.files) {
+			if(this.files[x].size > 10485760) {
+				imageError += (imageError.length == 0 ? "" : "\n") + this.files[x].name + " is too large";
+			}
+		}
+
+		if( imageError.length > 0 ) {
+			imageOK = false;
+			showError(imageError);
+		} else {
+			imageOK = true;
+		}
+	});
 
 	 $("#add-tag").click(function() {
 		var tag = $("#tags").val();
