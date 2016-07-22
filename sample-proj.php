@@ -181,8 +181,8 @@
                         "Is the presentation good?",
                         " Is it worth using?"
                     );
-                    for($i = 0; $i < 4; $i++) {?>
-                    <div class="col s3">
+                    //for($i = 0; $i < 4; $i++) {?>
+                    <!-- <div class="col s3">
                         <div class="card-panel grey-border center">
                             <h3 class="sf-300">
                                 <?php echo $project['grades'][$i];?>
@@ -196,8 +196,8 @@
                                 </i>
                             </p>
                         </div>
-                    </div>
-                    <?php }?>
+                    </div> -->
+                    <?php //}?>
                 </div>
                 <!-- Score aggregate -->
                 <div class="row">
@@ -208,12 +208,12 @@
                                 <div class="col s12 m4 border-right-grey">
                                     <div class="center">
                                         <!-- -->
-                                        <div class="card-panel white-border">
+                                        <!-- <div class="card-panel white-border">
                                             <span>Grade Equivalent:</span>
                                             <h2 class="green-text text-accent-3 ">
                                                 <?php echo getGrade($project['grade']);?>/4.0
                                             </h2>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <!-- Summary -->
@@ -246,28 +246,28 @@
                                     <?php foreach($project['images'] as $image) {?>
                                     <img src="<?php echo $image;?>" class="image-fit-width">
                                     <?php }?>
-                                    <div>
+                                    <!-- <div>
                                         
                                         <p class="image-caption">
                                             <i>
                                                 This is a screenshot of the application
                                             </i>
                                         </p>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="card-content"
+                                <!-- <div class="card-content"
                                      style="font-size: 1.2em; padding: 5% 8% 5% 8%;">
                                     <p>
-                                    <?php echo $project['description'];?>
+                                    <?php //echo $project['description'];?>
                                     </p>
-                                </div>
+                                </div> -->
                             </div>
                             <!-- /App screens and descriptions -->
                         </div>                        
                     </div>
                     <!-- /Main Project -->
                     <!-- Related -->
-                    <div class="row hide-on-small-only">
+                    <!-- <div class="row hide-on-small-only">
                         <div class="row">
                             <h5 class="center sf-300 green-text text-accent-3">
                                 SIMILAR PROJECTS
@@ -332,8 +332,7 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
-                        
+                        </div> -->
                     </div>
                 </div>
             </div>

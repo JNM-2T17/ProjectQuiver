@@ -44,6 +44,18 @@ function checkSubmit() {
 
 
 $(document).ready(function(){
+	var status = $("#status").val();
+	if(status && status.length > 0 ) {
+		switch(status) {
+			case "success":
+				showSuccess("User successfully created.");
+				break;
+			case "error":
+				showError("Failed to add project.");
+				break;
+			default:
+		}
+	}
 	$('select').material_select();
 
 	$("#confirm-password-overlay").hide();

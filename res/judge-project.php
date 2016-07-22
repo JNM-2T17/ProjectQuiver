@@ -135,14 +135,14 @@ require_once "commons/admin-header.php";
                                     <?php foreach($project['images'] as $image) {?>
                                     <img src="../<?php echo $image;?>" class="image-fit-width">
                                     <?php }?>
-                                    <div>
+                                    <!-- <div>
 
                                         <p class="image-caption">
                                             <i>
                                                 This is a screenshot of the application
                                             </i>
                                         </p>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 
                             </div>

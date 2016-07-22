@@ -241,20 +241,20 @@
                                     <!-- overflow effect --><div class="overflow-white"></div>
                                 </div>
                             </div>
-                            <div class="card-action score-in-card center">
+                            <!-- <div class="card-action score-in-card center">
                                 <span>
                                     Score in Category:
                                 </span>
                                 <!-- Scores -->
-                                <h1 class="sf-200 center green-text text-accent-3 no-margin">
-                                    <?php echo getGrade($projects[$i]['grade']); ?>/4.0
-                                </h1>
-                                <?php foreach($projects[$i]['recogs'] as $recog) {?>
-                                <div class="cat mobile">
-                                    <?php echo $recog; ?>
-                                </div>
-                                <?php }?>
-                            </div>
+                                <!-- <h1 class="sf-200 center green-text text-accent-3 no-margin"> -->
+                                    <?php //echo getGrade($projects[$i]['grade']); ?><!-- /4.0 -->
+                                <!-- </h1> -->
+                                <?php //foreach($projects[$i]['recogs'] as $recog) {?>
+                                <!-- <div class="cat mobile"> -->
+                                    <?php //echo $recog; ?>
+                                <!-- </div> -->
+                                <?php //}?>
+                            <!-- </div> -->
                         </div>
                     </div>
                     <?php }?>

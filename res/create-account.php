@@ -25,6 +25,7 @@ $projects = proj_get_pending();
 		<!-- belowNav provides an effect for the nav bar-->
 		<?php require_once "commons/admin-header.php";?>
 
+    <input id="status" type="hidden" value="<?php echo isset($_GET['status']) ? $_GET['status'] : "";?>"/>
     <div class ="row add-user-form-container">
   <h1> Create Account </h1>
   <form action="includes/controller.php" method="POST" id="createAccountForm" onsubmit="return checkSubmit();">

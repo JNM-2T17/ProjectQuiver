@@ -516,7 +516,7 @@ h1{
   /*position: absolute;
   bottom:0;
   right:0;*/
-  z-index: 100;
+  z-index: 1200;
 }
 #alert-container{
   position: fixed;
@@ -531,7 +531,7 @@ h1{
   border-radius: 8px;
   border: 1px grey solid;
   float: right;
-  z-index:100;
+  z-index:1200;
 }
 
 #alert-container p{
