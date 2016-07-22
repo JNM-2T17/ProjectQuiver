@@ -250,7 +250,9 @@ function proj_review($id,$reviewer,$review,$grades,$recogs = null) {
 				return false;
 			}	
 		} 
+		return true;
 	}
+	return false;
 }
 
 // proj_review(5,1,"Beri Gud project",array(10,9,8,8));

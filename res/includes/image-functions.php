@@ -25,10 +25,10 @@ function img_upload($folderName,$images) {
 					$imgCtr++;
 				}
 			} else {
-				echo "$image[name] is too large";
+				return false;
 			}
 		} else {
-			echo "$image[name] has an invalid file extension $ext.";
+			return false;
 		}
 	}
 

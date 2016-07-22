@@ -61,8 +61,12 @@ switch($request['request']) {
 			}
 			// echo $id;
 			//save images in db
-			proj_add_images($id,img_upload($id,$images));
-			header("Location: ../add-project.php?status=success");
+			$result = proj_add_images($id,img_upload($id,$images));
+			if( $result === false ) {
+				header("Location: ../add-project.php?status=error");
+			} else {
+				header("Location: ../add-project.php?status=success");
+			}
 		}
 		break;
 	case "confirmPassword":
@@ -123,8 +127,12 @@ switch($request['request']) {
 		// }
 		// if( $gradeok ) {
 			//$recogs = $request['recogs'];
-			proj_review($id,$_SESSION['session_user'],$review,$grades);
-			header("Location: ../index.php");
+			$res = proj_review($id,$_SESSION['session_user'],$review,$grades);
+			if( $res ) {
+				header("Location: ../index.php?status=success");
+			} else {
+				header("Location: ../index.php?status=error");
+			}
 		// }
 		break;
 	default:

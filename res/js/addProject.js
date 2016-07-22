@@ -24,10 +24,10 @@ $(document).ready(function(){
 	if(status && status.length > 0 ) {
 		switch(status) {
 			case "success":
-				showSuccess("Project successfully added");
+				showSuccess("Project successfully added.");
 				break;
 			case "error":
-				showError("An unexpected error occured.");
+				showError("Failed to add project.");
 				break;
 			default:
 		}

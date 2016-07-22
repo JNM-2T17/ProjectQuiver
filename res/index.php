@@ -18,6 +18,8 @@ require_once "commons/admin-header.php";
 $projects = proj_get_pending();
 
 ?>
+	<input id="status" value="<?php echo isset($_GET['status']) ? $_GET['status'] : "";?>"/>
+	<script src="js/admin-home.js"></script>
     <div class = "container" style="padding-top: 80px;">
     <div class = "col s12 m12 l12">
     <h1>Pending Projects</h1>
