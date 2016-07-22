@@ -9,11 +9,7 @@ function checkSubmit() {
 		$("#projdescription").val().length > 0 ) {
 		return true;
 	} else {
-		$("#alert-container p").html("Please fill out all fields.");
-		$("#alert-container").show();
-		setTimeout(function(){
-			$("#alert-container").fadeOut("slow");
-		}, 3000);
+		showError("Please fill out all fields.");
 		return false;
 	}
 }
