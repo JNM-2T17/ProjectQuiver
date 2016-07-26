@@ -6,6 +6,16 @@
  * This file manages image uploads
  */
 
+/**
+ * This uploads a list of photos to the given foldername under the uploads 
+ * folder.
+ * @param $folderName name of folder to save images in
+ * @param $images list of images, each with 
+ * 			name - name of image
+ * 			size - size of image
+ * 			tmp_name - temporary location of image
+ * @return array of paths to the images or FALSE if an error occured
+ */
 function img_upload($folderName,$images) {
 	$path = "../../uploads/".$folderName;
 	mkdir($path);
@@ -34,5 +44,4 @@ function img_upload($folderName,$images) {
 
 	return $paths;
 }
-
 ?>

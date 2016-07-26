@@ -1,8 +1,23 @@
 <?php
-
+/**
+ * project-functions.php
+ * @author Austin Fernandez
+ * @20150722
+ * This file handles all project-related functions.
+ */
 require_once "main-functions.php";
 require_once "student-functions.php";
 
+/**
+ * returns all projects that have been judged
+ * @return all projects in a list with each element having
+ * 		name		- name of project
+ * 		class		- classification of project
+ * 		abstract	- abstract of project
+ * 		description	- description of project
+ * 		review		- review of project
+ * 		reviewer	- name of reviewer
+ */
 function proj_get_all() {
 	global $db;
 
@@ -22,6 +37,16 @@ function proj_get_all() {
 	}
 }
 
+/**
+ * returns all pending projects
+ * @return list of pending projects with 
+ * 		name		- name of project
+ * 		class		- classification of project
+ * 		abstract	- abstract of project
+ * 		description	- description of project
+ * 		review		- review of project
+ * 		reviewer	- name of reviewer
+ */
 function proj_get_pending() {
 	global $db;
 
@@ -42,6 +67,16 @@ function proj_get_pending() {
 	}
 }
 
+/**
+ * returns the top projects for displaying in the Quiver site
+ * @return list of top projects with 
+ * 		name		- name of project
+ * 		class		- classification of project
+ * 		abstract	- abstract of project
+ * 		description	- description of project
+ * 		review		- review of project
+ * 		reviewer	- name of reviewer
+ */
 function proj_get_best() {
 	global $db;
 
@@ -105,6 +140,17 @@ function proj_get_best() {
 	}
 }
 
+/**
+ * gets a single project
+ * @param $id id of project
+ * @return project associative array with 
+ * 		name		- name of project
+ * 		class		- classification of project
+ * 		abstract	- abstract of project
+ * 		description	- description of project
+ * 		review		- review of project
+ * 		reviewer	- name of reviewer
+ */
 function proj_get($id) {
 	global $db;
 
@@ -197,7 +243,16 @@ function proj_get($id) {
 	}
 }
 
-function proj_review($id,$reviewer,$review,$grades,$recogs = null) {
+/**
+ * adds a review to a project
+ * @param $id id of project
+ * @param $reviewer id of reviewer
+ * @param $review review text
+ * @param $grades list of grades
+ * @param $recogs list of recognitions
+ * @return TRUE if successful and FALSE otherwise
+ */
+function proj_review($id,$reviewer,$review,$grades = null,$recogs = null) {
 	global $db;
 
 	$sql = "UPDATE pq_project SET review = :review, reviewer = :reviewer
@@ -260,8 +315,20 @@ function proj_review($id,$reviewer,$review,$grades,$recogs = null) {
 	return false;
 }
 
-// proj_review(5,1,"Beri Gud project",array(10,9,8,8));
-
+/**
+ * adds a project to the database
+ * @param $name name of project
+ * @param $class classification of project
+ * @param $abstract abstract of project
+ * @param $desc description of project
+ * @param $students list of students with 
+ *			idNo id number
+ *			fName first name
+ *			lName last name
+ *			email email address
+ * @param $tags list of tags
+ * @return id of project if successful and FALSE otherwise
+ */
 function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 					,$tags = null) {
 	global $db;
@@ -350,6 +417,9 @@ function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 	}
 }
 
+/**
+ *
+ */
 function proj_add_images($id,$images) {
 	global $db;
 

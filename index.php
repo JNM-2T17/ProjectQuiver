@@ -191,7 +191,8 @@
                                        style="width: 50%;">
                                         Featured Project:
                                     </p>
-                                    <?php $feat = $projects[0]; ?>
+                                    <?php if( count($projects) > 0 ) {
+                                        $feat = $projects[0]; ?>
                                     <h1 class="">
                                         <?php echo $feat['name']; ?>
                                     </h1>
@@ -209,6 +210,7 @@
                                     </p>
                                 </a>
                             </div>
+                            <?php }?>
                         </div>
                     </div>
                 </div>
@@ -221,7 +223,7 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <?php for($i = 1; $i < 4; $i++) {?>
+                    <?php if(count($projects) > 0 ) {for($i = 1; $i < 4; $i++) {?>
                     <div class="col s12 m4">
 
                         <div class="card white app-card-plain"
@@ -257,7 +259,7 @@
                             <!-- </div> -->
                         </div>
                     </div>
-                    <?php }?>
+                    <?php }}?>
                     <!-- / -->
                 </div>
             </div>
