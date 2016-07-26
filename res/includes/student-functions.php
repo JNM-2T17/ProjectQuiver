@@ -1,6 +1,20 @@
 <?php 
+/**
+ * security-functions.php
+ * @author Austin Fernandez
+ * @20160705
+ * This file handles authorization.
+ */
 require_once "main-functions.php";
 
+/**
+ * adds a student to the database
+ * @param $idNo id number
+ * @param $fName first name
+ * @param $lName last name
+ * @param $email email address
+ * @param id of student if successful, FALSE otherwise
+ */
 function student_add($idNo,$fName,$lName,$email) {
 	global $db;
 
@@ -21,6 +35,16 @@ function student_add($idNo,$fName,$lName,$email) {
 	}
 }
 
+/**
+ * gets a students' details
+ * @param $idNo id number
+ * @return associative array of the student with
+ * 		id - id of student in database
+ * 		idNo - id number
+ * 		fName - first name
+ * 		lName - last name
+ * 		email - email address
+ */
 function student_get($idNo) {
 	global $db;
 

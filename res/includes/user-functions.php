@@ -3,9 +3,19 @@
  * user-functions.php
  * @author Austin Fernandex
  * @20160303
+ * This function manages user data in the database.
  */
 require_once "main-functions.php";
 
+/**
+ * adds a user to the database
+ * @param $email email address of user
+ * @param $password password of user
+ * @param $fname first name of user
+ * @param $lname last name of user
+ * @param $usrType type of user
+ * @return true if success and false otherwise
+ */
 function usr_add($email,$password,$fname,$lname,$usrType) {
 	global $db;
 
@@ -28,6 +38,12 @@ function usr_add($email,$password,$fname,$lname,$usrType) {
 	}
 }
 
+/**
+ * checks if a password is correct for an account
+ * @param $email email address of account
+ * @param $password password to check
+ * @return id of user if correct password, FALSE otherwise
+ */
 function usr_check($email,$password) {
 	global $db;
 
@@ -38,21 +54,27 @@ function usr_check($email,$password) {
 	
 	if( $res['status'] ) {
 		if( $res['count'] == 0 ) {
-			return "No Such User";
+			return false;
 		} else if(password_verify($password,$res['data'][0]['password'])) {
 			return $res['data'][0]['id'];
 		} else {
-			return "Wrong password";
+			return false;
 		}
 	} else {
 		return false;
 	}
 }
 
+/**
+ *
+ */
 function usr_get_session() {
 	return isset($_SESSION['session_user']) ? usr_get($_SESSION['session_user']) : null;
 }
 
+/**
+ *
+ */
 function usr_get($id) {
 	global $db;
 
@@ -83,6 +105,9 @@ function usr_get($id) {
 	}
 }
 
+/**
+ *
+ */
 function usr_get_by_email($email) {
 	global $db;
 

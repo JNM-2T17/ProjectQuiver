@@ -118,6 +118,9 @@
                         <!-- /Title of the list -->
                         <?php $i = 0;
                         $count = count($projects);
+                        if($count == 0 ) {?>
+                            <h3>No Projects</h3>
+                        <?php } else {
                         while($i < $count) {?>
                         <!-- first row -->
                         <div class="row">
@@ -167,7 +170,7 @@
                             $i++; 
                             }?>
                         </div>
-                        <?php }?>
+                        <?php }}?>
                         <!-- /first row -->
                     </div>
                 </div>

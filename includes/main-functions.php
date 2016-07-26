@@ -36,7 +36,7 @@ function formatDate($date) {
 
 /**
  * validates that a date is in YYYY-MM-DD format
- * $param $date date to validate
+ * @param $date date to validate
  * @return true if valid, false otherwise
  */
 function validateDate($date) {
@@ -67,6 +67,11 @@ function validateDLSUEmail($email) {
 	return preg_match($pattern,$email);
 }
 
+/**
+ * Gives the grade equivalent of a percentile grade
+ * @param $grade percentile grade
+ * @return grade point value
+ */
 function getGrade($grade) {
 	if( $grade >= 9.4) {
 		return "4.0";
