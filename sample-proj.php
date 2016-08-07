@@ -119,7 +119,7 @@
                             <div class="col s12 m9">
                                 <div id="proj-title">
                                     <h2>
-                                        <?php echo $project['name']; ?>
+                                        <?php echo htmlspecialchars($project['name']); ?>
                                     </h2>
                                 </div>
                                 <!-- Team Members or Team Name-->
@@ -131,16 +131,16 @@
                                             if($i > 0 ) {
                                                 echo ",";
                                             }
-                                            echo $member['lName'];
+                                            echo htmlspecialchars($member['lName']);
                                             $i++;
                                         }?>
                                     </h5>
                                 </div>
                                 <div id="proj-abstract">
                                     <p>
-                                        <?php echo $project['description'] 
-                                                == null ? $project['abstract'] 
-                                                : $project['description']; ?>
+                                        <?php echo htmlspecialchars($project['description']) 
+                                                == null ? htmlspecialchars($project['abstract']) 
+                                                : htmlspecialchars($project['description']); ?>
                                     </p>
                                 </div>
                                 <!-- Tags Area -->
@@ -149,7 +149,7 @@
                                     <div class="black-text">
                                         <?php foreach($project['tags'] as $tag) {?>
                                         <div class="chip">
-                                            <?php echo $tag;?>
+                                            <?php echo htmlspecialchars($tag);?>
                                         </div>
                                         <?php }?>
                                     </div>
@@ -220,11 +220,11 @@
                                 <div class="col s12 m8">
                                     <p>
                                         <b>
-                                            Review by <?php echo $project['reviewer']; ?>:
+                                            Review by <?php echo htmlspecialchars($project['reviewer']); ?>:
                                             <br>
                                             <br>
                                         </b>
-                                        <?php echo $project['review']; ?>
+                                        <?php echo htmlspecialchars($project['review']); ?>
                                     </p>
                                 </div>
                             </div>

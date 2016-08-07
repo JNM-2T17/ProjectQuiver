@@ -45,7 +45,7 @@ require_once "commons/admin-header.php";
                             <div class="col s12 m9">
                                 <div id="proj-title">
                                     <h2>
-                                        <?php echo $project['name']; ?>
+                                        <?php echo htmlspecialchars($project['name']); ?>
                                     </h2>
                                 </div>
                                 <!-- Team Members or Team Name-->
@@ -57,7 +57,7 @@ require_once "commons/admin-header.php";
                                             if($i > 0 ) {
                                                 echo ",";
                                             }
-                                            echo $member['lName'];
+                                            echo htmlspecialchars($member['lName']);
                                             $i++;
                                         }?>
                                     </h5>
@@ -65,8 +65,8 @@ require_once "commons/admin-header.php";
                                 <div id="proj-abstract">
                                     <p>
                                         <?php echo $project['description']
-                                                == null ? $project['abstract']
-                                                : $project['description']; ?>
+                                                == null ? htmlspecialchars($project['abstract'])
+                                                : htmlspecialchars($project['description']); ?>
                                     </p>
                                 </div>
                                 <!-- Tags Area -->
@@ -75,7 +75,7 @@ require_once "commons/admin-header.php";
                                     <div class="black-text">
                                         <?php foreach($project['tags'] as $tag) {?>
                                         <div class="chip">
-                                            <?php echo $tag;?>
+                                            <?php echo htmlspecialchars($tag);?>
                                         </div>
                                         <?php }?>
                                     </div>
@@ -105,7 +105,7 @@ require_once "commons/admin-header.php";
                                           <b>
                                               Review
                                           </b>
-                                          by <span class="judge"><?php echo $user['fName']." ".$user['lName'];?></span>
+                                          by <span class="judge"><?php echo htmlspecialchars($user['fName']." ".$user['lName']);?></span>
                                       </p>
                                       <form action="includes/controller.php" method="POST" onSubmit="return checkForm();">
                                       <input type="hidden" name="request" value="reviewProject"/>
@@ -266,26 +266,6 @@ require_once "commons/admin-header.php";
             $(".button-collapse").sideNav();
         </script>
         <script type="text/javascript" src="js/laurenz.js"></script>
-        <!-- Script for changing navbar color. I know it's primitive. -->
-        <script>
-            var a = $(".nav").offset().top + 200;
-
-            $(document).scroll(function(){
-                if($(this).scrollTop() > a)
-                {
-                    $('.nav').css({"background":"rgb(10, 27, 32)"});
-                    $('.white-to-quiver').css({"color":"white"});
-                    $('#submitBtn').css({"color":"#0a1b20", "background":"#00e676"});
-                    $('.moveLeft').css({"transform":"translate(0px,0px)", "transition":"transform 0.4s ease-in-out"});
-
-                } else {
-                    $('.nav').css({"background":"white"});
-                    $('.white-to-quiver').css({"color":"#0a1b20"});
-                    $('#submitBtn').css({"color":"white", "background":"#0a1b20"});
-                    $('.moveLeft').css({"transform":"translate(-30px,0px)"});
-                }
-            });
-        </script>
         <script src="js/typed.js"></script>
 
 

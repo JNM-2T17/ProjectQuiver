@@ -328,7 +328,7 @@ p {
   width: 100%; }
 
 .short-desc {
-  height: 180px;
+  height: 280px;
   width: 100%;
   text-overflow: ellipsis;
   overflow: hidden; }

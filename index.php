@@ -194,12 +194,12 @@
                                     <?php if( count($projects) > 0 ) {
                                         $feat = $projects[0]; ?>
                                     <h1 class="">
-                                        <?php echo $feat['name']; ?>
+                                        <?php echo htmlspecialchars($feat['name']); ?>
                                     </h1>
                                 </div>
                                 <!-- Description -->
                                 <p style="font-size: 1.1em;">
-                                <?php echo $feat['abstract']; ?>
+                                <?php echo htmlspecialchars($feat['abstract']); ?>
                                 </p>
                             </div>
                             <div class="card-action bottom center">
@@ -227,18 +227,18 @@
                     <div class="col s12 m4">
 
                         <div class="card white app-card-plain"
-                            onclick="window.location='judge-project.php?id=<?php echo $projects[$i]['id'];?>'">
+                            onclick="window.location='sample-proj.php?id=<?php echo $projects[$i]['id'];?>'">
                             <div class="card-content">
                                 <h4 class="green-text text-accent-3">
-                                    <?php echo $projects[$i]['name'];?>
+                                    <?php echo htmlspecialchars($projects[$i]['name']);?>
                                 </h4>
                                 <h5>
-                                    <?php echo $projects[$i]['class']; ?>
+                                    <?php echo htmlspecialchars($projects[$i]['class']); ?>
                                 </h5>
                                 <!-- Short summary of what the app is about. Has an overflow effect when text is too long-->
                                 <div class="short-desc">
                                     <p style="width: 95%;">
-                                        <?php echo $projects[$i]['abstract'];?>
+                                        <?php echo htmlspecialchars($projects[$i]['abstract']);?>
                                     </p>
                                     <!-- overflow effect --><div class="overflow-white"></div>
                                 </div>
