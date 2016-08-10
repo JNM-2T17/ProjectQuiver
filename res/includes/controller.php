@@ -144,7 +144,8 @@ switch($request['request']) {
 				if( validateDLSUEmail($request['emailAdd'])) {
 					if( preg_match("/^[a-z ,.'-]+ [a-z ,.'-]+$/i"
 									,$request['firstName']." ".$request['lastName']) &&
-						checkPass($request['userPassword'])) {
+						checkPass($request['userPassword']) &&
+						preg_match("/^(1|2)$/",$request['accountType'])) {
 						$fName = $request['firstName'];
 						$lName = $request['lastName'];
 						$password = $request['userPassword'];

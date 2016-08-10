@@ -53,6 +53,7 @@ var createAccount = (function() {
 			var accountPass = $("#accountPass").val();
 			var confirmPass = $("#confirmPass").val();
 			var accType = $("input[name='accountType']:checked").attr("id");
+			var accTypeVal = $("input[name='accountType']:checked").val();
 			console.log(accType);
 			var idNo = $("#idNo").val();
 			var message = "";
@@ -76,6 +77,10 @@ var createAccount = (function() {
 			if( !/^([a-zA-Z0-9_\-\.]+)@(dlsu.edu.ph|delasalle.ph)$/.test(emailAdd)) {
 					message += (message.length == 0 ? "" : "<br/>")
 							+ "Email Address is invalid. Make sure you are inputting a valid DLSU email.";
+			}
+			if( !/^(1|2)$/.test(accTypeVal)) {
+					message += (message.length == 0 ? "" : "<br/>")
+							+ "Please select a valid account type.";
 			}
 			if( message.length == 0 ) {
 				if( !auth && accType === "admin") {
