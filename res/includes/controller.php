@@ -19,7 +19,7 @@ if( empty($_POST) && !isset($_SERVER['HTTP_REFERER']) && $request['request'] != 
 
 require_once "image-functions.php";
 require_once "project-functions.php";
-require_once "user-functions.php";
+require_once "audit-functions.php";
 require_once "security-functions.php";
 
 
@@ -27,6 +27,11 @@ $usr = usr_get_session();
 if( $usr ) {
 	$now = strtotime("now");
 	if( $now >= $_SESSION['idleExpiry'] || $now >= $_SESSION['sessExpiry'] ) {
+		if( $_SESSION['idleExpiry'] > $_SESSION['sessExpiry'] ) {
+			audit_add("has their session expire.");
+		} else {
+			audit_add("was idle for too long.");
+		}
 		$request['request'] = 'logout';
     } else {
     	$_SESSION['idleExpiry'] = strtotime("+1 day");
@@ -64,6 +69,7 @@ switch($request['request']) {
 				}
 
 				if($error) {
+					audit_add("ran into data validation errors on add project.");
 					header("Location: ../add-project.php?status=error");
 				} else {
 					$id = proj_add($request["projname"],$request['category'],$request["abstract"]
@@ -94,32 +100,38 @@ switch($request['request']) {
 						$result = proj_add_images($id,img_upload($id,$images));
 						if( $result === false ) {
 							// echo "FAIL IMG";
+							audit_add("ran into image adding errors in add project.");
 							header("Location: ../add-project.php?status=error");
 						} else {
 							// echo "SUCCESS";
+							audit_add("added project $request[projname].");
 							header("Location: ../add-project.php?status=success");
 						}
 					} else {
 						// echo "SUCCESS";
+						audit_add("added project $request[projname].");
 						header("Location: ../add-project.php?status=success");
 					}
 				}
 			} else {
 				// echo "FAIL TOKEN";
+				audit_add("had an invalid token on add account.");
 				header("Location: ../add-project.php?status=error");
 			}
 		} else {
 			// echo "FAIL AUTH";
+			audit_add("tried to add project but was not authorized to.");
 			header("Location: ../.");			
-			
 		}
 		break;
 	case "confirmPassword":
 		if( checkToken($request['token'])) {
 			$usr = usr_get_session();
 			$result = usr_check($usr['email'],$request['password']);
+			audit_add("verified their identity.");
 			echo $result == $usr['id'] ? "true" : "false";
 		} else {
+			audit_add("failed to verify their identity.");
 			echo "false";
 		}
 		break;
@@ -137,20 +149,25 @@ switch($request['request']) {
 						$type = $request['accountType'];
 						if( usr_add($email,$password,$fName,$lName,$type) ) {
 							// echo "Success";
+							audit_add("created account for $request[emailAdd].");
 							header("Location: ../create-account.php?status=success");
 						} else {
 							// echo "Cannot add";
+							audit_add("failed to create account for $request[emailAdd].");
 							header("Location: ../create-account.php?status=failure");
 						}
 					} else {
 						// echo "Invalid NAME";
+						audit_add("ran into data validation errors on create account");
 						header("Location: ../create-account.php?status=failure");
 					}
 				} else {
 					// echo "Invalid EMAIL";
-					header("Location: ../create-account.php?status=failure");
+					audit_add("ran into data validation errors on create account");
+						header("Location: ../create-account.php?status=failure");
 				}
 			} else {
+				audit_add("had an invalid token on create account.");
 				header("Location: ../create-account.php?status=failure");
 			}
 		}
@@ -169,21 +186,26 @@ switch($request['request']) {
 					genToken($_SERVER['REMOTE_ADDR']);					
 					$_SESSION['sessExpiry'] = strtotime("+1 week");
 				    $_SESSION['idleExpiry'] = strtotime("+1 day");
+				    audit_add("logged in.");
 				    setcookie("pqSessionToken",$_SESSION['pqSessionToken'],
 				    	strtotime("+1 week"),"/ProjectQuiver","",
 				    	false,true);
 					header("Location: ../");
 				} else {
-					header("Location: ../login.php?status=error");
+					audit_add("failed to log in as $request[email].");
+				    header("Location: ../login.php?status=error");
 				}
 			} else {
+				audit_add("had an invalid token on login.");
 				header("Location: ../login.php?status=error");
 			}
 		} else {
+			audit_add("tried to logged in but was already logged in.");
 			header("Location: ../.");
 		}
 		break;
 	case "logout":
+		audit_add("logged out.");
 		session_unset();
 		session_destroy();
 		unset($_COOKIE['pqSessionToken']);
@@ -214,12 +236,15 @@ switch($request['request']) {
 					//$recogs = $request['recogs'];
 					$res = proj_review($id,$_SESSION['session_user'],$review,$grades);
 					if( $res ) {
+						audit_add("reviewed project $request[id].");
 						header("Location: ../index.php?status=success");
 					} else {
+						audit_add("failed to review project $request[id].");
 						header("Location: ../judge-project.php?id=$id&status=error");
 					}
 				// }
 			} else {
+				audit_add("had an invalid token on judge project.");
 				header("Location: ../judge-project.php?id=$id&status=error");
 			}
 		}

@@ -6,6 +6,7 @@
  * This function manages user data in the database.
  */
 require_once "main-functions.php";
+require_once "audit-functions.php";
 
 /**
  * adds a user to the database
@@ -87,6 +88,7 @@ function usr_get_session() {
 						session_destroy();
 						session_start();
 						session_regenerate_id(true);
+						audit_add("refreshed their session.");
 						$_SESSION['session_user'] = $userId;
 						genToken($_SERVER['REMOTE_ADDR']);					
 						$_SESSION['sessExpiry'] = strtotime("+1 week");
