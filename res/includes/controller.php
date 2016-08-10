@@ -7,7 +7,9 @@
  * Each form must have an input field with name "request" that corresponds to 
  * a case in the switch statement
  */
-session_start();
+if(session_status() == PHP_SESSION_NONE ) {
+	session_start();
+}
 define("BASE_PATH","Quiver");
 
 $request = $_SERVER['REQUEST_METHOD'] == "POST" ? $_POST : $_GET;
@@ -128,10 +130,10 @@ switch($request['request']) {
 		if( checkToken($request['token'])) {
 			$usr = usr_get_session();
 			$result = usr_check($usr['email'],$request['password']);
-			audit_add("verified their identity.");
+			audit_add($result == $usr['id'] ? "verified their identity." : "failed to verify their identity.");
 			echo $result == $usr['id'] ? "true" : "false";
 		} else {
-			audit_add("failed to verify their identity.");
+			audit_add("had an invalid token on reauthentication.");
 			echo "false";
 		}
 		break;
@@ -141,7 +143,8 @@ switch($request['request']) {
 				$request['userPassword'] = $request['confirmPassword'];
 				if( validateDLSUEmail($request['emailAdd'])) {
 					if( preg_match("/^[a-z ,.'-]+ [a-z ,.'-]+$/i"
-									,$request['firstName']." ".$request['lastName'])) {
+									,$request['firstName']." ".$request['lastName']) &&
+						checkPass($request['userPassword'])) {
 						$fName = $request['firstName'];
 						$lName = $request['lastName'];
 						$password = $request['userPassword'];
