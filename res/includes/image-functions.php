@@ -1,7 +1,7 @@
 <?php
 /**
  * image-functions.php
- * @author RAF
+ * @author Austin Fernandez
  * @20160609
  * This file manages image uploads
  */
