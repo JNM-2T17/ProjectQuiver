@@ -18,6 +18,31 @@ USE `db_project_quiver`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `pq_audit`
+--
+
+DROP TABLE IF EXISTS `pq_audit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pq_audit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `log` text NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '1',
+  `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pq_audit`
+--
+
+LOCK TABLES `pq_audit` WRITE;
+/*!40000 ALTER TABLE `pq_audit` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pq_audit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pq_project`
 --
 
@@ -30,7 +55,7 @@ CREATE TABLE `pq_project` (
   `class` varchar(45) NOT NULL,
   `abstract` text,
   `description` text,
-  `review` varchar(512) DEFAULT NULL,
+  `review` text,
   `reviewer` int(11) DEFAULT NULL,
   `forJudging` tinyint(1) NOT NULL DEFAULT '1',
   `dateAdded` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -39,7 +64,7 @@ CREATE TABLE `pq_project` (
   KEY `pq_projectfk_1` (`reviewer`),
   KEY `pq_projectidx_1` (`name`),
   CONSTRAINT `pq_projectfk_1` FOREIGN KEY (`reviewer`) REFERENCES `pq_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +227,7 @@ CREATE TABLE `pq_student` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idNo` (`idNo`),
   KEY `pq_studentsidx_1` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +236,6 @@ CREATE TABLE `pq_student` (
 
 LOCK TABLES `pq_student` WRITE;
 /*!40000 ALTER TABLE `pq_student` DISABLE KEYS */;
-INSERT INTO `pq_student` VALUES (1,'11312121','John','Collantes','johncollantes@dlsu.edu.ph','2016-02-13 02:13:08',1),(2,'11312122','John','Hipe','johnHipe@dlsu.edu.ph','2016-02-13 02:13:08',1),(3,'11312123','John','Sorilla','johnSorilla@dlsu.edu.ph','2016-02-13 02:13:08',1),(4,'11312124','John','Tolentino','johnTolentino@dlsu.edu.ph','2016-02-13 02:13:08',1),(5,'11323604','Ryan Austin','Fernandez','ryan_fernandez@dlsu.edu.ph','2016-06-21 15:58:03',1),(6,'11335459','Victoria Angela','Acorda','victoria_acorda@dlsu.edu.ph','2016-06-21 16:02:05',1),(7,'11334223','Angelo John','Amadora','angelo_amadora@dlsu.edu.ph','2016-06-21 16:02:05',1),(8,'11327278','Alden Luc','Hade','alden_hade@dlsu.edu.ph','2016-06-21 16:04:57',1),(9,'11336579','Jonah','Syfu','jonah_syfu@dlsu.edu.ph','2016-06-21 16:04:57',1),(10,'11336617','Marc Dominic','San Pedro','marc_sanpedro@dlsu.edu.ph','2016-06-21 17:40:06',1),(11,'11238374','Kanga','Kanga','kanga@dlsu.edu.ph','2016-07-07 11:03:07',1),(12,'11321792','Clarisse','Poblete','clarisse_poblete@dlsu.edu.ph','2016-07-23 01:49:40',1),(13,'11314320','Johansson','Tan','johansson_tan@dlsu.edu.ph','2016-07-23 01:49:40',1);
 /*!40000 ALTER TABLE `pq_student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,7 +258,7 @@ CREATE TABLE `pq_user` (
   PRIMARY KEY (`id`),
   KEY `userfk_1_idx` (`userType`),
   CONSTRAINT `userfk_1` FOREIGN KEY (`userType`) REFERENCES `pq_user_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,7 +267,7 @@ CREATE TABLE `pq_user` (
 
 LOCK TABLES `pq_user` WRITE;
 /*!40000 ALTER TABLE `pq_user` DISABLE KEYS */;
-INSERT INTO `pq_user` VALUES (1,'admin@dlsu.edu.ph','$2y$10$aNCro/Z9jEiXgYqdsytOou2Oca.cVyw8zRLTP/Mylot5BLqlxMO.i','Admin','Admin',1,'2016-03-03 10:33:34',0),(2,'thomas.tiamlee@dlsu.edu.ph','$2y$10$aNCro/Z9jEiXgYqdsytOou2Oca.cVyw8zRLTP/Mylot5BLqlxMO.i','Thomas James','Tiam-Lee',2,'2016-07-12 21:55:49',1),(3,'courtney.ngo@dlsu.edu.ph','$2y$10$Wa5b1vaABYjiI6dRYHCdpebpAjLs6JqqGrFINUUzTN.iBv4J0tJnK','Courtney Anne','Ngo',2,'2016-07-19 16:20:58',1),(4,'remedios.bulos@dlsu.edu.ph','$2y$10$l4kF7LUQAU/vmXIz8nxDKu9lIkK5mWzEsVesjw6Dg.2Hg.KY/Spou','Remedios','Bulos',2,'2016-07-19 16:22:39',1),(5,'angelo_amadora@dlsu.edu.ph','$2y$10$HYjhIWVuHJEBNV/xAZH3ZeN23aRAXJR5QT4Oei24twl87mfqc0F2W','Angelo','Amadora',2,'2016-07-19 16:34:57',1),(8,'angelo_amadodwasra@dlsu.edu.ph','$2y$10$gu0Z1s.Q1xETuvzo6ztwfe8CZimVu3VK0VTICQrzGrQzPlf1eVcb.','Angeloo','Amadoraa',1,'2016-07-19 16:41:57',0),(9,'briane.samson@dlsu.edu.ph','$2y$10$tSEce2CRuBByX0ibDdr3lOpF6sqYqFALLwCOYkKRSTtFb4hf.xdjm','Briane Paul','Samson',1,'2016-07-22 21:44:40',0),(11,'briane.samson@dlsu.edu.ph','$2y$10$2oeCIp.o0EQ3.1K33YS4cOWQ4BTEntwmHurf1AxgLWCeJIZ7k7cz6','Briane Paul','Samson',1,'2016-07-22 22:13:02',1),(12,'matthew_allen_go@dlsu.edu.ph','$2y$10$Y1d5zPPCe1eeGk98Q6g/K.Rn/J4Qo55Al0x4JydxO0M.Ci1dRR/Zu','Matthew','Go',1,'2016-07-23 01:29:21',1),(13,'solomon.see@delasalle.ph','$2y$10$RqPfLa2lB2ezS1/sXj9QKedoJsVsPsdPDDrtN2xPimB4S1h.CkpvC','Solomon','See',2,'2016-07-23 01:50:12',1);
+INSERT INTO `pq_user` VALUES (1,'admin@dlsu.edu.ph','$2y$10$aNCro/Z9jEiXgYqdsytOou2Oca.cVyw8zRLTP/Mylot5BLqlxMO.i','Admin','Admin',1,'2016-03-03 10:33:34',0),(2,'thomas.tiamlee@dlsu.edu.ph','$2y$10$aNCro/Z9jEiXgYqdsytOou2Oca.cVyw8zRLTP/Mylot5BLqlxMO.i','Thomas James','Tiam-Lee',2,'2016-07-12 21:55:49',1),(3,'courtney.ngo@dlsu.edu.ph','$2y$10$Wa5b1vaABYjiI6dRYHCdpebpAjLs6JqqGrFINUUzTN.iBv4J0tJnK','Courtney Anne','Ngo',2,'2016-07-19 16:20:58',1),(4,'remedios.bulos@dlsu.edu.ph','$2y$10$l4kF7LUQAU/vmXIz8nxDKu9lIkK5mWzEsVesjw6Dg.2Hg.KY/Spou','Remedios','Bulos',2,'2016-07-19 16:22:39',1),(5,'angelo_amadora@dlsu.edu.ph','$2y$10$HYjhIWVuHJEBNV/xAZH3ZeN23aRAXJR5QT4Oei24twl87mfqc0F2W','Angelo','Amadora',2,'2016-07-19 16:34:57',1),(8,'angelo_amadodwasra@dlsu.edu.ph','$2y$10$gu0Z1s.Q1xETuvzo6ztwfe8CZimVu3VK0VTICQrzGrQzPlf1eVcb.','Angeloo','Amadoraa',1,'2016-07-19 16:41:57',0),(9,'briane.samson@dlsu.edu.ph','$2y$10$tSEce2CRuBByX0ibDdr3lOpF6sqYqFALLwCOYkKRSTtFb4hf.xdjm','Briane Paul','Samson',1,'2016-07-22 21:44:40',0),(11,'briane.samson@dlsu.edu.ph','$2y$10$2oeCIp.o0EQ3.1K33YS4cOWQ4BTEntwmHurf1AxgLWCeJIZ7k7cz6','Briane Paul','Samson',1,'2016-07-22 22:13:02',1),(12,'matthew_allen_go@dlsu.edu.ph','$2y$10$Y1d5zPPCe1eeGk98Q6g/K.Rn/J4Qo55Al0x4JydxO0M.Ci1dRR/Zu','Matthew','Go',1,'2016-07-23 01:29:21',1),(13,'solomon.see@delasalle.ph','$2y$10$RqPfLa2lB2ezS1/sXj9QKedoJsVsPsdPDDrtN2xPimB4S1h.CkpvC','Solomon','See',2,'2016-07-23 01:50:12',1),(14,'stanley.tan@dlsu.edu.ph','$2y$10$nGue1sw6B0b/X7r1CTgpNuH/UujPTk6it2wyRQshhI4pcJ/y0P4CS','Daniel Stanley','Tan',2,'2016-08-10 16:48:22',1);
 /*!40000 ALTER TABLE `pq_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,4 +310,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-26 16:20:54
+-- Dump completed on 2016-08-10 17:28:12

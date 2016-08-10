@@ -25,7 +25,7 @@
         <!--
             PLEASE UPDATE THE FAVICON FFS
         -->
-        <link rel="icon" type="image/png" href="assets/img/hack2015-favicon.png">
+        <link rel="icon" type="image/png" href="assets/images/quiver-badge-only.png">
         <!--
             Looks like you've skipped editing the FAVICON....
         -->

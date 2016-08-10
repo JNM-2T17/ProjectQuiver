@@ -82,7 +82,7 @@ switch($request['request']) {
 					$imgCtr = count($_FILES['images']['name']);
 					// echo "IMGCTR: $imgCtr<br/>";
 					for($i = 0; $i < $imgCtr; $i++) {
-						if( strlen($_FILES['images']['name']) > 0 ) {
+						if( strlen($_FILES['images']['name'][$i]) > 0 ) {
 							$image = array(
 								"name" 		=> $_FILES["images"]["name"][$i],
 								"type" 		=> $_FILES["images"]["type"][$i],
