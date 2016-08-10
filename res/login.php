@@ -39,6 +39,7 @@ if( isset($_SESSION['session_user'])) {
         value="<?php echo isset($_GET['status']) && $_GET['status'] == "error" ? "Invalid username/password combination" : ""; ?>"/>
   <div class="row">
     <form action="includes/controller.php" method="post" onsubmit="">
+      <input type="hidden" name="token" value="<?php echo $_SESSION['pqSessionToken']; ?>"/>
       <input type="hidden" name="request" value="login">
       <div class="col s10 m4 offset-m4 offset-s1 " style="margin-top: 10%;">
         <div class="card blue-grey darken-1">

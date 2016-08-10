@@ -17,8 +17,9 @@ if( $auth === FALSE ) {
 		<input id="status" type="hidden" value="<?php echo isset($_GET['status']) ? $_GET['status'] : "";?>"/>
 		<div class="row add-project-form-container">
 			<h1> Add Project </h1>
-			<form action = "includes/controller.php" method= "post" onsubmit="return checkSubmit();" enctype="multipart/form-data">
-			<input type="hidden" name='request' value="addProject"/>
+			<form action = "includes/controller.php" method= "post" onsubmit="return addProject.checkSubmit();" enctype="multipart/form-data">
+			<input type="hidden" name="token" value="<?php echo $_SESSION['pqSessionToken']; ?>"/>
+			<input type="hidden" id="request" name='request' value="addProject"/>
 			<div class = "row">
 				<div class="input-field col s6">
 			      <input placeholder="Placeholder" id="projname" name="projname" type="text" class="validate">

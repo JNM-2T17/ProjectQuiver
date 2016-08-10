@@ -28,7 +28,8 @@ $projects = proj_get_pending();
     <input id="status" type="hidden" value="<?php echo isset($_GET['status']) ? $_GET['status'] : "";?>"/>
     <div class ="row add-user-form-container">
   <h1> Create Account </h1>
-  <form action="includes/controller.php" method="POST" id="createAccountForm" onsubmit="return checkSubmit();">
+  <form action="includes/controller.php" method="POST" id="createAccountForm" onsubmit="return createAccount.checkSubmit();">
+  <input type="hidden" name="token" value="<?php echo $_SESSION['pqSessionToken']; ?>"/>
   <input type="hidden" name='request' value="createUser"/>
 
   <!-- User Information -->

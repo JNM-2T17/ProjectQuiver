@@ -418,7 +418,10 @@ function proj_add($name,$class,$abstract = null,$desc = null,$students = null
 }
 
 /**
- *
+ * adds images to a project in the database
+ * @param $id id of project
+ * @param $images list of relative urls for images
+ * @return true if successful, false otherwise
  */
 function proj_add_images($id,$images) {
 	global $db;
@@ -447,7 +450,9 @@ function proj_add_images($id,$images) {
 		if(!$res['status']) {
 			echo $res['error'];
 			return false;
-		}	
+		} else {
+			return true;
+		}
 	} 
 }
 // echo proj_add("ShareZone v2","Mobile Application","ShareZone allows you to share and transfer files from multiple different devices with each other with just a web browser and your smartphone.","Simpatico is a text simplification system that makes us of lexical and syntactic simplification methods in order to simplify legalese to plain English in which a majority of the Philippine population can understand. It makes use of various existing NLP tools in order to carry out tasks like multiword extraction and word sense disambiguation.",array(

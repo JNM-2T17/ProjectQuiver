@@ -4,6 +4,15 @@
  */
 require_once "includes/user-functions.php";
 $usr = usr_get_session();
+date_default_timezone_set("Asia/Manila");
+if( $usr ) {
+    $now = strtotime("now");
+    if( $now >= $_SESSION['idleExpiry'] || $now >= $_SESSION['sessExpiry'] ) {
+        header("Location: includes/controller.php?request=logout");
+    } else {
+        $_SESSION['idleExpiry'] = strtotime("+1 day");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>

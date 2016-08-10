@@ -108,6 +108,7 @@ require_once "commons/admin-header.php";
                                           by <span class="judge"><?php echo htmlspecialchars($user['fName']." ".$user['lName']);?></span>
                                       </p>
                                       <form action="includes/controller.php" method="POST" onSubmit="return checkForm();">
+                                      <input type="hidden" name="token" value="<?php echo $_SESSION['pqSessionToken']; ?>"/>
                                       <input type="hidden" name="request" value="reviewProject"/>
                                       <input type="hidden" name="id" value="<?php echo $_GET['id'];?>"/>
                                       <textarea id="review" placeholder="Write your review here" name="review"></textarea>
