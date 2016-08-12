@@ -193,7 +193,7 @@ switch($request['request']) {
 				    audit_add("logged in.");
 				    setcookie("pqSessionToken",$_SESSION['pqSessionToken'],
 				    	strtotime("+1 week"),"/ProjectQuiver","",
-				    	false,true);
+				    	true,true);
 					header("Location: ../");
 				} else {
 					audit_add("failed to log in as $request[email].");
@@ -214,7 +214,7 @@ switch($request['request']) {
 		session_destroy();
 		unset($_COOKIE['pqSessionToken']);
 		setcookie("pqSessionToken",null,-1,"/ProjectQuiver","",
-				    	false,true);					
+				    	true,true);					
 		session_start();
 		if(session_regenerate_id(true) === TRUE) {
 			genToken();
