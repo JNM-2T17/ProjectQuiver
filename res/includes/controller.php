@@ -103,21 +103,25 @@ switch($request['request']) {
 						if( $result === false ) {
 							// echo "FAIL IMG";
 							audit_add("ran into image adding errors in add project.");
+							$_SESSION['sessionError'] = "Failed to add project.";
 							header("Location: ../add-project.php?status=error");
 						} else {
 							// echo "SUCCESS";
 							audit_add("added project $request[projname].");
+							$_SESSION['sessionMessage'] = "Project successfully added.";
 							header("Location: ../add-project.php?status=success");
 						}
 					} else {
 						// echo "SUCCESS";
 						audit_add("added project $request[projname].");
+						$_SESSION['sessionMessage'] = "Project successfully added.";
 						header("Location: ../add-project.php?status=success");
 					}
 				}
 			} else {
 				// echo "FAIL TOKEN";
 				audit_add("had an invalid token on add account.");
+				$_SESSION['sessionError'] = "Failed to add project.";
 				header("Location: ../add-project.php?status=error");
 			}
 		} else {
@@ -154,23 +158,28 @@ switch($request['request']) {
 						if( usr_add($email,$password,$fName,$lName,$type) ) {
 							// echo "Success";
 							audit_add("created account for $request[emailAdd].");
+							$_SESSION['sessionMessage'] = "Account successfully added.";
 							header("Location: ../create-account.php?status=success");
 						} else {
 							// echo "Cannot add";
+							$_SESSION['sessionError'] = "Failed to add project.";
 							audit_add("failed to create account for $request[emailAdd].");
 							header("Location: ../create-account.php?status=failure");
 						}
 					} else {
 						// echo "Invalid NAME";
+						$_SESSION['sessionError'] = "Failed to create account.";
 						audit_add("ran into data validation errors on create account");
 						header("Location: ../create-account.php?status=failure");
 					}
 				} else {
 					// echo "Invalid EMAIL";
+					$_SESSION['sessionError'] = "Failed to create account.";
 					audit_add("ran into data validation errors on create account");
-						header("Location: ../create-account.php?status=failure");
+					header("Location: ../create-account.php?status=failure");
 				}
 			} else {
+				$_SESSION['sessionError'] = "Failed to create account.";
 				audit_add("had an invalid token on create account.");
 				header("Location: ../create-account.php?status=failure");
 			}
@@ -180,26 +189,34 @@ switch($request['request']) {
 		$usr = usr_get_session();
 		if( $usr === null ) {
 			if( checkToken($request['token'])) {
-				$res = usr_check($request['email'],$request['password']);
-				if(is_numeric($res)) {
-					session_unset();
-					session_destroy();
-					session_start();
-					session_regenerate_id(true);
-					$_SESSION['session_user'] = $res;
-					genToken($_SERVER['REMOTE_ADDR']);					
-					$_SESSION['sessExpiry'] = strtotime("+1 week");
-				    $_SESSION['idleExpiry'] = strtotime("+1 day");
-				    audit_add("logged in.");
-				    setcookie("pqSessionToken",$_SESSION['pqSessionToken'],
-				    	strtotime("+1 week"),"/ProjectQuiver","",
-				    	true,true);
-					header("Location: ../");
-				} else {
-					audit_add("failed to log in as $request[email].");
-				    header("Location: ../login.php?status=error");
+				try {
+					$res = usr_check($request['email'],$request['password']);
+					if(is_numeric($res)) {
+						session_unset();
+						session_destroy();
+						session_start();
+						session_regenerate_id(true);
+						$_SESSION['session_user'] = $res;
+						genToken($_SERVER['REMOTE_ADDR']);					
+						$_SESSION['sessExpiry'] = strtotime("+1 week");
+					    $_SESSION['idleExpiry'] = strtotime("+1 day");
+					    audit_add("logged in.");
+					    setcookie("pqSessionToken",$_SESSION['pqSessionToken'],
+					    	strtotime("+1 week"),"/ProjectQuiver","",
+					    	true,true);
+						header("Location: ../");
+					} else {
+						audit_add("failed to log in as $request[email].");
+					    $_SESSION['sessionError'] = "Invalid username/password combination.";
+						header("Location: ../login.php?status=error");
+					}
+				} catch(Exception $e) {
+					$_SESSION['sessionError'] = $e->getMessage();
+					audit_add("ran into the error ".$e->getMessage());
+					header("Location: ../login.php?status=error");
 				}
 			} else {
+				$_SESSION['sessionError'] = "An unexpected error occured.";
 				audit_add("had an invalid token on login.");
 				header("Location: ../login.php?status=error");
 			}
@@ -216,12 +233,9 @@ switch($request['request']) {
 		setcookie("pqSessionToken",null,-1,"/ProjectQuiver","",
 				    	true,true);					
 		session_start();
-		if(session_regenerate_id(true) === TRUE) {
-			genToken();
-			header("Location: ../");
-		} else {
-			die();
-		}
+		session_regenerate_id(true);
+		genToken();
+		header("Location: ../");
 		break;
 	case "reviewProject":
 		if( checkAuth("judgeProject")) {

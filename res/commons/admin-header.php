@@ -34,6 +34,16 @@ if( $usr ) {
 
 </head>
 <body>
+  <input type="hidden" id="message" value="<?php 
+    if(isset($_SESSION['sessionMessage'])) { 
+        echo $_SESSION['sessionMessage'];
+        unset($_SESSION['sessionMessage']);
+    } ?>"/>
+  <input type="hidden" id="error" value="<?php 
+    if(isset($_SESSION['sessionError'])) { 
+        echo $_SESSION['sessionError'];
+        unset($_SESSION['sessionError']);
+    } ?>"/>  
   <div id="alert-overlay">
     <div id="alert-container">
       <h4>Error</h4>

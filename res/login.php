@@ -25,11 +25,20 @@ if( isset($_SESSION['session_user'])) {
   <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
   <script src="js/materialize.min.js"></script>
   <script src="js/script.js"></script>
-  <script src="js/login.js"></script>
 </head>
 
 <body background="assets/images/login_background.jpg">
-<div id="alert-overlay">
+ <input type="hidden" id="message" value="<?php 
+    if(isset($_SESSION['sessionMessage'])) { 
+        echo $_SESSION['sessionMessage'];
+        unset($_SESSION['sessionMessage']);
+    } ?>"/>
+  <input type="hidden" id="error" value="<?php 
+    if(isset($_SESSION['sessionError'])) { 
+        echo $_SESSION['sessionError'];
+        unset($_SESSION['sessionError']);
+    } ?>"/>  
+  <div id="alert-overlay">
     <div id="alert-container">
       <h4>Error</h4>
       <p id="alert-text">
@@ -37,8 +46,6 @@ if( isset($_SESSION['session_user'])) {
       </p>
     </div>
   </div>
-  <input type="hidden" id="error" 
-        value="<?php echo isset($_GET['status']) && $_GET['status'] == "error" ? "Invalid username/password combination" : ""; ?>"/>
   <div class="row">
     <form action="includes/controller.php" method="post" onsubmit="">
       <input type="hidden" name="token" value="<?php echo $_SESSION['pqSessionToken']; ?>"/>

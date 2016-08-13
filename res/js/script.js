@@ -5,6 +5,7 @@
 var a = 0;
 
 function showError(message) {
+  console.log("Error: " + message);
   $("#alert-container p").html(message);
   $("#alert-container h4").html("Error");
   $("#alert-container").show();
@@ -13,7 +14,8 @@ function showError(message) {
   }, 3000);
 }
 
-function showSuccess(message) {
+function showMessage(message) {
+  console.log("Message: " + message);
   $("#alert-container p").html(message);
   $("#alert-container h4").html("Success");
   $("#alert-container").show();
@@ -86,9 +88,21 @@ $(document).scroll(function(){
 });
 
 $(document).ready(function(){
+        $("#alert-container").hide();
+
+        var message = $("#message").val();
+        console.log("Message: " + message)
+        if( message && message.length > 0 ) {
+          showMessage(message);
+        }
+        var error = $("#error").val();
+        console.log("Error: " + error + " " + (error && error.length > 0 ));
+        if( error && error.length > 0 ) {
+          console.log("HERE NIGGA");
+          showError(error);
+        }
         a = $("nav").offset() ? $("nav").offset().top + 200 : 0 ;
 
-        $("#alert-container").hide();
         var bodyheight = $(window).height();
         $(".windowheight").css('max-height', bodyheight);
 

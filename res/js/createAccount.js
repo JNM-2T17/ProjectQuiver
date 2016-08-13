@@ -2,18 +2,6 @@ var createAccount = (function() {
 	var auth = false;
 
 	$(document).ready(function(){
-		var status = $("#status").val();
-		if(status && status.length > 0 ) {
-			switch(status) {
-				case "success":
-					showSuccess("User successfully created.");
-					break;
-				case "failure":
-					showError("Failed to add account.");
-					break;
-				default:
-			}
-		}
 		$('select').material_select();
 
 		$("#confirm-password-overlay").hide();
