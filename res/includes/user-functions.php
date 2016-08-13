@@ -78,7 +78,7 @@ function usr_check($email,$password) {
 			} 
 			throw new Exception("Account is expired.");
 		} else if($res['data'][0]['locked'] === "1") {
-			throw new Exception("Locked for ".$res['data'][0]['unlockTime']." minutes.");
+			throw new Exception("Account has been locked. Try again later.");
 		} else if(password_verify($password,$res['data'][0]['password'])) {
 			$id = $res['data'][0]['id'];
 			$sql = "UPDATE pq_user SET loginAttempts = 0, expiresOn = DATE_ADD(NOW(),INTERVAL 1 YEAR) WHERE id = :id";
@@ -99,7 +99,7 @@ function usr_check($email,$password) {
 			if(!$res['status']) {
 				echo $res['error'];
 			} 
-			throw new Exception("Locked out for 15 minutes.");
+			throw new Exception("Account has been locked. Try again later.");
 		} else {
 			$sql = "UPDATE pq_user SET loginAttempts = loginAttempts + 1 WHERE id = :id";
 			$params = array(
