@@ -2,10 +2,11 @@
 /**
  * user-functions.php
  * @author Austin Fernandex
- * @20160303
+ * @20160810
  * This function manages user data in the database.
  */
 require_once "main-functions.php";
+require_once "audit-functions.php";
 
 /**
  * adds a user to the database
@@ -31,8 +32,16 @@ function usr_add($email,$password,$fname,$lname,$usrType) {
 			":usrType" => $usrType
 		);
 
-		$res = $db->query("INSERT",$sql,$param);
-		return $res['status'];
+		$res = $db->query("INSERT_ID",$sql,$param);
+
+		if($res['status'] ) {
+			$sql = "UPDATE pq_user SET expiresOn = DATE_ADD(NOW(),INTERVAL 1 YEAR) WHERE id = :id";
+			$params = array(
+				":id" => $res['data']
+			);
+			$res = $db->query("UPDATE",$sql,$params);
+			return $res['status'];
+		}
 	} else { //if user exists
 		return false;
 	}
@@ -47,33 +56,122 @@ function usr_add($email,$password,$fname,$lname,$usrType) {
 function usr_check($email,$password) {
 	global $db;
 
-	$sql = "SELECT id,password FROM pq_user WHERE email = BINARY :email 
+	$sql = "SELECT id,password,loginAttempts, 
+					endLock IS NOT NULL AND endLock > NOW() as locked,
+					TIMESTAMPDIFF(MINUTE,NOW(),endLock) AS unlockTime,
+					NOW() >= expiresON AS expired 
+					FROM pq_user WHERE email = BINARY :email 
 				AND status = 1";
 	$param = array(":email" => $email);
 	$res = $db->query("SELECT",$sql,$param);
-	
 	if( $res['status'] ) {
 		if( $res['count'] == 0 ) {
 			return false;
+		} else if($res['data'][0]['expired'] === "1") {
+			$sql = "UPDATE pq_user SET expiresON = NULL,status = 0 WHERE id = :id";
+			$params = array(
+				":id" => $res['data'][0]['id']
+			);
+			$res = $db->query("UPDATE",$sql,$params);
+			if(!$res['status']) {
+				echo $res['error'];
+			} 
+			throw new Exception("Account is expired.");
+		} else if($res['data'][0]['locked'] === "1") {
+			throw new Exception("Locked for ".$res['data'][0]['unlockTime']." minutes.");
 		} else if(password_verify($password,$res['data'][0]['password'])) {
-			return $res['data'][0]['id'];
+			$id = $res['data'][0]['id'];
+			$sql = "UPDATE pq_user SET loginAttempts = 0, expiresOn = DATE_ADD(NOW(),INTERVAL 1 YEAR) WHERE id = :id";
+			$params = array(
+				":id" => $res['data'][0]['id']
+			);
+			$res = $db->query("UPDATE",$sql,$params);
+			if(!$res['status']) {
+				echo $res['error'];
+			}
+			return $id;
+		} else if( $res['data'][0]['loginAttempts'] + 1 === MAX_LOGIN_ATTEMPTS) {
+			$sql = "UPDATE pq_user SET loginAttempts = 0, endLock = DATE_ADD(NOW(),INTERVAL 15 MINUTE) WHERE id = :id";
+			$params = array(
+				":id" => $res['data'][0]['id']
+			);
+			$res = $db->query("UPDATE",$sql,$params);
+			if(!$res['status']) {
+				echo $res['error'];
+			} 
+			throw new Exception("Locked out for 15 minutes.");
 		} else {
+			$sql = "UPDATE pq_user SET loginAttempts = loginAttempts + 1 WHERE id = :id";
+			$params = array(
+				":id" => $res['data'][0]['id']
+			);
+			$res = $db->query("UPDATE",$sql,$params);
+			if(!$res['status']) {
+				echo $res['error'];
+			} 
 			return false;
 		}
 	} else {
+		echo $res['error'];
 		return false;
 	}
 }
 
 /**
- *
+ * Returns the session user or null if none. If no user is set, it tries to use
+ * a cookie to restore a session
+ * @return session user object or NULL if none
  */
 function usr_get_session() {
-	return isset($_SESSION['session_user']) ? usr_get($_SESSION['session_user']) : null;
+	if(!isset($_SESSION['session_user'])) {
+		if(isset($_COOKIE['pqSessionToken'])) {
+			$token = $_COOKIE['pqSessionToken'];
+			$index = strpos($token,'$');
+			if( $index !== false) {
+				$userId = substr($token,0,$index );
+				$usr = usr_get($userId);
+				if( $usr === null) {
+					return null;
+				} else {
+					$hash = $userId.'$'.hash("sha256",$usr['id'].$usr['email'].$_SERVER['REMOTE_ADDR']);
+					if( $hash === $token) {
+						session_unset();
+						session_destroy();
+						session_start();
+						session_regenerate_id(true);
+						audit_add("refreshed their session.");
+						$_SESSION['session_user'] = $userId;
+						genToken($_SERVER['REMOTE_ADDR']);					
+						$_SESSION['sessExpiry'] = strtotime("+1 week");
+					    $_SESSION['idleExpiry'] = strtotime("+1 day");
+						return $usr;
+					} else {
+						return null;
+					}
+				}
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	} else {
+		return usr_get($_SESSION['session_user']);
+	}
 }
 
 /**
- *
+ * gets the details of one user
+ * @param $id id of user in database
+ * @return user containing
+ * 		id - id of user in db
+ * 		email - email address of user
+ * 		fName - first name of user
+ * 		lName - last name of user
+ * 		addProject - 1 if user can add project, 0 otherwise
+ * 		judgeProject - 1 if user can judge project, 0 otherwise
+ * 		createUser - 1 if user can create User, 0 otherwise
+ * 		deleteUser - 1 if user can delete User, 0 otherwise
  */
 function usr_get($id) {
 	global $db;
@@ -106,7 +204,17 @@ function usr_get($id) {
 }
 
 /**
- *
+ * gets user details using email
+ * @param $email email address of user
+ * @return user containing 
+ * 		id - id of user in db
+ * 		email - email address of user
+ * 		fName - first name of user
+ * 		lName - last name of user
+ * 		addProject - 1 if user can add project, 0 otherwise
+ * 		judgeProject - 1 if user can judge project, 0 otherwise
+ * 		createUser - 1 if user can create User, 0 otherwise
+ * 		deleteUser - 1 if user can delete User, 0 otherwise
  */
 function usr_get_by_email($email) {
 	global $db;

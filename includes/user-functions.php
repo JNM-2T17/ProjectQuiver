@@ -2,10 +2,11 @@
 /**
  * user-functions.php
  * @author Austin Fernandex
- * @20160303
+ * @20160810
  * This function manages user data in the database.
  */
 require_once "main-functions.php";
+require_once "audit-functions.php";
 
 /**
  * adds a user to the database
@@ -66,14 +67,60 @@ function usr_check($email,$password) {
 }
 
 /**
- *
+ * Returns the session user or null if none. If no user is set, it tries to use
+ * a cookie to restore a session
+ * @return session user object or NULL if none
  */
 function usr_get_session() {
-	return isset($_SESSION['session_user']) ? usr_get($_SESSION['session_user']) : null;
+	if(!isset($_SESSION['session_user'])) {
+		if(isset($_COOKIE['pqSessionToken'])) {
+			$token = $_COOKIE['pqSessionToken'];
+			$index = strpos($token,'$');
+			if( $index !== false) {
+				$userId = substr($token,0,$index );
+				$usr = usr_get($userId);
+				if( $usr === null) {
+					return null;
+				} else {
+					$hash = $userId.'$'.hash("sha256",$usr['id'].$usr['email'].$_SERVER['REMOTE_ADDR']);
+					if( $hash === $token) {
+						session_unset();
+						session_destroy();
+						session_start();
+						session_regenerate_id(true);
+						audit_add("refreshed their session.");
+						$_SESSION['session_user'] = $userId;
+						genToken($_SERVER['REMOTE_ADDR']);					
+						$_SESSION['sessExpiry'] = strtotime("+1 week");
+					    $_SESSION['idleExpiry'] = strtotime("+1 day");
+						return $usr;
+					} else {
+						return null;
+					}
+				}
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	} else {
+		return usr_get($_SESSION['session_user']);
+	}
 }
 
 /**
- *
+ * gets the details of one user
+ * @param $id id of user in database
+ * @return user containing
+ * 		id - id of user in db
+ * 		email - email address of user
+ * 		fName - first name of user
+ * 		lName - last name of user
+ * 		addProject - 1 if user can add project, 0 otherwise
+ * 		judgeProject - 1 if user can judge project, 0 otherwise
+ * 		createUser - 1 if user can create User, 0 otherwise
+ * 		deleteUser - 1 if user can delete User, 0 otherwise
  */
 function usr_get($id) {
 	global $db;
@@ -106,7 +153,17 @@ function usr_get($id) {
 }
 
 /**
- *
+ * gets user details using email
+ * @param $email email address of user
+ * @return user containing 
+ * 		id - id of user in db
+ * 		email - email address of user
+ * 		fName - first name of user
+ * 		lName - last name of user
+ * 		addProject - 1 if user can add project, 0 otherwise
+ * 		judgeProject - 1 if user can judge project, 0 otherwise
+ * 		createUser - 1 if user can create User, 0 otherwise
+ * 		deleteUser - 1 if user can delete User, 0 otherwise
  */
 function usr_get_by_email($email) {
 	global $db;

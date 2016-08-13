@@ -13,7 +13,7 @@ function showError(message) {
   }, 3000);
 }
 
-function showSuccess(message) {
+function showMessage(message) {
   $("#alert-container p").html(message);
   $("#alert-container h4").html("Success");
   $("#alert-container").show();
@@ -22,11 +22,54 @@ function showSuccess(message) {
   }, 3000);
 }
 
+function appendMessage(message, add) {
+  return message + (message.length == 0 ? "" : "<br/>") + add;
+}
+
+function checkPass(pass) {
+  var message = "";
+  if( pass.length < 8 ) {
+    message = appendMessage(message,"Password must be at least 8 characters long.");
+  }
+  
+  var cap = false;
+  var low = false;
+  var num = false;
+  var spec = false;
+  
+  for(var i = 0; i < pass.length; i++) {
+    if( /[A-Z]/.test(pass.substring(i,i + 1))) {
+      cap = true;
+    } else if(/[a-z]/.test(pass.substring(i,i + 1))) {
+      low = true;
+    } else if(/[0-9]/.test(pass.substring(i,i + 1))) {
+      num = true;
+    } else {
+      spec = true;
+    }
+  }
+  
+  if( !cap ) {
+    message = appendMessage(message,"Password must contain at least one uppercase letter.");
+  }
+  if( !low ) {
+    message = appendMessage(message,"Password must contain at least one lowercase letter.");
+  }
+  if( !num ) {
+    message = appendMessage(message,"Password must contain at least one number.");
+  }
+  if( !spec ) {
+    message = appendMessage(message,"Password must contain at least one non-alphanumeric character.");
+  }
+  
+  return message.length == 0 ? true : message;
+}
+
 $(".button-collapse").sideNav();
 
 $(document).scroll(function(){
     
-    console.log($(this).scrollTop() + " " + a);
+    // console.log($(this).scrollTop() + " " + a);
     if($(this).scrollTop() > a)
     {
         $('.nav').css({"background":"rgb(10, 27, 32)"});
@@ -43,9 +86,21 @@ $(document).scroll(function(){
 });
 
 $(document).ready(function(){
+        $("#alert-container").hide();
+
+        var message = $("#message").val();
+        console.log("Message: " + message)
+        if( message && message.length > 0 ) {
+          showMessage(message);
+        }
+        var error = $("#error").val();
+        console.log("Error: " + error + " " + (error && error.length > 0 ));
+        if( error && error.length > 0 ) {
+          console.log("HERE NIGGA");
+          showError(error);
+        }
         a = $("nav").offset() ? $("nav").offset().top + 200 : 0 ;
 
-        $("#alert-container").hide();
         var bodyheight = $(window).height();
         $(".windowheight").css('max-height', bodyheight);
 

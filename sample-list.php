@@ -135,16 +135,16 @@
                                 <div class="card white app-card-plain" onclick="window.location='sample-proj.php?id=<?php echo $project['id'];?>'">
                                     <div class="card-content">
                                         <h4 class="green-text text-accent-3">
-                                            <?php echo $project['name'];?>
+                                            <?php echo htmlspecialchars($project['name']);?>
                                         </h4>
                                         <h5>
-                                            <?php echo $project['class'];?>
+                                            <?php echo htmlspecialchars($project['class']);?>
                                         </h5>
                                         <!-- Short summary of what the app is about. Has an overflow effect when text is too long-->
                                         <div class="short-desc">
-                                            <?php echo $project['description'] 
-                                                == null ? $project['abstract'] 
-                                                : $project['description']; ?>
+                                            <?php echo htmlspecialchars($project['description']) 
+                                                == null ? htmlspecialchars($project['abstract']) 
+                                                : htmlspecialchars($project['description']); ?>
                                             <!-- overflow effect --><div class="overflow-white"></div>
                                         </div>
                                     </div>                            

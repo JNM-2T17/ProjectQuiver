@@ -136,7 +136,7 @@ p {
   background: #0a1b20 !important; }
 
 .quiver-green-text {
-  color: #0A1B20 !important; }
+  color: #0A1B20; }
 
 .quiver-accent {
   background: #66F46F !important; }
@@ -328,7 +328,7 @@ p {
   width: 100%; }
 
 .short-desc {
-  height: 180px;
+  height: 280px;
   width: 100%;
   text-overflow: ellipsis;
   overflow: hidden; }
