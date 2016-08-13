@@ -9,8 +9,12 @@ var addProject = (function() {
 			console.log(this.files);
 			imageError = "";
 			for(x in this.files) {
-				if(this.files[x].size > 10485760) {
-					imageError += (imageError.length == 0 ? "" : "<br/>") + this.files[x].name + " is too large";
+				if( /^[0-9]+$/.test(x) ) {
+					if(this.files[x].size > 10485760) {
+						imageError += (imageError.length == 0 ? "" : "<br/>") + this.files[x].name + " is too large";
+					} else if(!/^image\/.*$/.test(this.files[x].type)) {
+						imageError += (imageError.length == 0 ? "" : "<br/>") + this.files[x].name + " is not an image";
+					}
 				}
 			}
 

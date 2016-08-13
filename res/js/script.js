@@ -5,7 +5,6 @@
 var a = 0;
 
 function showError(message) {
-  console.log("Error: " + message);
   $("#alert-container p").html(message);
   $("#alert-container h4").html("Error");
   $("#alert-container").show();
@@ -15,7 +14,6 @@ function showError(message) {
 }
 
 function showMessage(message) {
-  console.log("Message: " + message);
   $("#alert-container p").html(message);
   $("#alert-container h4").html("Success");
   $("#alert-container").show();
