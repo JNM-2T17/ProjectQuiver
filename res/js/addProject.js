@@ -1,3 +1,9 @@
+/**
+ * addProject.js
+ * @author Austin Fernandez
+ * @20160813
+ * This file handles the add project screen.
+ */
 var addProject = (function() {
 	var members = 0;
 	var tags = 0;
@@ -86,6 +92,10 @@ var addProject = (function() {
 	});
 
 	return {
+		/**
+		 * checks the form if all fields' values are valid.
+		 * @return true if everything is valid, false otherwise
+		 */
 		checkSubmit : function() {
 			$("#request").val("addProject");
 			// console.log($("#projname").val().length);

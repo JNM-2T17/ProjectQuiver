@@ -1,9 +1,17 @@
-/*
-    AUTHOR: LAURENZ (laurenz@outlook.ph)
-*/
+/**
+ * addProject.js
+ * @author Austin Fernandez
+ * @author Laurenz Tolentino
+ * @20160813
+ * This file handles the utility functions.
+ */
 
 var a = 0;
 
+/**
+ * shows the given error message
+ * @param message message to be shown
+ */
 function showError(message) {
   $("#alert-container p").html(message);
   $("#alert-container h4").html("Error");
@@ -13,6 +21,10 @@ function showError(message) {
   }, 3000);
 }
 
+/**
+ * shows the given message
+ * @param message message to be shown
+ */
 function showMessage(message) {
   $("#alert-container p").html(message);
   $("#alert-container h4").html("Success");
@@ -22,10 +34,23 @@ function showMessage(message) {
   }, 3000);
 }
 
+/**
+ * constructs a new message given the current message and an addition
+ * @param message current message
+ * @param add string to add
+ * @return new message
+ */
 function appendMessage(message, add) {
   return message + (message.length == 0 ? "" : "<br/>") + add;
 }
 
+/**
+ * checks if a password meets the standards i.e. has at least one uppercase 
+ * letter, one lowercase letter, 8 characters, one special character, and one 
+ * number
+ * @param pass password to check
+ * @return true if valid, error message otherwise
+ */
 function checkPass(pass) {
   var message = "";
   if( pass.length < 8 ) {

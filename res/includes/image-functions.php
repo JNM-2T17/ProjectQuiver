@@ -23,7 +23,7 @@ function img_upload($folderName,$images) {
 	$imgCtr = 1;
 	$paths = array();
 	foreach($images as $image) {
-		$ext = strtolower(pathinfo(basename($image['name']),PATHINFO_EXTENSION));
+		$ext = pathinfo(basename($image['name']),PATHINFO_EXTENSION);
 		if( $ext === "jpeg" || $ext === "jpg" || $ext === "png" 
 				|| $ext === "gif" ) {
 			//10 MB lmit

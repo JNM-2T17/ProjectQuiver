@@ -1,9 +1,9 @@
 <?php 
 /**
- * security-functions.php
+ * student-functions.php
  * @author Austin Fernandez
  * @20160705
- * This file handles authorization.
+ * This file handles student related operations.
  */
 require_once "main-functions.php";
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * user-functions.php
- * @author Austin Fernandex
+ * @author Austin Fernandez
  * @20160810
  * This function manages user data in the database.
  */

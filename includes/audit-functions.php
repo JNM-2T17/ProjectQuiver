@@ -8,6 +8,11 @@
 
 require_once "user-functions.php";
 
+/**
+ * adds an audit to the db
+ * @param @action action of the user in the audit
+ * @return 1 if successful, 0 otherwise
+ */
 function audit_add($action) {
 	global $db;
 

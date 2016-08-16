@@ -13,6 +13,14 @@ if( !$sandbox && !defined(BASE_PATH) ) {
 class Database {
 	private $db;
 
+	/**
+	 * constructs a basic db connection
+	 * @param $dbType - type of database
+	 * @param $dbHost - host address of db server
+	 * @param $dbName - schema name
+	 * @param $dbUser - username on server
+	 * @param $dbPass - password for corresponding user on server
+	 */
 	public function __construct($dbType,$dbHost,$dbName,$dbUser,$dbPass) {
 		try {
 			$this->db = new PDO("$dbType:host=$dbHost;dbname=$dbName",$dbUser	

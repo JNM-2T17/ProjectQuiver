@@ -3,7 +3,7 @@
  * security-functions.php
  * @author Austin Fernandez
  * @20160810
- * This file handles authorization.
+ * This file handles security related operations.
  */
 if(session_status() == PHP_SESSION_NONE ) {
 	session_start();
@@ -26,50 +26,6 @@ function checkAuth($feature) {
 			return 0;
 		}
 	}
-}
-
-/**
- * checks if a password is secure
- * @param $pass password to check
- * @return true if secure, false otherwise
- */
-function checkPass($pass) {
-	$message = "";
-	if( strlen($pass) < 8 ) {
-		return false;
-	}
-	
-	$cap = false;
-	$low = false;
-	$num = false;
-	$spec = false;
-	
-	for($i = 0; $i < strlen($pass); $i++) {
-		if( preg_match("/[A-Z]/",substr($pass,$i,1))) {
-			$cap = true;
-		} else if(preg_match("/[a-z]/",substr($pass,$i,1))) {
-			$low = true;
-		} else if(preg_match("/[0-9]/",substr($pass,$i,1))) {
-			$num = true;
-		} else {
-			$spec = true;
-		}
-	}
-	
-	if( !$cap ) {
-		return false;
-	}
-	if( !$low ) {
-		return false;
-	}
-	if( !$num ) {
-		return false;
-	}
-	if( !$spec ) {
-		return false;
-	}
-	
-	return true;
 }
 
 /**

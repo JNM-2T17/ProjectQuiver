@@ -1,3 +1,9 @@
+/**
+ * createAccount.js
+ * @author Austin Fernandez
+ * @20160813
+ * This file handles the create account screen.
+ */
 var createAccount = (function() {
 	var auth = false;
 
@@ -33,6 +39,10 @@ var createAccount = (function() {
 		});
 	});
 	return {
+		/**
+		 * checks the form if all fields' values are valid.
+		 * @return true if everything is valid, false otherwise
+		 */
 		checkSubmit : function() {
 			var message = "";
 			var firstName = $("#firstName").val();

@@ -1,7 +1,7 @@
 <?php
 /**
  * user-functions.php
- * @author Austin Fernandex
+ * @author Austin Fernandez
  * @20160810
  * This function manages user data in the database.
  */
@@ -32,16 +32,8 @@ function usr_add($email,$password,$fname,$lname,$usrType) {
 			":usrType" => $usrType
 		);
 
-		$res = $db->query("INSERT_ID",$sql,$param);
-
-		if($res['status'] ) {
-			$sql = "UPDATE pq_user SET expiresOn = DATE_ADD(NOW(),INTERVAL 1 YEAR) WHERE id = :id";
-			$params = array(
-				":id" => $res['data']
-			);
-			$res = $db->query("UPDATE",$sql,$params);
-			return $res['status'];
-		}
+		$res = $db->query("INSERT",$sql,$param);
+		return $res['status'];
 	} else { //if user exists
 		return false;
 	}
@@ -56,63 +48,20 @@ function usr_add($email,$password,$fname,$lname,$usrType) {
 function usr_check($email,$password) {
 	global $db;
 
-	$sql = "SELECT id,password,loginAttempts, 
-					endLock IS NOT NULL AND endLock > NOW() as locked,
-					TIMESTAMPDIFF(MINUTE,NOW(),endLock) AS unlockTime,
-					NOW() >= expiresON AS expired 
-					FROM pq_user WHERE email = BINARY :email 
+	$sql = "SELECT id,password FROM pq_user WHERE email = BINARY :email 
 				AND status = 1";
 	$param = array(":email" => $email);
 	$res = $db->query("SELECT",$sql,$param);
+	
 	if( $res['status'] ) {
 		if( $res['count'] == 0 ) {
 			return false;
-		} else if($res['data'][0]['expired'] === "1") {
-			$sql = "UPDATE pq_user SET expiresON = NULL,status = 0 WHERE id = :id";
-			$params = array(
-				":id" => $res['data'][0]['id']
-			);
-			$res = $db->query("UPDATE",$sql,$params);
-			if(!$res['status']) {
-				echo $res['error'];
-			} 
-			throw new Exception("Account is expired.");
-		} else if($res['data'][0]['locked'] === "1") {
-			throw new Exception("Account has been locked. Try again later.");
 		} else if(password_verify($password,$res['data'][0]['password'])) {
-			$id = $res['data'][0]['id'];
-			$sql = "UPDATE pq_user SET loginAttempts = 0, expiresOn = DATE_ADD(NOW(),INTERVAL 1 YEAR) WHERE id = :id";
-			$params = array(
-				":id" => $res['data'][0]['id']
-			);
-			$res = $db->query("UPDATE",$sql,$params);
-			if(!$res['status']) {
-				echo $res['error'];
-			}
-			return $id;
-		} else if( $res['data'][0]['loginAttempts'] + 1 === MAX_LOGIN_ATTEMPTS) {
-			$sql = "UPDATE pq_user SET loginAttempts = 0, endLock = DATE_ADD(NOW(),INTERVAL 15 MINUTE) WHERE id = :id";
-			$params = array(
-				":id" => $res['data'][0]['id']
-			);
-			$res = $db->query("UPDATE",$sql,$params);
-			if(!$res['status']) {
-				echo $res['error'];
-			} 
-			throw new Exception("Account has been locked. Try again later.");
+			return $res['data'][0]['id'];
 		} else {
-			$sql = "UPDATE pq_user SET loginAttempts = loginAttempts + 1 WHERE id = :id";
-			$params = array(
-				":id" => $res['data'][0]['id']
-			);
-			$res = $db->query("UPDATE",$sql,$params);
-			if(!$res['status']) {
-				echo $res['error'];
-			} 
 			return false;
 		}
 	} else {
-		echo $res['error'];
 		return false;
 	}
 }

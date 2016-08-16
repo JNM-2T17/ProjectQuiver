@@ -3,7 +3,7 @@
  * security-functions.php
  * @author Austin Fernandez
  * @20160810
- * This file handles authorization.
+ * This file handles security related operations.
  */
 if(session_status() == PHP_SESSION_NONE ) {
 	session_start();
